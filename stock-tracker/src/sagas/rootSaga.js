@@ -32,7 +32,6 @@ function* pollPrice(action) {
     }
     finally {
         if (yield cancelled()) {
-            console.log("in cancel block");
             controller.abort();
         }
     }
@@ -50,7 +49,6 @@ function* pollNews(action) {
     }
     finally {
         if (yield cancelled()) {
-            console.log("in cancel block");
             controller.abort();
         }
     }
@@ -65,7 +63,6 @@ function* searchSubmittedHandler(action) {
         return;
     }
     // Otherwise, cancel current polling requests
-    console.log("Cancelling")
     yield put({ type: 'ABORT_CURRENT_REQUESTS'})
     // Fetch the new stock data
     const requestParameters = `{"symbol":"${symbol}", "range":"1d"}`;

@@ -4,8 +4,8 @@ const initialState = {
     companyOverview: "",
     price: null,
     chart: [],
-    news: [], // NOT changed by this reducer
-    keyStats: {} // NOT changed by this reducer
+    news: [],
+    keyStats: {}
 }
 
 export const rootReducer = (state = initialState, action) => {
