@@ -7,8 +7,8 @@ const SearchBar = () => {
   
   const handleSubmit = (e) => {
       e.preventDefault();
-      console.log("Search for " + search + " submitted.");
-      dispatch({ type: 'SEARCH_SUBMITTED', payload: search});
+      console.log("Search for " + search.toUpperCase() + " submitted.");
+      dispatch({ type: 'SEARCH_SUBMITTED', payload: search.toUpperCase()});
   }
 
   return (

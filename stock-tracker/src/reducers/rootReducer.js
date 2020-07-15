@@ -3,7 +3,8 @@ const initialState = {
     companyName: "",
     companyOverview: "",
     price: null,
-    news: {}, // NOT changed by this reducer
+    chart: [],
+    news: [], // NOT changed by this reducer
     keyStats: {} // NOT changed by this reducer
 }
 
@@ -14,10 +15,12 @@ export const rootReducer = (state = initialState, action) => {
             console.log("stock in reducer:", stock)
             return {
                 ...state,
-                stockSymbol: stock.symbol,
+                symbol: stock.symbol,
                 companyName: stock.companyName,
                 companyOverview: stock.overview.description,
-                price: stock.latestPrice
+                price: stock.latestPrice,
+                chart: stock.chart,
+                news: stock.news
             }
         case 'NEWS_RECEIVED':
             console.log("news in NEWS_RECEIVED:", action.payload)
@@ -25,7 +28,13 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 news: action.payload
             }
-
+        case 'PRICE_RECEIVED':
+            console.log("price in PRICE_RECEIVED:", action.payload.latestPrice)        
+            return {
+                ...state,
+                price: action.payload.latestPrice,
+                chart: action.payload.chart
+            }
         default:
             return state;
     }
