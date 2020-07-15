@@ -1,4 +1,4 @@
-import { select, put, fork, take, call, takeEvery, takeLatest, cancel, cancelled, race, all, delay } from 'redux-saga/effects'
+import { select, put, fork, take, call, takeLatest, cancel, cancelled, delay } from 'redux-saga/effects'
 import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL } from '../config/config.js'
 
 const getNewStockData = (url, controller) => fetch(url, { signal: controller.signal })
@@ -67,13 +67,12 @@ function* searchSubmittedHandler(action) {
     if (currentSymbol === symbol) {
         return;
     }
-    // Otherwise, cancel current polling requests
     // Fetch the new stock data
     const requestParameters = `{"symbol":"${symbol}", "range":"1d"}`;
     const controller = new AbortController();
-    const stockData = yield call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller)
+    const stockData = yield call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller);
     if (stockData === undefined) {
-        return
+        return;
     }
     yield put({ type: 'ABORT_CURRENT_REQUESTS' })
     yield put({ type: 'STOCK_RECEIVED', payload: stockData }) // this orchestrates the ongoing polls
