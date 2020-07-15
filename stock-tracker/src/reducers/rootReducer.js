@@ -3,7 +3,7 @@ const initialState = {
     companyName: "",
     companyOverview: "",
     price: null,
-    news: [], // NOT changed by this reducer
+    news: {}, // NOT changed by this reducer
     keyStats: {} // NOT changed by this reducer
 }
 
@@ -18,6 +18,12 @@ export const rootReducer = (state = initialState, action) => {
                 companyName: stock.companyName,
                 companyOverview: stock.overview.description,
                 price: stock.latestPrice
+            }
+        case 'NEWS_RECEIVED':
+            console.log("news in NEWS_RECEIVED:", action.payload)
+            return {
+                ...state,
+                news: action.payload
             }
 
         default:

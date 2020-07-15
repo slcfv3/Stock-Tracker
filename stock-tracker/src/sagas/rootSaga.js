@@ -1,5 +1,5 @@
-import { select, put, fork, take, call, takeEvery, takeLatest, cancel, cancelled, race } from 'redux-saga/effects'
-import { NEW_STOCK_ENDPOINT_URL } from '../config/config.js'
+import { select, put, fork, take, call, takeEvery, takeLatest, cancel, cancelled, race, all } from 'redux-saga/effects'
+import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL } from '../config/config.js'
 
 const getNewStockData = (url) => fetch(url)
     .then(response => response.json())
@@ -13,9 +13,12 @@ function* searchSubmittedHandler(action) {
     const requestParameters = `{"symbol":"${action.payload}", "range":"1d"}`;
     console.log("requestParameters:", requestParameters);
     console.log("URL + PARAMETERS:", NEW_STOCK_ENDPOINT_URL + requestParameters)
-    const newStockData = yield call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters)
-    console.log("newStockData:", newStockData)
-    yield put({ type: 'STOCK_RECEIVED', payload: newStockData})
+    const { stockData, newsData } = yield all({
+        stockData: call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters),
+        newsData: call(getNewStockData, NEWS_ENDPOINT_URL + requestParameters)
+        })
+    yield put({ type: 'STOCK_RECEIVED', payload: stockData})
+    yield put({ type: 'NEWS_RECEIVED', payload: newsData})
 }
 
 export default function* rootSaga() {
