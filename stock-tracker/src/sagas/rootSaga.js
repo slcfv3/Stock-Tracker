@@ -2,15 +2,20 @@ import { select, put, fork, take, call, takeEvery, takeLatest, cancel, cancelled
 import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL } from '../config/config.js'
 
 const getNewStockData = (url, controller) => fetch(url, { signal: controller.signal })
-    .then(response => response.json())
-    .catch(error => console.log('Fetch error ', error.name, error.message))
+    .then(response => {
+        if (!response.ok) {
+            throw Error(response.statusText)
+        }
+        return response.json()
+    })
+    .catch(error => console.log(error.name, error.message))
 
 function* searchSubmittedWatcher() {
     yield takeLatest('SEARCH_SUBMITTED', searchSubmittedHandler);
 }
 
 function* stockReceivedWatcher() {
-    while(true) {
+    while (true) {
         const action = yield take('STOCK_RECEIVED');
         const pricePolling = yield fork(pollPrice, action);
         const newsPolling = yield fork(pollNews, action)
@@ -24,7 +29,7 @@ function* pollPrice(action) {
     const controller = new AbortController();
     const requestParameters = `{"symbol":"${action.payload.symbol}", "range":"1d"}`;
     try {
-        while(true) {
+        while (true) {
             yield delay(3000)
             const news = yield call(getNewStockData, PRICE_ENDPOINT_URL + requestParameters, controller)
             yield put({ type: 'PRICE_RECEIVED', payload: news })
@@ -41,7 +46,7 @@ function* pollNews(action) {
     const controller = new AbortController();
     const requestParameters = `{"symbol":"${action.payload.symbol}", "range":"1d"}`;
     try {
-        while(true) {
+        while (true) {
             yield delay(3000)
             const news = yield call(getNewStockData, NEWS_ENDPOINT_URL + requestParameters, controller)
             yield put({ type: 'NEWS_RECEIVED', payload: news })
@@ -63,11 +68,14 @@ function* searchSubmittedHandler(action) {
         return;
     }
     // Otherwise, cancel current polling requests
-    yield put({ type: 'ABORT_CURRENT_REQUESTS'})
     // Fetch the new stock data
     const requestParameters = `{"symbol":"${symbol}", "range":"1d"}`;
     const controller = new AbortController();
     const stockData = yield call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller)
+    if (stockData === undefined) {
+        return
+    }
+    yield put({ type: 'ABORT_CURRENT_REQUESTS' })
     yield put({ type: 'STOCK_RECEIVED', payload: stockData }) // this orchestrates the ongoing polls
 }
 
