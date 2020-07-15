@@ -6,15 +6,23 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "concurrently": "^5.2.0",
+    "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3"
   },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "proxy": "http://localhost:8080",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently --kill-others \"npm run start-front\" \"npm run start-server\"",
+    "start-front": "react-scripts start",
     "build": "react-scripts build",
+    "start-server": "node ./server/index.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
