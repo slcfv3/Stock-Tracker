@@ -169,18 +169,17 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
         if(res.statusCode==404)
             resolve.status(404).send('Stock not found');
         else{
-            res.setEncoding("utf8");
-            let body = "";
-            res.on("data", data => {
-            body += data;
-            
-            });
-            res.on("end", () => {
-            body = JSON.parse(body);
-            
-            resolve.send(body)
-            });
-        }
+              res.setEncoding("utf8");
+              let body = "";
+              res.on("data", data => {
+              body += data;
+              });
+              res.on("end", () => {
+              body = JSON.parse(body);
+              
+              resolve.send(body)
+              });
+            }
         
       });
   })
