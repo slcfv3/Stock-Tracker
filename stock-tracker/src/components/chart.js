@@ -12,22 +12,9 @@ const Chart = () => {
             margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
         >
 
-            <XAxis dataKey="label">
-                <Label
-                    value={"Date"}
-                    position="bottom"
-                    style={{ textAnchor: "middle" }}
-                />
-            </ XAxis>
+            <XAxis dataKey="label"></ XAxis>
 
-            <YAxis dataKey="close" domain={["dataMin", "dataMax"]}>
-                <Label
-                    value={"Price"}
-                    position="left"
-                    angle={-90}
-                    style={{ textAnchor: "middle" }}
-                />
-            </ YAxis>
+            <YAxis dataKey="close" domain={["dataMin", "dataMax"]}></ YAxis>
 
             <Line dataKey="close"/>
 
