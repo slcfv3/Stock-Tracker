@@ -1,6 +1,6 @@
 const initialState = {
-    symbol: "AAPL",
-    companyName: "Apple Inc.",
+    symbol: "Please enter a stock symbol",
+    companyName: "",
     companyOverview: "",
     price: null,
     chart: [],
@@ -32,7 +32,7 @@ export const rootReducer = (state = initialState, action) => {
                 symbol: stock.symbol,
                 companyName: stock.companyName,
                 companyOverview: stock.overview.description,
-                price: stock.latestPrice,
+                price: '$'+stock.latestPrice,
                 chart: stock.chart,
                 news: stock.news,
                 keyStats:keyStats
@@ -48,17 +48,10 @@ export const rootReducer = (state = initialState, action) => {
              
             return {
                 ...state,
-                price: action.payload.latestPrice,
+                price: '$'+action.payload.latestPrice,
                 chart: action.payload.chart
             }
-        case 'STOCK_NOT_EXIST':
-            console.log("stock does not exist")   
-                
-            return {
-                ...state,
-                companyName: 'Stock does not exist',
-                symbol:'N/A'
-            }
+        
         default:
             return state;
     }

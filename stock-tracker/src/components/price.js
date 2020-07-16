@@ -7,7 +7,7 @@ const Price = () => {
     
     return (
         <div className="pricetags">
-            <label>${price}</label>
+            <label>{price}</label>
         </div>
     );
 }
