@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import SearchBar from './components/SearchBar.js'
+import Chart from './components/Chart.js'
 import { rootReducer } from './reducers/rootReducer.js'
 import rootSaga from './sagas/rootSaga.js'
 import './App.css';
@@ -19,6 +20,7 @@ function App() {
       <div className="App">
         <header className="App-header">
           <SearchBar />
+          <Chart />
         </header>
       </div>
     </Provider>
