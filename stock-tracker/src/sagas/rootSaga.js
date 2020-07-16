@@ -3,6 +3,9 @@ import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL } from '.
 
 const getNewStockData = (url, controller) => fetch(url, { signal: controller.signal })
     .then(response => {
+        if(response.status===404){
+            return response.status
+        }
         if (!response.ok) {
             throw Error(response.statusText)
         }
@@ -73,6 +76,9 @@ function* searchSubmittedHandler(action) {
     const stockData = yield call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller);
     if (stockData === undefined) {
         return;
+    }
+    if(stockData ===404){
+        yield put({ type: 'STOCK_NOT_EXIST', payload: stockData  })
     }
     yield put({ type: 'ABORT_CURRENT_REQUESTS' })
     yield put({ type: 'STOCK_RECEIVED', payload: stockData }) // this orchestrates the ongoing polls

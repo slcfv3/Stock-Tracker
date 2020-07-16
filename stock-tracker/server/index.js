@@ -28,6 +28,7 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
     let quoteUrl= base_url+'stable/stock/'+symbol+'/quote?token='+secret_key
     let tradayChartUrl= base_url+'stable/stock/'+symbol+'/intraday-prices?token='+secret_key
     let newsUrl = base_url+'stable/stock/'+symbol+'/news/last/5?token='+secret_key
+    let statsUrl= base_url+'stable/stock/'+symbol+'/stats?token='+secret_key
     https.get(quoteUrl, res => {
         if(res.statusCode==404)
             resolve.status(404).send('Stock not found');
@@ -59,7 +60,20 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
                 res2.on("end", () => {
                   body.news = JSON.parse(body2);
                   
-                  resolve.send(body)
+                  //resolve.send(body)
+                  https.get(statsUrl, res3 => {
+                    res3.setEncoding("utf8");
+                    let body3 =""
+                    res3.on("data", data => {
+                      body3 += data;
+                      
+                    });
+                    res3.on("end", () => {
+                      body.stats = JSON.parse(body3);
+                      
+                      resolve.send(body)
+                    });
+                  });
                 });
               });
             });
@@ -193,6 +207,7 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
     let overviewUrl = base_url+'stable/stock/'+symbol+'/company?token='+secret_key
     let peerUrl = base_url+'stable/stock/'+symbol+'/peers?token='+secret_key
     let newsUrl = base_url+'stable/stock/'+symbol+'/news/last/5?token='+secret_key
+    let statsUrl= base_url+'stable/stock/'+symbol+'/stats?token='+secret_key
     https.get(quoteUrl, res => {
         if(res.statusCode==404)
             resolve.status(404).send('Stock not found');
@@ -249,7 +264,20 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
                                 res4.on("end", () => {
                                 body.news = JSON.parse(body4);
                                 
-                                resolve.send(body)
+                                //resolve.send(body)
+                                https.get(statsUrl, res5 => {
+                                  res5.setEncoding("utf8");
+                                  let body5 =""
+                                  res5.on("data", data => {
+                                    body5 += data;
+                                    
+                                  });
+                                  res5.on("end", () => {
+                                    body.stats = JSON.parse(body5);
+                                    
+                                    resolve.send(body)
+                                  });
+                                });
                                 });
                                 
                                 
