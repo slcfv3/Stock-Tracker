@@ -29,7 +29,8 @@ export const rootReducer = (state = initialState, action) => {
                 news: action.payload
             }
         case 'PRICE_RECEIVED':
-            console.log("price in PRICE_RECEIVED:", action.payload.latestPrice)        
+            console.log("price in PRICE_RECEIVED:", action.payload.latestPrice)  
+            console.log("chart in PRICE_RECEIVED:", action.payload.chart)      
             return {
                 ...state,
                 price: action.payload.latestPrice,
