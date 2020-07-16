@@ -1,0 +1,71 @@
+::placeholder {
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+
+.wrapper {
+    position: relative;
+    display: flex;
+    min-width: 100px;
+    position: relative;
+    top: 40px;
+    left: 20px;
+    height:50px;
+}
+
+input, select, textarea{
+    color: white;
+    font-size: 40px;
+}
+
+.search {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    padding: 2px 23px 2px 30px;
+    outline: 0;
+    background-color: transparent;
+}
+
+.search-icon {
+    position: absolute;
+    top: 15px;
+    
+    width: 28px;
+}
+
+.clear-icon {
+    position: absolute;
+    top: 9px;
+    right: 8px;
+    width: 12px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+.search:hover, .search:focus {
+    
+    background-color: transparent;
+}
+
+ul {
+    list-style-type: none;
+   }
+
+.leftstats{
+    display: inline-block;
+}
+
+.rightstats{
+    display: inline-block;
+    position: relative;
+    left: 200px;
+}
+
+.pricetags{
+    position: relative;
+    left: 70%;
+    color: white;
+    font-size: 30px;
+}

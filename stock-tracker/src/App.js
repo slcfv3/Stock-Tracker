@@ -1,10 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import SearchBar from './components/SearchBar.js'
+import Keystats from './components/keyStats.js'
+import Price from './components/price.js'
 import { rootReducer } from './reducers/rootReducer.js'
 import rootSaga from './sagas/rootSaga.js'
 import './App.css';
@@ -19,7 +20,9 @@ function App() {
       <div className="App">
         <header className="App-header">
           <SearchBar />
+          <Price />
         </header>
+        <Keystats/>
       </div>
     </Provider>
   );
