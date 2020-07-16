@@ -21,11 +21,12 @@ function App() {
       <div className="App">
         <header className="App-header">
           <SearchBar />
-          <Chart />
-
           <Price />
         </header>
-        <Keystats/>
+        <div>
+          <Chart />
+        </div>
+        <Keystats />
       </div>
     </Provider>
   );
