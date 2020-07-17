@@ -32,7 +32,7 @@ export const rootReducer = (state = initialState, action) => {
                 symbol: stock.symbol,
                 companyName: stock.companyName,
                 companyOverview: stock.overview.description,
-                price: '$'+stock.latestPrice,
+                price: stock.latestPrice,
                 chart: stock.chart,
                 news: stock.news,
                 keyStats:keyStats
@@ -49,7 +49,7 @@ export const rootReducer = (state = initialState, action) => {
              
             return {
                 ...state,
-                price: '$'+action.payload.latestPrice,
+                price: action.payload.latestPrice,
                 chart: action.payload.chart
             }
         
