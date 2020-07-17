@@ -7,9 +7,10 @@ const Overview = () => {
     console.log('test overview'+JSON.stringify(overview))
     return (
         <div className="overview">
+           <div className="title">COMPANY OVERVIEW</div>
            <div>{overview.companyName+'('+overview.symbol+')'}</div> 
             <div>{overview.website}</div>
-            <div>{overview.description}</div>
+            <div className="overviewtext">{overview.description}</div>
         </div>
     );
 }

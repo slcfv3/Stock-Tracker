@@ -7,6 +7,7 @@ const Peers = () => {
     //console.log('test overview'+JSON.stringify(overview))
     return (
         <div className="peers">
+          <div className="title">TOP PEERS</div>
           {peer.map((item, index) =>
                     <label>{item+' '}</label>
                 )}

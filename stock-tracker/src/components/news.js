@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from 'react-redux'
-import {timeAgo} from '../util'
+import {unixToTimePassed} from '../util'
 import './components.css';
 
 const News = () => {
@@ -8,13 +8,13 @@ const News = () => {
     //console.log('test news'+news[0].headline)
     return (
         <div className="news">
+            <div className="title">LATEST NEWS</div>
             <ul>
                 {news.map((article, index) =>
                     <li>
-                        <span>{article.headline}</span>
-                        <br></br>
+                        <p className="newstext">{article.headline}</p>
                         <label>{article.source}</label>
-                        <label>-{timeAgo(article.datetime)}</label>
+                        <label>-{unixToTimePassed(article.datetime)}</label>
                     </li>
                 )}
                 

@@ -1,4 +1,4 @@
-export function timeAgo(someDateInThePast) {
+export function unixToTimePassed(someDateInThePast) {
     var difference = Date.now() - someDateInThePast;
   
     if (difference < 5 * 1000) {
