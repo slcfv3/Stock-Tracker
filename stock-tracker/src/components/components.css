@@ -69,3 +69,19 @@ ul {
     color: white;
     font-size: 30px;
 }
+
+.news{
+    color: white;
+    position: relative;
+    top: 100px;
+    left: 50%;
+    width: 630px;
+}
+
+.overview{
+    color: white;
+    position: relative;
+    top: 200px;
+    left: 50%;
+    width: 600px;
+}

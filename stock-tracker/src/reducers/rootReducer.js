@@ -1,7 +1,7 @@
 const initialState = {
     symbol: "Please enter a stock symbol",
     companyName: "",
-    companyOverview: "",
+    overview: "",
     price: null,
     chart: [],
     news: [],
@@ -31,7 +31,7 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 symbol: stock.symbol,
                 companyName: stock.companyName,
-                companyOverview: stock.overview.description,
+                overview: stock.overview,
                 price: '$'+stock.latestPrice,
                 chart: stock.chart,
                 news: stock.news,
