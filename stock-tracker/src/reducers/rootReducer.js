@@ -5,7 +5,8 @@ const initialState = {
     price: null,
     chart: [],
     news: [],
-    keyStats: {}
+    keyStats: {},
+    peer:[]
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -35,7 +36,8 @@ export const rootReducer = (state = initialState, action) => {
                 price: '$'+stock.latestPrice,
                 chart: stock.chart,
                 news: stock.news,
-                keyStats:keyStats
+                keyStats:keyStats,
+                peer:stock.peers
             }
         case 'NEWS_RECEIVED':
             console.log("news in NEWS_RECEIVED:", action.payload)

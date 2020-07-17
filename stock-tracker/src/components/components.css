@@ -85,3 +85,10 @@ ul {
     left: 50%;
     width: 600px;
 }
+
+.peers{
+    position: relative;
+    top: 400px;
+    left: 60%;
+    color: white;
+}
