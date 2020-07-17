@@ -1,11 +1,12 @@
 const initialState = {
     symbol: "Please enter a stock symbol",
     companyName: "",
-    companyOverview: "",
+    overview: "",
     price: null,
     chart: [],
     news: [],
-    keyStats: {}
+    keyStats: {},
+    peer:[]
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -31,11 +32,12 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 symbol: stock.symbol,
                 companyName: stock.companyName,
-                companyOverview: stock.overview.description,
+                overview: stock.overview,
                 price: '$'+stock.latestPrice,
                 chart: stock.chart,
                 news: stock.news,
-                keyStats:keyStats
+                keyStats:keyStats,
+                peer:stock.peers
             }
         case 'NEWS_RECEIVED':
             console.log("news in NEWS_RECEIVED:", action.payload)

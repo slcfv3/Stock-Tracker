@@ -6,6 +6,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import SearchBar from './components/SearchBar.js'
 import Keystats from './components/keyStats.js'
 import Price from './components/price.js'
+import News from './components/news'
+import Overview from './components/overview'
+import Peers from './components/peers'
 import { rootReducer } from './reducers/rootReducer.js'
 import rootSaga from './sagas/rootSaga.js'
 import './App.css';
@@ -22,6 +25,9 @@ function App() {
           <SearchBar />
           <Price />
         </header>
+        <News />
+        <Overview />
+        <Peers />
         <Keystats/>
       </div>
     </Provider>

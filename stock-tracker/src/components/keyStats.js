@@ -7,6 +7,7 @@ const Keystats = () => {
     
     return (
         <div className="keystats">
+            <div className="title">KEY STATS</div>
             <ul className="leftstats">
                 <li>Previous Close{stats.previousClose}</li>
                 <li>Day Range{stats.low+'-'+stats.high}</li>

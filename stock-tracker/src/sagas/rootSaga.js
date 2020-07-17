@@ -52,6 +52,7 @@ function* pollNews(action) {
         while (true) {
             yield delay(3000)
             const news = yield call(getNewStockData, NEWS_ENDPOINT_URL + requestParameters, controller)
+            //console.log('news before sent'+ news[0].headline)
             yield put({ type: 'NEWS_RECEIVED', payload: news })
         }
     }
