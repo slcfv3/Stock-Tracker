@@ -21,6 +21,7 @@ export function getPriceTicks(chartData, nbOfTicks) {
 
     const ticks = Array(nbOfTicks).fill(0).map((tick, index) => ((index * stepRounded) + minRoundedToEven).toFixed(2));
     return ticks;
+}
 
 export function unixToTimePassed(someDateInThePast) {
     let difference = Date.now() - someDateInThePast;
