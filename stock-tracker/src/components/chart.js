@@ -1,15 +1,19 @@
 import React from "react"
 import { useDispatch, useSelector, select } from 'react-redux'
 import { Line, LineChart, AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine } from "recharts";
+import { getPriceTicks } from '../util.js'
 
 const Chart = () => {
     const chartData = useSelector(state => state.chart)
     const currentPrice = useSelector(state => state.price)
     //XAxisTicks =
     //YAXisTicks = 
+    let YTicks;
 
-    console.log("currentPrice in Chart", currentPrice)
-    console.log("chartData in Chart", chartData)
+    if (chartData !== undefined && chartData.length !== 0) {
+        YTicks = getPriceTicks(chartData, 10)
+    }
+    console.log("YTicks in chart", YTicks)
 
     return (
         <AreaChart
@@ -21,10 +25,10 @@ const Chart = () => {
 
             <Tooltip cursor={false} />
             <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3">
-                <Label 
-                value={currentPrice} 
-                position="right"
-                style={{ fill: "#e95656", fontSize: "10px" }} />
+                <Label
+                    value={currentPrice}
+                    position="right"
+                    style={{ fill: "#e95656", fontSize: "10px" }} />
             </ReferenceLine>
 
 
@@ -43,17 +47,23 @@ const Chart = () => {
                 dataKey="label"
                 stroke="transparent"
                 style={{ fill: "#beccdc", fontSize: "10px" }}
-                tickCount={10}
+                //tickCount={10}
+                // Following line avoids times like "9:17 AM" to be ticks
+                ticks={["09:30 AM", "10 AM", "10:30 AM", "11 AM", "11:30 AM", "12 PM", "12:30 PM", "1 PM", "1:30 PM", "2 PM", "2:30 PM", "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM"]}
+                interval={"preserveStart"}
             >
             </ XAxis>
 
             <YAxis
                 dataKey="close"
-                domain={["dataMin", "dataMax"]}
+                domain={["dataMin", "auto"]}
                 orientation="right"
                 stroke="transparent"
                 style={{ fill: "#beccdc", fontSize: "10px" }}
-                tickCount={10}
+                //tickCount={10}
+                //interval={30}
+                ticks={YTicks}
+                allowDecimals={false}
             >
             </ YAxis>
 
