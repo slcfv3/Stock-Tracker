@@ -6,14 +6,11 @@ import { getPriceTicks } from '../util.js'
 const Chart = () => {
     const chartData = useSelector(state => state.chart)
     const currentPrice = useSelector(state => state.price)
-    //XAxisTicks =
-    //YAXisTicks = 
-    let YTicks;
+    let YTicks = [];
 
     if (chartData !== undefined && chartData.length !== 0) {
         YTicks = getPriceTicks(chartData, 10)
     }
-    console.log("YTicks in chart", YTicks)
 
     return (
         <AreaChart
@@ -47,7 +44,6 @@ const Chart = () => {
                 dataKey="label"
                 stroke="transparent"
                 style={{ fill: "#beccdc", fontSize: "10px" }}
-                //tickCount={10}
                 // Following line avoids times like "9:17 AM" to be ticks
                 ticks={["09:30 AM", "10 AM", "10:30 AM", "11 AM", "11:30 AM", "12 PM", "12:30 PM", "1 PM", "1:30 PM", "2 PM", "2:30 PM", "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM"]}
                 interval={"preserveStart"}
@@ -56,14 +52,13 @@ const Chart = () => {
 
             <YAxis
                 dataKey="close"
-                domain={["dataMin", "auto"]}
+                domain={ [ Number(YTicks[0]), Number(YTicks[YTicks.length - 1]) ] }
                 orientation="right"
                 stroke="transparent"
-                style={{ fill: "#beccdc", fontSize: "10px" }}
+                style={{ fill: "#beccdc", fontSize: "7px" }}
                 //tickCount={10}
-                //interval={30}
                 ticks={YTicks}
-                allowDecimals={false}
+                //interval={0}
             >
             </ YAxis>
 
