@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import SearchBar from './components/SearchBar.js'
+import Chart from './components/Chart.js'
 import Keystats from './components/keyStats.js'
 import Price from './components/price.js'
 import News from './components/news'
@@ -25,10 +26,14 @@ function App() {
           <SearchBar />
           <Price />
         </header>
+        <div>
+          <Chart />
+        </div>
         <News />
         <Overview />
         <Peers />
         <Keystats/>
+
       </div>
     </Provider>
   );
