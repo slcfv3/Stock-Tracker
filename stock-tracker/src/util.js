@@ -1,5 +1,5 @@
 export function unixToTimePassed(someDateInThePast) {
-    var difference = Date.now() - someDateInThePast;
+    let difference = Date.now() - someDateInThePast;
   
     if (difference < 5 * 1000) {
       return "just now";
@@ -44,3 +44,24 @@ export function unixToTimePassed(someDateInThePast) {
       return result + " ago";
     }
   }
+
+export function findHighValue(chart){
+    let max = 0; 
+    chart.forEach(point => {
+        if(point.average>max){
+            max= point.average
+        }
+   });
+   return max;
+}
+
+export function findLowValue(chart){
+    let min = Number.MAX_VALUE; 
+    
+    chart.forEach(point => {
+        if(point.average<min&&point.average!==null){
+            min= point.average
+        }
+   });
+   return min;
+}
