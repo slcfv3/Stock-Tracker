@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from 'react-redux'
 import './components.css';
+import { BlueLine } from '../styled-components/lines.js'
 
 const Overview = () => {
     const overview = useSelector(state => state.overview);
@@ -8,6 +9,7 @@ const Overview = () => {
     return (
         <div className="overview">
            <div className="title">COMPANY OVERVIEW</div>
+           <BlueLine />
            <div>{overview.companyName+'('+overview.symbol+')'}</div> 
             <div>{overview.website}</div>
             <div className="overviewtext">{overview.description}</div>
