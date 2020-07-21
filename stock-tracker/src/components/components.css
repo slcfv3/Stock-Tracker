@@ -66,14 +66,23 @@ ul {
 .pricetags{
     position: relative;
     left: 70%;
-    color: white;
-    font-size: 30px;
+    width: 124px;
+    height: 48px;
+    font-family: Lato;
+    font-size: 40px;
+    font-weight: 300;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    color: #ffffff;
 }
 
 .news{
     color: white;
     position: relative;
-    top: 100px;
+    bottom: 400px;
     left: 60%;
     width: 630px;
 }
@@ -141,3 +150,15 @@ li{
     position: relative;
     right:40px;
 }
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: white;
+    font-weight: 500;
+}
+
+.ant-tabs-tab{
+    display: inline-block;
+}
+div:focus {
+    outline: none;
+    }

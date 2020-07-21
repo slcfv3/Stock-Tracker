@@ -1,5 +1,6 @@
-import { select, put, fork, take, call, takeLatest, cancel, cancelled, delay } from 'redux-saga/effects'
-import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL } from '../config/config.js'
+import { select, put, fork, take, all, call, takeLatest, cancel, cancelled, delay } from 'redux-saga/effects'
+import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL, COLD_CHART_ENDPOINT_URL } from '../config/config.js'
+import { useDebugValue } from 'react'
 
 const getNewStockData = (url, controller) => fetch(url, { signal: controller.signal })
     .then(response => {
@@ -30,7 +31,7 @@ function* stockReceivedWatcher() {
 
 function* pollPrice(action) {
     const controller = new AbortController();
-    const requestParameters = `{"symbol":"${action.payload.symbol}", "range":"1d"}`;
+    const requestParameters = `{"symbol":"${action.payload.info.symbol}", "range":"1d"}`;
     try {
         while (true) {
             yield delay(3000)
@@ -47,7 +48,7 @@ function* pollPrice(action) {
 
 function* pollNews(action) {
     const controller = new AbortController();
-    const requestParameters = `{"symbol":"${action.payload.symbol}", "range":"1d"}`;
+    const requestParameters = `{"symbol":"${action.payload.info.symbol}", "range":"1d"}`;
     try {
         while (true) {
             yield delay(3000)
@@ -74,13 +75,19 @@ function* searchSubmittedHandler(action) {
     // Fetch the new stock data
     const requestParameters = `{"symbol":"${symbol}", "range":"1d"}`;
     const controller = new AbortController();
+    //const controller1 = new AbortController();
     const stockData = yield call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller);
-    if (stockData === undefined) {
+    const chartData = yield call(getNewStockData, COLD_CHART_ENDPOINT_URL + requestParameters, controller);
+    /*const [chartData, stockData] = yield all([
+        call(getNewStockData, COLD_CHART_ENDPOINT_URL + requestParameters, controller),
+        call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller)
+      ])*/
+    if (stockData === undefined ) {
         return;
     }
-    
+    //console.log('chart before send'+JSON.stringify(chartData))
     yield put({ type: 'ABORT_CURRENT_REQUESTS' })
-    yield put({ type: 'STOCK_RECEIVED', payload: stockData }) // this orchestrates the ongoing polls
+    yield put({ type: 'STOCK_RECEIVED', payload: {info:stockData, chart:chartData}}) // this orchestrates the ongoing polls
 }
 
 export default function* rootSaga() {
