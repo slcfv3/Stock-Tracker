@@ -11,6 +11,7 @@ export const Grid = styled.div`
 
 export const Row = styled.div`
     display: flex;
+    overflow: hidden;
     column-gap: 50px;
     padding-bottom: 1%;
 `

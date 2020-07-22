@@ -13,10 +13,10 @@ const Chart = () => {
     }
 
     return (
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="99%" aspect={3}>
             <AreaChart
-                width={600}
-                height={1000}
+                width={500}
+                height={500}
                 data={chartData}
                 margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
             >
@@ -56,7 +56,7 @@ const Chart = () => {
                     domain={[Number(YTicks[0]), Number(YTicks[YTicks.length - 1])]}
                     orientation="right"
                     stroke="transparent"
-                    style={{ fill: "#beccdc", fontSize: "7px" }}
+                    style={{ fill: "#beccdc", fontSize: "10px" }}
                     //tickCount={10}
                     ticks={YTicks}
                 //interval={0}

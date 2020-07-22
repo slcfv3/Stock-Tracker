@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from 'react-redux'
 import './components.css';
+import { SectionTitle } from '../styled-components/text.js'
 import { BlueLine } from '../styled-components/lines.js'
 
 const Overview = () => {
@@ -8,7 +9,7 @@ const Overview = () => {
     console.log('test overview'+JSON.stringify(overview))
     return (
         <div className="overview">
-           <div className="title">COMPANY OVERVIEW</div>
+           <SectionTitle>COMPANY OVERVIEW</SectionTitle>
            <BlueLine />
            <div>{overview.companyName+'('+overview.symbol+')'}</div> 
             <div>{overview.website}</div>

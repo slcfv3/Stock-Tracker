@@ -16,7 +16,7 @@ import './App.css';
 import { ThemeProvider } from 'styled-components'
 import theme from './theme.js'
 import { Grid, Row, Col } from './styled-components/wrappers.js'
-import { BlueLine } from './styled-components/lines.js'
+import { BlueLine, GreyLine } from './styled-components/lines.js'
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
@@ -38,7 +38,7 @@ function App() {
           </Row>
 
           <Row>
-            <BlueLine />
+            <GreyLine />
           </Row>
 
           <Row>
