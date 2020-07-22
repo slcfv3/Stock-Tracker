@@ -1,7 +1,9 @@
+
 ::placeholder {
     color: white;
     opacity: 1; /* Firefox */
   }
+
 /*
 .wrapper {
     position: relative;
@@ -48,11 +50,13 @@ input, select, textarea{
     
     background-color: transparent;
 }
-
+/*
 ul {
     list-style-type: none;
    }
+*/
 
+   /*
 .leftstats{
     display: inline-block;
 }
@@ -62,13 +66,13 @@ ul {
     position: relative;
     left: 200px;
 }
-
+*/
 .pricetags{
     color: white;
     font-size: 30px;
 }
 
-
+/*
 .news{
     color: white;
     width: 500px;
@@ -83,6 +87,8 @@ ul {
     overflow: hidden;
     width: 500px;
 }
+*/
+/*
 
 .overview{
     color: white;
@@ -99,6 +105,7 @@ ul {
     overflow: hidden;
     width: 500px; 
 }
+*/
 
 .peers{
     position: absolute;
@@ -107,6 +114,7 @@ ul {
     color: white;
 }
 
+/*
 .keystats{
     position: absolute;
     left: 50px;
@@ -116,6 +124,7 @@ ul {
 .keystats li{
     height:50px;
 }
+*/
   
 .title{
     width: 601px;

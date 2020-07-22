@@ -26,8 +26,8 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <Grid>
 
+        <Grid>
           <Row>
             <Col size={2}>
               <SearchBar />
@@ -36,8 +36,10 @@ function App() {
               <Price />
             </Col>
           </Row>
-          
-          <BlueLine />
+
+          <Row>
+            <BlueLine />
+          </Row>
 
           <Row>
             <Col size={2}>
