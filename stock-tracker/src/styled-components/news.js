@@ -22,6 +22,7 @@ color: #ffffff;
 &:hover {
   color: #e0be86
 }
+transition: 0.3s;
 `
 
 export const ArticleLabel = styled.label`
