@@ -162,3 +162,18 @@ li{
 div:focus {
     outline: none;
     }
+
+.specialbutton {
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color:transparent;
+    cursor: pointer;
+    font-size: 18px;
+    }
+    
+    /* Style the active class, and buttons on mouse-over */
+.active, .specialbutton:hover {
+    
+    color: white;
+}

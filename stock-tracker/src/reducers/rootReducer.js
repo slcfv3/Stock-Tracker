@@ -15,7 +15,7 @@ export const rootReducer = (state = initialState, action) => {
         case 'STOCK_RECEIVED':
             const stock = action.payload.info;
             const charts = action.payload.chart
-            console.log("chart in reducer:", charts)
+           
             const keyStats = {
                 previousClose:stock.previousClose,
                 iexVolume:stock.iexVolume,

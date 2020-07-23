@@ -1,60 +1,93 @@
-import React from "react"
-import { useDispatch, useSelector, select } from 'react-redux'
-import { Line, LineChart, AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine } from "recharts";
-import { Tabs } from 'antd';
+import React, {useState, useEffect} from "react"
+import {  useSelector } from 'react-redux'
+import {AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine } from "recharts";
 import './components.css';
 //import 'antd/dist/antd.css';
-import { getPriceTicks } from '../util.js'
+import { getPriceTicks, getTimeTicks } from '../util.js'
 
 const Chart = () => {
     const chartData = useSelector(state => state.chart)
     const coldchartData = useSelector(state => state.coldChart)
     const currentPrice = useSelector(state => state.price)
-    let YTicks1 = [];
-    let YTicks2 = [];
-    let YTicks3 = [];
-    let YTicks4 = [];
-    let YTicks5 = [];
-    let YTicks6 = [];
-    console.log('oneday in chartjs'+JSON.stringify(chartData))
-    if (chartData !== undefined && chartData.length !== 0) {
-        YTicks1 = getPriceTicks(chartData, 10)
-    }
-    if (coldchartData.fiveday !== undefined && coldchartData.fiveday.length !== 0) {
-        YTicks2 = getPriceTicks(coldchartData.fiveday, 10)
-    }
-    if (chartData.onemonth !== undefined && chartData.onemonth.length !== 0) {
-        YTicks3 = getPriceTicks(chartData.onemonth, 10)
-    }
-    if (chartData.oneyear !== undefined && chartData.oneyear.length !== 0) {
-        YTicks4 = getPriceTicks(chartData.oneyear, 10)
-    }
-    if (chartData.fiveyear !== undefined && chartData.fiveyear.length !== 0) {
-        YTicks5 = getPriceTicks(chartData.fiveyear, 10)
-    }
-    if (chartData.max !== undefined && chartData.max.length !== 0) {
-        YTicks6 = getPriceTicks(chartData.max, 10)
-    }
-    const { TabPane } = Tabs;
+    const [active,setActive] = useState(0);
+    const [currentChart,setCurrentChart] = useState(chartData);
+    const [lineDisplay,setLineDisplay] = useState('block')
+    const [XTicks,setXTicks] = useState();
+    const [YTicks,setYTicks] = useState([0]);
+
+    
+    useEffect(()=>{
+        if(active===0){
+            setCurrentChart(chartData)
+            setYTicks(getPriceTicks(chartData, 10))
+            setXTicks(getTimeTicks(chartData, 0))
+            setLineDisplay('block')
+            
+        }
+        if(active===1){
+            setCurrentChart(coldchartData.fiveday)
+            setYTicks(getPriceTicks(coldchartData.fiveday, 10))
+            setXTicks(getTimeTicks(coldchartData.fiveday, 1))
+            setLineDisplay('none')
+            
+        }
+        if(active===2){
+            setCurrentChart(coldchartData.onemonth)
+            setYTicks(getPriceTicks(coldchartData.onemonth, 10))
+            setXTicks(getTimeTicks(coldchartData.onemonth, 2))
+            setLineDisplay('none')
+            
+        }
+        if(active===3){
+            setCurrentChart(coldchartData.oneyear)
+            setYTicks(getPriceTicks(coldchartData.oneyear, 10))
+            setXTicks(getTimeTicks(coldchartData.oneyear, 3))
+            setLineDisplay('none')
+            
+        }
+        if(active===4){
+            setCurrentChart(coldchartData.fiveyear)
+            setYTicks(getPriceTicks(coldchartData.fiveyear, 10))
+            setXTicks(getTimeTicks(coldchartData.fiveyear, 4))
+            setLineDisplay('none')
+            
+        }
+        if(active===5){
+            setCurrentChart(coldchartData.max)
+            setYTicks(getPriceTicks(coldchartData.max, 10))
+            setXTicks(getTimeTicks(coldchartData.max, 5))
+            setLineDisplay('none')
+           
+        }
+    },[active, coldchartData])
+
     return (
-        <Tabs defaultActiveKey="1">
-            <TabPane tab="1D" key="1">
-                    <AreaChart
+        <div>
+          <div id="switch">
+            <button className={active===0?'specialbutton active':'specialbutton'} onClick={()=>setActive(0)}>1D</button>
+            <button className={active===1?'specialbutton active':'specialbutton'} onClick={()=>setActive(1)}>5D</button>
+            <button className={active===2?'specialbutton active':'specialbutton'} onClick={()=>setActive(2)}>1M</button>
+            <button className={active===3?'specialbutton active':'specialbutton'} onClick={()=>setActive(3)}>1Y</button>
+            <button className={active===4?'specialbutton active':'specialbutton'} onClick={()=>setActive(4)}>5Y</button>
+            <button className={active===5?'specialbutton active':'specialbutton'} onClick={()=>setActive(5)}>MAX</button>
+          </div> 
+          <AreaChart
                     width={600}
                     height={400}
-                    data={chartData}
+                    data={currentChart}
                     margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
                     >
-
+ 
                     <Tooltip cursor={false} />
-                    <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3">
+                    <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3" display={lineDisplay}>
                         <Label
                             value={currentPrice}
                             position="right"
-                            style={{ fill: "#e95656", fontSize: "10px" }} />
+                            style={{ fill: "#e95656", fontSize: "10px" }} 
+                            display={lineDisplay}/>
                     </ReferenceLine>
-
-
+ 
+ 
                     <CartesianGrid
                         stroke="#344968"
                         opacity="0.5"
@@ -65,29 +98,29 @@ const Chart = () => {
                             <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
                         </linearGradient>
                     </defs>
-
+ 
                     <XAxis
                         dataKey="label"
                         stroke="transparent"
                         style={{ fill: "#beccdc", fontSize: "10px" }}
                         // Following line avoids times like "9:17 AM" to be ticks
-                        ticks={["09:30 AM", "10 AM", "10:30 AM", "11 AM", "11:30 AM", "12 PM", "12:30 PM", "1 PM", "1:30 PM", "2 PM", "2:30 PM", "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM"]}
+                        ticks={XTicks}
                         interval={"preserveStart"}
                     >
                     </ XAxis>
-
+ 
                     <YAxis
                         dataKey="close"
-                        domain={ [ Number(YTicks1[0]), Number(YTicks1[YTicks1.length - 1]) ] }
+                        domain={ [ Number(YTicks[0]), Number(YTicks[YTicks.length - 1]) ] }
                         orientation="right"
                         stroke="transparent"
                         style={{ fill: "#beccdc", fontSize: "7px" }}
                         //tickCount={10}
-                        ticks={YTicks1}
+                        ticks={YTicks}
                         //interval={0}
                     >
                     </ YAxis>
-
+ 
                     <Area
                         isAnimationActive={false}
                         dataKey="close"
@@ -97,308 +130,9 @@ const Chart = () => {
                         fill="url(#lineGradient)"
                     />
                 </AreaChart>
-            </TabPane>
-            <TabPane tab="5D" key="2">
-            <AreaChart
-                    width={600}
-                    height={400}
-                    data={coldchartData.fiveday}
-                    margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
-                    >
-
-                    <Tooltip cursor={false} />
-                    <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3">
-                        <Label
-                            value={currentPrice}
-                            position="right"
-                            style={{ fill: "#e95656", fontSize: "10px" }} />
-                    </ReferenceLine>
-
-
-                    <CartesianGrid
-                        stroke="#344968"
-                        opacity="0.5"
-                    />
-                    <defs>
-                        <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.5} />
-                            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                        </linearGradient>
-                    </defs>
-
-                    <XAxis
-                        dataKey="label"
-                        stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "10px" }}
-                        // Following line avoids times like "9:17 AM" to be ticks
-                        ticks={["09:30 AM", "10 AM", "10:30 AM", "11 AM", "11:30 AM", "12 PM", "12:30 PM", "1 PM", "1:30 PM", "2 PM", "2:30 PM", "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM"]}
-                        interval={"preserveStart"}
-                    >
-                    </ XAxis>
-
-                    <YAxis
-                        dataKey="close"
-                        domain={ [ Number(YTicks2[0]), Number(YTicks1[YTicks2.length - 1]) ] }
-                        orientation="right"
-                        stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "7px" }}
-                        //tickCount={10}
-                        ticks={YTicks2}
-                        //interval={0}
-                    >
-                    </ YAxis>
-
-                    <Area
-                        isAnimationActive={false}
-                        dataKey="close"
-                        connectNulls={true}
-                        stroke="#7FB3FF"
-                        fillOpacity={1}
-                        fill="url(#lineGradient)"
-                    />
-                </AreaChart>
-            </TabPane>
-            <TabPane tab="1M" key="3">
-            <AreaChart
-                    width={600}
-                    height={400}
-                    data={coldchartData.onemonth}
-                    margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
-                    >
-
-                    <Tooltip cursor={false} />
-                    <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3">
-                        <Label
-                            value={currentPrice}
-                            position="right"
-                            style={{ fill: "#e95656", fontSize: "10px" }} />
-                    </ReferenceLine>
-
-
-                    <CartesianGrid
-                        stroke="#344968"
-                        opacity="0.5"
-                    />
-                    <defs>
-                        <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.5} />
-                            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                        </linearGradient>
-                    </defs>
-
-                    <XAxis
-                        dataKey="label"
-                        stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "10px" }}
-                        // Following line avoids times like "9:17 AM" to be ticks
-                        ticks={["09:30 AM", "10 AM", "10:30 AM", "11 AM", "11:30 AM", "12 PM", "12:30 PM", "1 PM", "1:30 PM", "2 PM", "2:30 PM", "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM"]}
-                        interval={"preserveStart"}
-                    >
-                    </ XAxis>
-
-                    <YAxis
-                        dataKey="close"
-                        domain={ [ Number(YTicks3[0]), Number(YTicks1[YTicks3.length - 1]) ] }
-                        orientation="right"
-                        stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "7px" }}
-                        //tickCount={10}
-                        ticks={YTicks3}
-                        //interval={0}
-                    >
-                    </ YAxis>
-
-                    <Area
-                        isAnimationActive={false}
-                        dataKey="close"
-                        connectNulls={true}
-                        stroke="#7FB3FF"
-                        fillOpacity={1}
-                        fill="url(#lineGradient)"
-                    />
-                </AreaChart>
-            </TabPane>
-            <TabPane tab="1Y" key="4">
-            <AreaChart
-                    width={600}
-                    height={400}
-                    data={coldchartData.oneyear}
-                    margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
-                    >
-
-                    <Tooltip cursor={false} />
-                    <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3">
-                        <Label
-                            value={currentPrice}
-                            position="right"
-                            style={{ fill: "#e95656", fontSize: "10px" }} />
-                    </ReferenceLine>
-
-
-                    <CartesianGrid
-                        stroke="#344968"
-                        opacity="0.5"
-                    />
-                    <defs>
-                        <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.5} />
-                            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                        </linearGradient>
-                    </defs>
-
-                    <XAxis
-                        dataKey="label"
-                        stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "10px" }}
-                        // Following line avoids times like "9:17 AM" to be ticks
-                        ticks={["09:30 AM", "10 AM", "10:30 AM", "11 AM", "11:30 AM", "12 PM", "12:30 PM", "1 PM", "1:30 PM", "2 PM", "2:30 PM", "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM"]}
-                        interval={"preserveStart"}
-                    >
-                    </ XAxis>
-
-                    <YAxis
-                        dataKey="close"
-                        domain={ [ Number(YTicks4[0]), Number(YTicks1[YTicks4.length - 1]) ] }
-                        orientation="right"
-                        stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "7px" }}
-                        //tickCount={10}
-                        ticks={YTicks4}
-                        //interval={0}
-                    >
-                    </ YAxis>
-
-                    <Area
-                        isAnimationActive={false}
-                        dataKey="close"
-                        connectNulls={true}
-                        stroke="#7FB3FF"
-                        fillOpacity={1}
-                        fill="url(#lineGradient)"
-                    />
-                </AreaChart>
-            </TabPane>
-            <TabPane tab="5Y" key="5">
-            <AreaChart
-                    width={600}
-                    height={400}
-                    data={coldchartData.fiveyear}
-                    margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
-                    >
-
-                    <Tooltip cursor={false} />
-                    <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3">
-                        <Label
-                            value={currentPrice}
-                            position="right"
-                            style={{ fill: "#e95656", fontSize: "10px" }} />
-                    </ReferenceLine>
-
-
-                    <CartesianGrid
-                        stroke="#344968"
-                        opacity="0.5"
-                    />
-                    <defs>
-                        <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.5} />
-                            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                        </linearGradient>
-                    </defs>
-
-                    <XAxis
-                        dataKey="label"
-                        stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "10px" }}
-                        // Following line avoids times like "9:17 AM" to be ticks
-                        ticks={["09:30 AM", "10 AM", "10:30 AM", "11 AM", "11:30 AM", "12 PM", "12:30 PM", "1 PM", "1:30 PM", "2 PM", "2:30 PM", "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM"]}
-                        interval={"preserveStart"}
-                    >
-                    </ XAxis>
-
-                    <YAxis
-                        dataKey="close"
-                        domain={ [ Number(YTicks5[0]), Number(YTicks1[YTicks5.length - 1]) ] }
-                        orientation="right"
-                        stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "7px" }}
-                        //tickCount={10}
-                        ticks={YTicks5}
-                        //interval={0}
-                    >
-                    </ YAxis>
-
-                    <Area
-                        isAnimationActive={false}
-                        dataKey="close"
-                        connectNulls={true}
-                        stroke="#7FB3FF"
-                        fillOpacity={1}
-                        fill="url(#lineGradient)"
-                    />
-                </AreaChart>
-            </TabPane>
-            <TabPane tab="MAX" key="6">
-            <AreaChart
-                    width={600}
-                    height={400}
-                    data={coldchartData.max}
-                    margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
-                    >
-
-                    <Tooltip cursor={false} />
-                    <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3">
-                        <Label
-                            value={currentPrice}
-                            position="right"
-                            style={{ fill: "#e95656", fontSize: "10px" }} />
-                    </ReferenceLine>
-
-
-                    <CartesianGrid
-                        stroke="#344968"
-                        opacity="0.5"
-                    />
-                    <defs>
-                        <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.5} />
-                            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                        </linearGradient>
-                    </defs>
-
-                    <XAxis
-                        dataKey="label"
-                        stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "10px" }}
-                        // Following line avoids times like "9:17 AM" to be ticks
-                        ticks={["09:30 AM", "10 AM", "10:30 AM", "11 AM", "11:30 AM", "12 PM", "12:30 PM", "1 PM", "1:30 PM", "2 PM", "2:30 PM", "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM"]}
-                        interval={"preserveStart"}
-                    >
-                    </ XAxis>
-
-                    <YAxis
-                        dataKey="close"
-                        domain={ [ Number(YTicks6[0]), Number(YTicks1[YTicks6.length - 1]) ] }
-                        orientation="right"
-                        stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "7px" }}
-                        //tickCount={10}
-                        ticks={YTicks6}
-                        //interval={0}
-                    >
-                    </ YAxis>
-
-                    <Area
-                        isAnimationActive={false}
-                        dataKey="close"
-                        connectNulls={true}
-                        stroke="#7FB3FF"
-                        fillOpacity={1}
-                        fill="url(#lineGradient)"
-                    />
-                </AreaChart>
-            </TabPane>
-        </Tabs>
+ 
+        </div>
+        
         
     );
 }
