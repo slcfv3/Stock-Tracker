@@ -1,15 +1,51 @@
+export function getTimeTicks(chartData, active) {
+  let ticks = []
+  if(active === 0){
+    
+      let currentHour = chartData[chartData.length-1]?.label.substring(0,2)
+      if(currentHour==='09'){
+        ticks = ["09:30 AM", "09:35 AM",  "09:40 AM", "09:45 AM", "09:50 AM", "09:55 AM","10 AM"]
+      }else{
+        ticks = ["09:30 AM", "10 AM", "10:30 AM", "11 AM", "11:30 AM", "12 PM", "12:30 PM", "1 PM", "1:30 PM", "2 PM", "2:30 PM", "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM"]
+      }
+    
+  
+  }
+  if(active === 1){
+    chartData.forEach(item => ticks.push(item.label))
+  }
+  if(active === 2){
+    ticks=[chartData[0].label,chartData[6].label,chartData[12].label,chartData[18].label]
+  }
+
+  if(active === 3){
+    ticks=[chartData[0].label,chartData[125].label,chartData[250].label]
+  }
+
+  if(active === 4){
+    ticks=[chartData[0].label,chartData[620].label,chartData[1200].label]
+  }
+
+  if(active === 5){
+    let len = chartData.length
+    
+    ticks=[chartData[1].label,chartData[len%2===0?(len/2):(len-1)/2].label,chartData[len-1].label]
+  }
+  
+  return ticks;
+}
 
 export function getPriceTicks(chartData, nbOfTicks) {
     const minPrice = chartData.reduce((min, dataPoint) => (dataPoint.close !== null && dataPoint.close < min) ? dataPoint.close : min, Number.MAX_SAFE_INTEGER);
     const maxPrice = chartData.reduce((max, dataPoint) => dataPoint.close > max ? dataPoint.close : max, Number.MIN_SAFE_INTEGER);
 
-    const minRoundedToEven = 2 * Math.floor(minPrice / 2); // first label
+    const minRoundedToEven = 2 * Math.floor(minPrice/ 2); // first label
 
     const spread = maxPrice - minRoundedToEven;
     const step = spread / (nbOfTicks - 1);
 
     let stepRounded;
-    if (0.5 < step <= 1) {
+    if (0.5 < step && step <= 1) {
         stepRounded = 1;
     }
     if (step <= 0.5) {
@@ -20,6 +56,7 @@ export function getPriceTicks(chartData, nbOfTicks) {
     }
 
     const ticks = Array(nbOfTicks).fill(0).map((tick, index) => ((index * stepRounded) + minRoundedToEven).toFixed(2));
+    
     return ticks;
 }
 

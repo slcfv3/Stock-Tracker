@@ -6,6 +6,7 @@ const initialState = {
     priceChange: 0,
     priceChangePercent: 0,
     chart: [],
+    coldChart:{},
     news: [],
     keyStats: {},
     peer:[]
@@ -14,8 +15,9 @@ const initialState = {
 export const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'STOCK_RECEIVED':
-            const stock = action.payload;
-            console.log("stock in reducer:", stock)
+            const stock = action.payload.info;
+            const charts = action.payload.chart
+           
             const keyStats = {
                 previousClose:stock.previousClose,
                 iexVolume:stock.iexVolume,
@@ -39,6 +41,7 @@ export const rootReducer = (state = initialState, action) => {
                 priceChange: stock.change,
                 priceChangePercent: stock.changePercent,
                 chart: stock.chart,
+                coldChart: charts,
                 news: stock.news,
                 keyStats:keyStats,
                 peer:stock.peers

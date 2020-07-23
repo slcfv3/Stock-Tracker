@@ -1,5 +1,9 @@
+
+import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL, COLD_CHART_ENDPOINT_URL } from '../config/config.js'
+
 import { select, put, fork, take, call, takeLatest, cancel, cancelled, delay, all } from 'redux-saga/effects'
-import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL } from '../config/config.js'
+
+
 
 const getNewStockData = (url, controller) => fetch(url, { signal: controller.signal })
     .then(response => {
@@ -15,7 +19,9 @@ const getNewStockData = (url, controller) => fetch(url, { signal: controller.sig
 
 function* pollPrice(symbol) {
     const controller = new AbortController();
+
     const requestParameters = `{"symbol":"${symbol}", "range":"1d"}`;
+
     try {
         while (true) {
             yield delay(1000)
@@ -33,6 +39,7 @@ function* pollPrice(symbol) {
 function* pollNews(symbol) {
     const controller = new AbortController();
     const requestParameters = `{"symbol":"${symbol}", "range":"1d"}`;
+
     try {
         while (true) {
             yield delay(3000)
@@ -60,10 +67,17 @@ function* searchSubmittedHandler(action) {
     // Fetch the new stock data
     const requestParameters = `{"symbol":"${symbol}", "range":"1d"}`;
     const controller = new AbortController();
+    //const controller1 = new AbortController();
     const stockData = yield call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller);
-    if (stockData === undefined) {
+    const chartData = yield call(getNewStockData, COLD_CHART_ENDPOINT_URL + requestParameters, controller);
+    /*const [chartData, stockData] = yield all([
+        call(getNewStockData, COLD_CHART_ENDPOINT_URL + requestParameters, controller),
+        call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller)
+      ])*/
+    if (stockData === undefined ) {
         return;
     }
+
 
     yield put({ type: 'STOCK_RECEIVED', payload: stockData }) // this orchestrates the ongoing polls
 
@@ -71,6 +85,7 @@ function* searchSubmittedHandler(action) {
         call(pollPrice, symbol),
         call(pollNews, symbol),
     ])    
+
 }
 
 export default function* searchSubmittedWatcher() {
