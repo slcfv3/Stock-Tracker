@@ -42,7 +42,7 @@ function App() {
           </Row>
 
           <Row justifyContent='space-between'>
-            <Col size={4}>
+            <Col size={3}>
               <SearchBar />
             </Col>
             <Col size={1}>
