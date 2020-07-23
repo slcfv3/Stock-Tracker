@@ -10,6 +10,8 @@ import Price from './components/price.js'
 import News from './components/news'
 import Overview from './components/overview'
 import Peers from './components/peers'
+import StockTags from './components/StockTags'
+import MarketOpen from './components/MarketOpen'
 import { rootReducer } from './reducers/rootReducer.js'
 import rootSaga from './sagas/rootSaga.js'
 import './App.css';
@@ -28,8 +30,17 @@ function App() {
       <ThemeProvider theme={theme}>
 
         <Grid>
-          <Row>
-            <Col size={2}>
+          <Row justifyContent='space-between'>
+            <Col>
+             LOGO 
+            </Col>
+            <Col>
+              TABS
+            </Col>
+          </Row>
+
+          <Row justifyContent='space-between'>
+            <Col size={4}>
               <SearchBar />
             </Col>
             <Col size={1}>
@@ -39,6 +50,15 @@ function App() {
 
           <Row>
             <GreyLine />
+          </Row>
+
+          <Row justifyContent='space-between'>
+            <Col >
+              <StockTags />
+            </Col>
+            <Col >
+                <MarketOpen/>
+            </Col>
           </Row>
 
           <Row>
@@ -56,6 +76,7 @@ function App() {
             </Col>
             <Col size={1}>
               <Overview />
+              <Peers />
             </Col>
           </Row>
 

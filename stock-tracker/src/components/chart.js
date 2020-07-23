@@ -13,12 +13,12 @@ const Chart = () => {
     }
 
     return (
-        <ResponsiveContainer width="99%" aspect={3}>
+        <ResponsiveContainer width="99%" aspect={2}>
             <AreaChart
                 width={500}
                 height={500}
                 data={chartData}
-                margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
+                margin={{ top: 30, left: 30, bottom: 30 }}
             >
 
                 <Tooltip cursor={false} />

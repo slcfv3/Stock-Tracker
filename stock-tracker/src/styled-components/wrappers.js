@@ -12,10 +12,12 @@ export const Grid = styled.div`
 export const Row = styled.div`
     display: flex;
     overflow: hidden;
-    column-gap: 50px;
-    padding-bottom: 1%;
-`
+    column-gap: ${prop => prop.columnGap ? prop.columnGap : '50px'};
+    justify-content: ${prop => prop.justifyContent ? prop.justifyContent : 'flex-start'};
+`    
+//justify-content: ${prop => prop.alignContent ? prop.alignContent : 'center'};
 
 export const Col = styled.div`
     flex: ${(props) => props.size};
 `
+//align-content: ${prop => prop.alignContent ? prop.alignContent : 'center'};

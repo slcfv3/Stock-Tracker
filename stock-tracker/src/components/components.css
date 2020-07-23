@@ -26,7 +26,7 @@ input, select, textarea{
     border-radius: 5px;
     height: 100%;
     width: 100%;
-    padding: 2px 23px 2px 30px;
+    padding: 2px 23px 0px 30px;
     outline: 0;
     background-color: transparent;
 }
@@ -67,11 +67,13 @@ ul {
     left: 200px;
 }
 */
+
+/*
 .pricetags{
     color: white;
     font-size: 30px;
 }
-
+*/
 /*
 .news{
     color: white;
@@ -107,12 +109,14 @@ ul {
 }
 */
 
+/*
 .peers{
     position: absolute;
     top: 950px;
     left: 60%;
     color: white;
 }
+*/
 
 /*
 .keystats{

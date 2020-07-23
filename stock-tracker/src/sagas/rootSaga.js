@@ -18,7 +18,7 @@ function* pollPrice(symbol) {
     const requestParameters = `{"symbol":"${symbol}", "range":"1d"}`;
     try {
         while (true) {
-            yield delay(3000)
+            yield delay(1000)
             const news = yield call(getNewStockData, PRICE_ENDPOINT_URL + requestParameters, controller)
             yield put({ type: 'PRICE_RECEIVED', payload: news })
         }
