@@ -16,8 +16,7 @@ const Chart = () => {
     const [lineDisplay,setLineDisplay] = useState('block')
     const [XTicks,setXTicks] = useState();
     const [YTicks,setYTicks] = useState([0]);
-
-    
+   
     useEffect(()=>{
         if(active===0){
             setCurrentChart(chartData)
@@ -68,11 +67,11 @@ const Chart = () => {
         <div>
           <div id="switch">
             <button className={active===0?'specialbutton active':'specialbutton'} onClick={()=>setActive(0)}>1D</button>
-            <button className={active===1?'specialbutton active':'specialbutton'} onClick={()=>setActive(1)}>5D</button>
-            <button className={active===2?'specialbutton active':'specialbutton'} onClick={()=>setActive(2)}>1M</button>
-            <button className={active===3?'specialbutton active':'specialbutton'} onClick={()=>setActive(3)}>1Y</button>
-            <button className={active===4?'specialbutton active':'specialbutton'} onClick={()=>setActive(4)}>5Y</button>
-            <button className={active===5?'specialbutton active':'specialbutton'} onClick={()=>setActive(5)}>MAX</button>
+            <button className={active===1?'specialbutton active':'specialbutton'} onClick={()=>setActive(1)} disabled={coldchartData.oneday===undefined}>5D</button>
+            <button className={active===2?'specialbutton active':'specialbutton'} onClick={()=>setActive(2)} disabled={coldchartData.oneday===undefined}>1M</button>
+            <button className={active===3?'specialbutton active':'specialbutton'} onClick={()=>setActive(3)} disabled={coldchartData.oneday===undefined}>1Y</button>
+            <button className={active===4?'specialbutton active':'specialbutton'} onClick={()=>setActive(4)} disabled={coldchartData.oneday===undefined}>5Y</button>
+            <button className={active===5?'specialbutton active':'specialbutton'} onClick={()=>setActive(5)} disabled={coldchartData.oneday===undefined}>MAX</button>
           </div> 
           
           <ResponsiveContainer width="99%" aspect={2}>

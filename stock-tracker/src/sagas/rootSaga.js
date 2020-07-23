@@ -60,12 +60,12 @@ function* searchSubmittedHandler(action) {
     // Fetch the new stock data
     const requestParameters = `{"symbol":"${symbol}", "range":"1d"}`;
     const controller = new AbortController();
-    //const { stockData, stockCharts }  = yield call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller);
-    //const stockCharts = yield call(getNewStockData, COLD_CHART_ENDPOINT_URL + requestParameters, controller);
-    const { stockData, stockCharts } = yield all({
+    const stockData = yield call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller);
+    const stockCharts = yield call(getNewStockData, COLD_CHART_ENDPOINT_URL + requestParameters, controller);
+    /*const { stockData, stockCharts } = yield all({
         stockData: call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller),
         stockCharts: call(getNewStockData, COLD_CHART_ENDPOINT_URL + requestParameters, controller)
-    })
+    })*/
 
     if (stockData === undefined) {
         return;
