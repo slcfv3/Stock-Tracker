@@ -1,4 +1,4 @@
-import { select, put, fork, take, call, takeLatest, cancel, cancelled, delay } from 'redux-saga/effects'
+import { select, put, fork, take, call, takeLatest, cancel, cancelled, delay, all } from 'redux-saga/effects'
 import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL } from '../config/config.js'
 
 const getNewStockData = (url, controller) => fetch(url, { signal: controller.signal })
@@ -13,27 +13,12 @@ const getNewStockData = (url, controller) => fetch(url, { signal: controller.sig
     })
     .catch(error => console.log(error.name, error.message))
 
-function* searchSubmittedWatcher() {
-    yield takeLatest('SEARCH_SUBMITTED', searchSubmittedHandler);
-}
-
-function* stockReceivedWatcher() {
-    while (true) {
-        const action = yield take('STOCK_RECEIVED');
-        const pricePolling = yield fork(pollPrice, action);
-        const newsPolling = yield fork(pollNews, action)
-        yield take('ABORT_CURRENT_REQUESTS');
-        yield cancel(pricePolling);
-        yield cancel(newsPolling);
-    }
-}
-
-function* pollPrice(action) {
+function* pollPrice(symbol) {
     const controller = new AbortController();
-    const requestParameters = `{"symbol":"${action.payload.symbol}", "range":"1d"}`;
+    const requestParameters = `{"symbol":"${symbol}", "range":"1d"}`;
     try {
         while (true) {
-            yield delay(3000)
+            yield delay(1000)
             const news = yield call(getNewStockData, PRICE_ENDPOINT_URL + requestParameters, controller)
             yield put({ type: 'PRICE_RECEIVED', payload: news })
         }
@@ -45,9 +30,9 @@ function* pollPrice(action) {
     }
 }
 
-function* pollNews(action) {
+function* pollNews(symbol) {
     const controller = new AbortController();
-    const requestParameters = `{"symbol":"${action.payload.symbol}", "range":"1d"}`;
+    const requestParameters = `{"symbol":"${symbol}", "range":"1d"}`;
     try {
         while (true) {
             yield delay(3000)
@@ -64,6 +49,7 @@ function* pollNews(action) {
 }
 
 function* searchSubmittedHandler(action) {
+
     // Previous and new stock symbols
     const currentSymbol = yield select(state => state.symbol)
     const symbol = action.payload;
@@ -78,12 +64,15 @@ function* searchSubmittedHandler(action) {
     if (stockData === undefined) {
         return;
     }
-    
-    yield put({ type: 'ABORT_CURRENT_REQUESTS' })
+
     yield put({ type: 'STOCK_RECEIVED', payload: stockData }) // this orchestrates the ongoing polls
+
+    yield all([
+        call(pollPrice, symbol),
+        call(pollNews, symbol),
+    ])    
 }
 
-export default function* rootSaga() {
-    yield fork(searchSubmittedWatcher)
-    yield fork(stockReceivedWatcher)
+export default function* searchSubmittedWatcher() {
+    yield takeLatest('SEARCH_SUBMITTED', searchSubmittedHandler);
 }

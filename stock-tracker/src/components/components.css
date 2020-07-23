@@ -1,8 +1,10 @@
+
 ::placeholder {
     color: white;
     opacity: 1; /* Firefox */
   }
 
+/*
 .wrapper {
     position: relative;
     display: flex;
@@ -12,6 +14,7 @@
     left: 20px;
     height:50px;
 }
+*/
 
 input, select, textarea{
     color: white;
@@ -23,15 +26,14 @@ input, select, textarea{
     border-radius: 5px;
     height: 100%;
     width: 100%;
-    padding: 2px 23px 2px 30px;
+    padding: 2px 23px 0px 30px;
     outline: 0;
     background-color: transparent;
 }
 
 .search-icon {
     position: absolute;
-    top: 15px;
-    
+    top: 15px;    
     width: 28px;
 }
 
@@ -48,11 +50,13 @@ input, select, textarea{
     
     background-color: transparent;
 }
-
+/*
 ul {
     list-style-type: none;
    }
+*/
 
+   /*
 .leftstats{
     display: inline-block;
 }
@@ -62,21 +66,20 @@ ul {
     position: relative;
     left: 200px;
 }
+*/
 
+/*
 .pricetags{
-    position: relative;
-    left: 70%;
     color: white;
     font-size: 30px;
 }
-
+*/
+/*
 .news{
     color: white;
-    position: relative;
-    top: 100px;
-    left: 60%;
-    width: 630px;
+    width: 500px;
 }
+
 
 .newstext{
     word-break: break-all;
@@ -86,12 +89,12 @@ ul {
     overflow: hidden;
     width: 500px;
 }
+*/
+/*
 
 .overview{
     color: white;
     position: absolute;
-    top: 700px;
-    left: 60%;
     width: 500px;
     height: 800px;
 }
@@ -104,17 +107,20 @@ ul {
     overflow: hidden;
     width: 500px; 
 }
+*/
 
+/*
 .peers{
     position: absolute;
     top: 950px;
     left: 60%;
     color: white;
 }
+*/
 
+/*
 .keystats{
     position: absolute;
-    top: 700px;
     left: 50px;
     color: #bdd5de;
   }
@@ -122,12 +128,13 @@ ul {
 .keystats li{
     height:50px;
 }
+*/
   
 .title{
-    width: 221px;
+    width: 601px;
     height: 19px;
-    font-family: Lato;
-    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
@@ -137,7 +144,9 @@ ul {
     color: #7fb3ff;
 }
 
+/*
 li{
     position: relative;
     right:40px;
 }
+*/

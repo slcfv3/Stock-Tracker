@@ -1,24 +1,27 @@
 import React from "react";
 import { useSelector } from 'react-redux'
-import {unixToTimePassed} from '../util'
-import './components.css';
+import { unixToTimePassed } from '../util'
+//import './components.css'
+import { BlueLine } from '../styled-components/lines.js'
+import { SectionTitle } from '../styled-components/text.js'
+import { Headline, NewsList, ListItem, ArticleLabel } from '../styled-components/news.js'
 
 const News = () => {
     const news = useSelector(state => state.news);
     //console.log('test news'+news[0].headline)
     return (
         <div className="news">
-            <div className="title">LATEST NEWS</div>
-            <ul>
+            <SectionTitle>LATEST NEWS</SectionTitle>
+            <BlueLine />
+            <NewsList>
                 {news.map((article, index) =>
-                    <li>
-                        <p className="newstext">{article.headline}</p>
-                        <label>{article.source}</label>
-                        <label>-{unixToTimePassed(article.datetime)}</label>
-                    </li>
+                    <ListItem>
+                        <Headline>{article.headline}</ Headline>                    
+                        <ArticleLabel>{unixToTimePassed(article.datetime)} - {article.source}</ArticleLabel>
+                    </ListItem>
                 )}
-                
-            </ul>
+
+            </NewsList>
 
         </div>
     );
