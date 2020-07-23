@@ -12,6 +12,7 @@ export const Grid = styled.div`
 export const Row = styled.div`
     display: flex;
     overflow: hidden;
+    margin-bottom: ${prop => prop.marginBottom ? prop.marginBottom : 'none'};
     column-gap: ${prop => prop.columnGap ? prop.columnGap : '50px'};
     justify-content: ${prop => prop.justifyContent ? prop.justifyContent : 'flex-start'};
 `    

@@ -12,6 +12,18 @@ export const SectionTitle = styled.header`
     color: #7fb3ff
 `
 
+export const FooterSectionTitle = styled.header`
+  font-family: Lato, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff;
+`
+
 export const CompanyName = styled.p`
   font-family: 'Lato', sans-serif;
   font-size: 24px;

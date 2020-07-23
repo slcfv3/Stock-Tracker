@@ -24,7 +24,7 @@ const Chart = () => {
                 <Tooltip cursor={false} />
                 <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3">
                     <Label
-                        value={currentPrice}
+                        value={' '+currentPrice}
                         position="right"
                         style={{ fill: "#e95656", fontSize: "10px" }} />
                 </ReferenceLine>

@@ -12,6 +12,8 @@ import Overview from './components/overview'
 import Peers from './components/peers'
 import StockTags from './components/StockTags'
 import MarketOpen from './components/MarketOpen'
+import HeaderTabs from './components/HeaderTabs'
+import { FooterSectionTitle } from './styled-components/text'
 import { rootReducer } from './reducers/rootReducer.js'
 import rootSaga from './sagas/rootSaga.js'
 import './App.css';
@@ -28,14 +30,14 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-
         <Grid>
-          <Row justifyContent='space-between'>
+
+          <Row justifyContent='space-between' marginBottom='2%'>
             <Col>
-             LOGO 
+              LOGO
             </Col>
             <Col>
-              TABS
+              <HeaderTabs />
             </Col>
           </Row>
 
@@ -44,7 +46,7 @@ function App() {
               <SearchBar />
             </Col>
             <Col size={1}>
-              <Price />
+              <Price size={40}/>
             </Col>
           </Row>
 
@@ -52,12 +54,12 @@ function App() {
             <GreyLine />
           </Row>
 
-          <Row justifyContent='space-between'>
+          <Row justifyContent='space-between' marginBottom='1%'>
             <Col >
               <StockTags />
             </Col>
             <Col >
-                <MarketOpen/>
+              <MarketOpen />
             </Col>
           </Row>
 
@@ -70,7 +72,7 @@ function App() {
             </Col>
           </Row>
 
-          <Row>
+          <Row marginBottom='2%'>
             <Col size={2}>
               <Keystats />
             </Col>
@@ -79,9 +81,8 @@ function App() {
               <Peers />
             </Col>
           </Row>
-
+        
         </Grid>
-
       </ThemeProvider>
     </ Provider >
   );

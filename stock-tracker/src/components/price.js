@@ -7,7 +7,8 @@ import { UpArrowAlt } from '@styled-icons/boxicons-regular/UpArrowAlt'
 import { DownArrowAlt } from '@styled-icons/boxicons-regular/DownArrowAlt'
 import { Dollar } from '@styled-icons/boxicons-regular/Dollar'
 
-const Price = () => {
+const Price = (props) => {
+    console.log("size in price", props.size)
     const price = useSelector(state => state.price);
     const priceChange = useSelector(state => state.priceChange)
     const priceChangeDisplay = Math.abs(priceChange).toFixed(2)
@@ -15,19 +16,19 @@ const Price = () => {
     const priceChangePercentDisplay = Math.abs(priceChangePercent).toFixed(2)
     let arrowIcon;
     if (priceChange < 0) {
-        arrowIcon = <DownArrowAlt size='25px'/>
+        arrowIcon = <DownArrowAlt size={props.size / 2 +'px'}/>
     }
     else {
-        arrowIcon = <UpArrowAlt  size='25px'/>
+        arrowIcon = <UpArrowAlt  size={props.size / 2 +'px'}/>
     }
 
     return (
             <Row  justifyContent='flex-end' columnGap='25px'>
                 <Col >
-                    <StyledPrice> <Dollar size='25px'/>{price.toFixed(2)} </StyledPrice>
+                    <StyledPrice> <Dollar size={props.size / 2}/>{price.toFixed(2)} </StyledPrice>
                 </ Col>
                 <Col >
-                    <PriceChange change={priceChange}>{arrowIcon}{priceChangeDisplay} {priceChangePercentDisplay}<Percent size='20px'/> </PriceChange>
+                    <PriceChange change={priceChange} size={props.size+'px'}>  {arrowIcon}{priceChangeDisplay} {priceChangePercentDisplay}<Percent size={props.size / 2 +'px'}/>  </PriceChange>
                 </ Col>
             </Row>
     );
