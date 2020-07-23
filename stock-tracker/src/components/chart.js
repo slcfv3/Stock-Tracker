@@ -1,9 +1,11 @@
+
 import React, {useState, useEffect} from "react"
-import {  useSelector } from 'react-redux'
-import {AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine } from "recharts";
 import './components.css';
-//import 'antd/dist/antd.css';
 import { getPriceTicks, getTimeTicks } from '../util.js'
+import { useDispatch, useSelector, select } from 'react-redux'
+import { Line, LineChart, AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer } from "recharts";
+
+
 
 const Chart = () => {
     const chartData = useSelector(state => state.chart)
@@ -62,6 +64,7 @@ const Chart = () => {
     },[active, coldchartData])
 
     return (
+
         <div>
           <div id="switch">
             <button className={active===0?'specialbutton active':'specialbutton'} onClick={()=>setActive(0)}>1D</button>
@@ -71,12 +74,14 @@ const Chart = () => {
             <button className={active===4?'specialbutton active':'specialbutton'} onClick={()=>setActive(4)}>5Y</button>
             <button className={active===5?'specialbutton active':'specialbutton'} onClick={()=>setActive(5)}>MAX</button>
           </div> 
-          <AreaChart
-                    width={600}
-                    height={400}
-                    data={currentChart}
-                    margin={{ top: 30, right: 30, left: 30, bottom: 30 }}
-                    >
+          
+          <ResponsiveContainer width="99%" aspect={2}>
+            <AreaChart
+                width={500}
+                height={500}
+                data={chartData}
+                margin={{ top: 30, left: 30, bottom: 30 }}
+            >
  
                     <Tooltip cursor={false} />
                     <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3" display={lineDisplay}>
@@ -130,10 +135,11 @@ const Chart = () => {
                         fill="url(#lineGradient)"
                     />
                 </AreaChart>
- 
+              </ResponsiveContainer>
         </div>
         
         
+
     );
 }
 

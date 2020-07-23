@@ -28,8 +28,7 @@ const SearchBar = () => {
   },[placeholder])
 
   return (
-    <form onSubmit={handleSubmit} className="wrapper">
-      <input className="search-icon" type="image" src="../images/search.png" alt="Submit" />
+    <form onSubmit={handleSubmit}>
       <input placeholder={placeholder}
             type="text" 
             value={search}
@@ -40,3 +39,5 @@ const SearchBar = () => {
 }
 
 export default SearchBar;
+
+//       <input className="search-icon" type="image" src="../images/search.png" alt="Submit" />

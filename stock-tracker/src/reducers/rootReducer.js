@@ -2,7 +2,9 @@ const initialState = {
     symbol: "Please enter a stock symbol",
     companyName: "",
     overview: "",
-    price: null,
+    price: 0,
+    priceChange: 0,
+    priceChangePercent: 0,
     chart: [],
     coldChart:{},
     news: [],
@@ -35,7 +37,9 @@ export const rootReducer = (state = initialState, action) => {
                 symbol: stock.symbol,
                 companyName: stock.companyName,
                 overview: stock.overview,
-                price: '$'+stock.latestPrice,
+                price: stock.latestPrice,
+                priceChange: stock.change,
+                priceChangePercent: stock.changePercent,
                 chart: stock.chart,
                 coldChart: charts,
                 news: stock.news,
@@ -55,6 +59,8 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 price: action.payload.latestPrice,
+                priceChange: action.payload.change,
+                priceChangePercent: action.payload.changePercent,
                 chart: action.payload.chart
             }
         
