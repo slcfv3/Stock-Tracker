@@ -16,7 +16,10 @@ export const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'STOCK_RECEIVED':
             const stock = action.payload.info;
-            const charts = action.payload.chart
+            const charts = action.payload.charts;
+            console.log("stock in STOCK_RECEIVED", stock)
+            console.log("charts in STOCK_RECEIVED", charts)
+
            
             const keyStats = {
                 previousClose:stock.previousClose,

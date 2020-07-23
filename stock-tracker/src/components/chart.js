@@ -79,7 +79,7 @@ const Chart = () => {
             <AreaChart
                 width={500}
                 height={500}
-                data={chartData}
+                data={currentChart}
                 margin={{ top: 30, left: 30, bottom: 30 }}
             >
  
