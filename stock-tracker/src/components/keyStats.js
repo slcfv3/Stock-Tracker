@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import { findHighValue, findLowValue } from '../util'
 import './components.css';
-import styled from 'styled-components'
 import { BlueLine } from '../styled-components/lines.js'
 import { Row, Col } from '../styled-components/wrappers.js'
 import { SectionTitle } from '../styled-components/text.js'
@@ -81,21 +80,3 @@ const Keystats = () => {
 }
 
 export default Keystats;
-
-/*
-            <ul className="leftstats">
-                <li>Previous Close{stats.previousClose}</li>
-                <li>Day Range{useSelector(lowHighSelector)}</li>
-                <li>Volume{stats.iexVolume}</li>
-                <li>Market Cap{stats.marketCap}</li>
-                <li>P/E Ratio{stats.peRatio}</li>
-            </ul>
-
-            <ul className="rightstats">
-                <li>Open{useSelector(openSelector)}</li>
-                <li>52 Week Range{stats.week52Low+'-'+stats.week52High}</li>
-                <li>Total Avg Volume{stats.avgTotalVolume}</li>
-                <li>Earnings Per Share{stats.ttmEPS}</li>
-                <li>Dividend & Yield{stats.dividendYield}</li>
-            </ul>
-            */

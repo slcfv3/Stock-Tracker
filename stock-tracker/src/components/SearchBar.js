@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { createSelector } from 'reselect'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col } from '../styled-components/wrappers.js'
 import './components.css';
-import { SearchAlt2 } from '@styled-icons/boxicons-regular/SearchAlt2'
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
-  //const [placeholder, setPlaceholder] = useState("Please enter a stock symbol");
   const dispatch = useDispatch();
   const name = state => state.companyName;
   const symbol = state => state.symbol;
@@ -29,7 +26,6 @@ const SearchBar = () => {
     e.preventDefault();
     console.log("Search for " + search.toUpperCase() + " submitted.");
     dispatch({ type: 'SEARCH_SUBMITTED', payload: search.toUpperCase() });
-
   }
 
   useEffect(() => {
@@ -50,5 +46,3 @@ const SearchBar = () => {
 }
 
 export default SearchBar;
-
-//       <input className="search-icon" type="image" src="../images/search.png" alt="Submit" />

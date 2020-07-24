@@ -19,7 +19,6 @@ export const Row = styled.div`
     justify-content: ${prop => prop.justifyContent ? prop.justifyContent : 'flex-start'};
     border-right: ${prop => prop.BorderRight ? prop.BorderRight : 'none'}
 `    
-//justify-content: ${prop => prop.alignContent ? prop.alignContent : 'center'};
 
 export const Col = styled.div`
     flex: ${(props) => props.size};
@@ -28,4 +27,3 @@ export const Col = styled.div`
     border-right: ${prop => prop.BorderRight ? prop.BorderRight : 'none'};
     border-color: ${prop => prop.BorderColor ? prop.BorderColor : 'none'};
 `
-//align-content: ${prop => prop.alignContent ? prop.alignContent : 'center'};

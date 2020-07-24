@@ -2,9 +2,9 @@
 import React, {useState, useEffect} from "react"
 import './components.css';
 import { getPriceTicks, getTimeTicks } from '../util.js'
-import { useDispatch, useSelector, select } from 'react-redux'
-import { Line, LineChart, AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer } from "recharts";
-import { Row, Col } from '../styled-components/wrappers.js'
+import {  useSelector } from 'react-redux'
+import { AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer } from "recharts";
+import { Row } from '../styled-components/wrappers.js'
 import { ChartButton } from '../styled-components/buttons.js'
 
 
@@ -121,9 +121,7 @@ const Chart = () => {
                         orientation="right"
                         stroke="transparent"
                         style={{ fill: "#beccdc", fontSize: "13px" }}
-                        //tickCount={10}
                         ticks={YTicks}
-                        //interval={0}
                     >
                     </ YAxis>
  

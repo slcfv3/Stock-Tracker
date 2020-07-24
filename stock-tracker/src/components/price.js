@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from 'react-redux'
-import { StyledPrice, PriceChange, PercentChange } from '../styled-components/price.js'
+import { StyledPrice, PriceChange } from '../styled-components/price.js'
 import { Row, Col } from '../styled-components/wrappers.js'
 import { Percent } from '@styled-icons/evaicons-solid/Percent'
 import { UpArrowAlt } from '@styled-icons/boxicons-regular/UpArrowAlt'
@@ -8,7 +8,6 @@ import { DownArrowAlt } from '@styled-icons/boxicons-regular/DownArrowAlt'
 import { Dollar } from '@styled-icons/boxicons-regular/Dollar'
 
 const Price = (props) => {
-    console.log("size in price", props.size)
     const price = useSelector(state => state.price);
     const priceChange = useSelector(state => state.priceChange)
     const priceChangeDisplay = Math.abs(priceChange).toFixed(2)

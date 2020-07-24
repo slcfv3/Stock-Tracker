@@ -1,5 +1,5 @@
-import { select, put, fork, take, call, takeLatest, cancel, cancelled, delay, all } from 'redux-saga/effects'
-import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL, COLD_CHART_ENDPOINT_URL } from '../config/config.js'
+import { select, put, fork, take, call, takeLatest, cancel, cancelled, delay } from 'redux-saga/effects'
+import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL } from '../config/config.js'
 
 const getNewStockData = (url, controller) => fetch(url, { signal: controller.signal })
     .then(response => {
@@ -52,7 +52,6 @@ function* pollNews(action) {
         while (true) {
             yield delay(3000)
             const news = yield call(getNewStockData, NEWS_ENDPOINT_URL + requestParameters, controller)
-            //console.log('news before sent'+ news[0].headline)
             yield put({ type: 'NEWS_RECEIVED', payload: news })
         }
     }

@@ -1,6 +1,5 @@
 import React from "react";
 import { HeaderTab } from '../styled-components/buttons.js'
-import { Row, Col } from '../styled-components/wrappers.js'
 
 const HeaderTabs = () => {
 
