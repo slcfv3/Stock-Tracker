@@ -21,6 +21,98 @@ app.use(function (req, res, next) {
   next()
 })
 
+function getColdChart(symbol, largeBody, resolve){
+  let onedayChartUrl = base_url+'stable/stock/'+symbol+'/chart/1d?token='+secret_key
+    let fivedayChartUrl = base_url+'stable/stock/'+symbol+'/chart/5d?token='+secret_key
+    let onemonthChartUrl = base_url+'stable/stock/'+symbol+'/chart/1m?token='+secret_key
+    let oneyearChartUrl = base_url+'stable/stock/'+symbol+'/chart/1y?token='+secret_key
+    let fiveyearChartUrl = base_url+'stable/stock/'+symbol+'/chart/5y?token='+secret_key
+    let maxChartUrl = base_url+'stable/stock/'+symbol+'/chart/max?token='+secret_key
+    https.get(onedayChartUrl, res => {
+        if(res.statusCode==404)
+            resolve.status(404).send('Stock not found');
+        else{
+              //res.setEncoding("utf8");
+              let body = {};
+              let body0 = "";
+              res.on("data", data => {
+              body0 += data;
+              });
+              res.on("end", () => {
+              
+              body.oneday = JSON.parse(body0);
+              
+              https.get(fivedayChartUrl, res1 => {
+                res1.setEncoding("utf8");
+                let body1 =""
+                res1.on("data", data => {
+                body1 += data;
+                
+                });
+                res1.on("end", () => {
+                    body.fiveday = JSON.parse(body1);
+                    
+                    https.get(onemonthChartUrl, res2 => {
+                    res2.setEncoding("utf8");
+                    let body2 =""
+                    res2.on("data", data => {
+                        body2 += data;
+                        
+                    });
+                    res2.on("end", () => {
+                        body.onemonth = JSON.parse(body2)
+                
+                        https.get(oneyearChartUrl, res3 => {
+                        res3.setEncoding("utf8");
+                        let body3 =""
+                        res3.on("data", data => {
+                            body3 += data;
+                            
+                        });
+                        res3.on("end", () => {
+                            body.oneyear = JSON.parse(body3);
+                            
+                            https.get(fiveyearChartUrl, res4 => {
+                                
+                                res4.setEncoding("utf8");
+                                let body4 = "";
+                                res4.on("data", data => {
+                                body4 += data;
+                                
+                                });
+                                res4.on("end", () => {
+                                body.fiveyear = JSON.parse(body4);
+                                
+                                
+                                https.get(maxChartUrl, res5 => {
+                                  res5.setEncoding("utf8");
+                                  let body5 =""
+                                  res5.on("data", data => {
+                                    body5 += data;
+                                    
+                                  });
+                                  res5.on("end", () => {
+                                    body.max = JSON.parse(body5);
+                                   
+                                    largeBody.coldcharts = body
+                                    resolve.send(largeBody)
+                                  });
+                                });
+                                });
+                                
+                                
+                              });
+                        });
+                        });
+                    });
+                    });
+                });
+                });
+              });
+            }
+        
+      });
+}
 
 app.get("/tradehotdetails/:request", function (req, resolve) {
     const request = JSON.parse(req.params.request)
@@ -242,16 +334,6 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
                         body.overview = JSON.parse(body2);
                         //console.log('overview normal')
                         
-                        
-                        https.get(peerUrl, res3 => {
-                        res3.setEncoding("utf8");
-                        let body3 =""
-                        res3.on("data", data => {
-                            body3 += data;
-                            
-                        });
-                        res3.on("end", () => {
-                            body.peers = JSON.parse(body3);
                             
                             https.get(newsUrl, res4 => {
                                 
@@ -274,16 +356,15 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
                                   });
                                   res5.on("end", () => {
                                     body.stats = JSON.parse(body5);
+                                    getColdChart(symbol, body, resolve)
                                     
-                                    resolve.send(body)
                                   });
                                 });
                                 });
                                 
                                 
                               });
-                        });
-                        });
+                        
                     });
                     });
                 });

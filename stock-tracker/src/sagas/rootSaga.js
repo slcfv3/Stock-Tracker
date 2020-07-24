@@ -62,12 +62,7 @@ function* searchSubmittedHandler(action) {
     const controller = new AbortController();
     const stockData = yield call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller);
     const stockCharts = yield call(getNewStockData, COLD_CHART_ENDPOINT_URL + requestParameters, controller);
-    //const stockCharts = yield call(getNewStockData, COLD_CHART_ENDPOINT_URL + requestParameters, controller);
-    /*const { stockData, stockCharts } = yield all({
-        stockData: call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller),
-        stockCharts: call(getNewStockData, COLD_CHART_ENDPOINT_URL + requestParameters, controller)
-    })
-    */
+
 
     if (stockData === undefined) {
         return;

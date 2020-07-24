@@ -12,9 +12,7 @@ const Peers = () => {
             <SectionTitle>TOP PEERS</SectionTitle>
             <BlueLine />
             <Row>
-                {peer.map((item, index) =>
-                    <PeerSymbol>{item + '     '}</PeerSymbol>
-                )}
+                TSLA
             </Row>
         </div>
     );
