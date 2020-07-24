@@ -18,6 +18,21 @@ font-family: 'Lato', sans-serif;
   color: #ffffff;
 `
 
+export const ChartButton = styled.button`
+font-family: Lato, sans-serif;
+font-size: 12px;
+font-weight: 300;
+font-stretch: normal;
+font-style: normal;
+line-height: normal;
+letter-spacing: normal;
+text-align: left;
+border: none;
+outline: none;
+color: ${prop => prop.isActive? 'white' : '#beccdc'};
+background: transparent
+`
+
 export const HeaderTab = styled.button`
 border-radius: 3px;
 background-color: ${prop => prop.isActive ? '#0068ff' : 'transparent'};

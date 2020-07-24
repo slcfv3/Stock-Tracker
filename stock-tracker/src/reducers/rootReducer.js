@@ -1,36 +1,36 @@
 const initialState = {
-    symbol: "Please enter a stock symbol",
+    symbol: "",
     companyName: "",
     overview: "",
     price: 0,
     priceChange: 0,
     priceChangePercent: 0,
     chart: [],
-    coldChart:{},
+    coldChart: {},
     news: [],
     keyStats: {},
-    peer:[]
+    peer: []
 }
 
 export const rootReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case 'STOCK_RECEIVED':
-            const stock = action.payload.info;
-            const charts = action.payload.chart
-           
+            const stock = action.payload
+            console.log("stock in reducer", stock)
+
             const keyStats = {
-                previousClose:stock.previousClose,
-                iexVolume:stock.iexVolume,
-                marketCap:stock.marketCap,
-                peRatio:stock.peRatio,
-                week52Low:stock.week52Low,
-                week52High:stock.week52High,
-                avgTotalVolume:stock.avgTotalVolume,
-                dividendYield:stock.stats.dividendYield,
-                ttmEPS:stock.stats.ttmEPS,
-                low:stock.low,
-                high:stock.high,
-                open:stock.open
+                previousClose: stock.previousClose,
+                iexVolume: stock.iexVolume,
+                marketCap: stock.marketCap,
+                peRatio: stock.peRatio,
+                week52Low: stock.week52Low,
+                week52High: stock.week52High,
+                avgTotalVolume: stock.avgTotalVolume,
+                dividendYield: stock.stats.dividendYield,
+                ttmEPS: stock.stats.ttmEPS,
+                low: stock.low,
+                high: stock.high,
+                open: stock.open
             }
             return {
                 ...state,
@@ -41,10 +41,10 @@ export const rootReducer = (state = initialState, action) => {
                 priceChange: stock.change,
                 priceChangePercent: stock.changePercent,
                 chart: stock.chart,
-                coldChart: charts,
+                coldChart: stock.coldcharts,
                 news: stock.news,
-                keyStats:keyStats,
-                peer:stock.peers
+                keyStats: keyStats,
+                peer: stock.peers
             }
         case 'NEWS_RECEIVED':
             console.log("news in NEWS_RECEIVED:", action.payload)
@@ -53,9 +53,9 @@ export const rootReducer = (state = initialState, action) => {
                 news: action.payload
             }
         case 'PRICE_RECEIVED':
-            console.log("chart in PRICE_RECEIVED:", action.payload.chart)      
-            console.log("price in PRICE_RECEIVED:", action.payload.latestPrice)   
-             
+            console.log("chart in PRICE_RECEIVED:", action.payload.chart)
+            console.log("price in PRICE_RECEIVED:", action.payload.latestPrice)
+
             return {
                 ...state,
                 price: action.payload.latestPrice,
@@ -63,7 +63,7 @@ export const rootReducer = (state = initialState, action) => {
                 priceChangePercent: action.payload.changePercent,
                 chart: action.payload.chart
             }
-        
+
         default:
             return state;
     }

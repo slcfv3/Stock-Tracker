@@ -36,7 +36,6 @@ input, select, textarea{
 }
 
 .search:hover, .search:focus {
-    
     background-color: transparent;
 }
 
