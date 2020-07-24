@@ -25,54 +25,56 @@ const Keystats = () => {
             <SectionTitle>KEY STATS</SectionTitle>
             <BlueLine />
             <Row>
-            <Col size={1}>
-                <StatTable>
-                    <tr>
-                        <StatLabel> Previous Close </StatLabel>
-                        <StatValue> {stats.previousClose} </ StatValue>
-                    </tr>
-                    <tr>
-                        <StatLabel> Day Range </StatLabel>
-                        <StatValue> {useSelector(lowHighSelector)} </ StatValue>
-                    </tr>
-                    <tr>
-                        <StatLabel> Volume </StatLabel>
-                        <StatValue> {stats.iexVolume} </ StatValue>
-                    </tr>
-                    <tr>
-                        <StatLabel> Market Cap </StatLabel>
-                        <StatValue> {stats.marketCap} </ StatValue>
-                    </tr>
-                    <tr>
-                        <StatLabel> P/E Ratio </StatLabel>
-                        <StatValue> {stats.peRatio} </ StatValue>
-                    </tr>
-                </StatTable>
-            </Col>
-            <Col size={1}>
-                <StatTable>
-                    <tr>
-                        <StatLabel> Open </StatLabel>
-                        <StatValue> {useSelector(openSelector)} </ StatValue>
-                    </tr>
-                    <tr>
-                        <StatLabel> 52 Week Range </StatLabel>
-                        <StatValue> {(stats.week52Low && stats.week52High) ? stats.week52Low+'-'+stats.week52High : ''} </ StatValue>
-                    </tr>
-                    <tr>
-                        <StatLabel> Total Avg Volume </StatLabel>
-                        <StatValue> {stats.avgTotalVolume} </ StatValue>
-                    </tr>
-                    <tr>
-                        <StatLabel> Earnings Per Share </StatLabel>
-                        <StatValue> {stats.ttmEPS} </ StatValue>
-                    </tr>
-                    <tr>
-                        <StatLabel> Dividend & Yield </StatLabel>
-                        <StatValue> {stats.dividendYield} </ StatValue>
-                    </tr>
-                </StatTable>
-            </Col>
+                <Col size={1}>
+                    <StatTable>
+                        <tr>
+                            <StatLabel> Previous Close </StatLabel>
+                            <StatValue> {stats.previousClose} </ StatValue>
+                        </tr>
+                        <tr>
+                            <StatLabel> Day Range </StatLabel>
+                            <StatValue> {useSelector(lowHighSelector)} </ StatValue>
+                        </tr>
+                        <tr>
+                            <StatLabel> Volume </StatLabel>
+                            <StatValue> {stats.iexVolume} </ StatValue>
+                        </tr>
+                        <tr>
+                            <StatLabel> Market Cap </StatLabel>
+                            <StatValue> {stats.marketCap} </ StatValue>
+                        </tr>
+                        <tr>
+                            <StatLabel> P/E Ratio </StatLabel>
+                            <StatValue> {stats.peRatio} </ StatValue>
+                        </tr>
+                    </StatTable>
+                </Col>
+                <Col size={1}>
+                    <StatTable>
+                        <tbody>
+                            <tr>
+                                <StatLabel> Open </StatLabel>
+                                <StatValue> {useSelector(openSelector)} </ StatValue>
+                            </tr>
+                            <tr>
+                                <StatLabel> 52 Week Range </StatLabel>
+                                <StatValue> {(stats.week52Low && stats.week52High) ? stats.week52Low + '-' + stats.week52High : ''} </ StatValue>
+                            </tr>
+                            <tr>
+                                <StatLabel> Total Avg Volume </StatLabel>
+                                <StatValue> {stats.avgTotalVolume} </ StatValue>
+                            </tr>
+                            <tr>
+                                <StatLabel> Earnings Per Share </StatLabel>
+                                <StatValue> {stats.ttmEPS} </ StatValue>
+                            </tr>
+                            <tr>
+                                <StatLabel> Dividend & Yield </StatLabel>
+                                <StatValue> {stats.dividendYield} </ StatValue>
+                            </tr>
+                        </tbody>
+                    </StatTable>
+                </Col>
             </Row>
         </div>
     );
