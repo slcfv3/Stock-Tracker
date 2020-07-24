@@ -16,21 +16,25 @@ const Price = (props) => {
     const priceChangePercentDisplay = Math.abs(priceChangePercent).toFixed(2)
     let arrowIcon;
     if (priceChange < 0) {
-        arrowIcon = <DownArrowAlt size={props.size / 2 +'px'}/>
+        arrowIcon = <DownArrowAlt size={props.size / 2 + 'px'} />
     }
     else {
-        arrowIcon = <UpArrowAlt  size={props.size / 2 +'px'}/>
+        arrowIcon = <UpArrowAlt size={props.size / 2 + 'px'} />
     }
 
     return (
-            <Row  justifyContent='flex-end' columnGap='25px'>
-                <Col >
-                    <StyledPrice> <Dollar size={props.size / 2}/>{price.toFixed(2)} </StyledPrice>
-                </ Col>
-                <Col >
-                    <PriceChange change={priceChange} size={props.size+'px'}>  {arrowIcon}{priceChangeDisplay} {priceChangePercentDisplay}<Percent size={props.size / 2 +'px'}/>  </PriceChange>
-                </ Col>
-            </Row>
+        <Row justifyContent='flex-end' columnGap='15px'>
+            <Col >
+                <StyledPrice size={props.size + 'px'}> <Dollar size={props.size / 2} />{price.toFixed(2)} </StyledPrice>
+            </ Col>
+            <Col BorderRight='solid 1.5px' Padding='0 15px 0 0' BorderColor={priceChange >= 0 ? 'rgba(145, 228, 165, 0.5)' : 'rgba(233, 86, 86, 0.5)'}>
+                <PriceChange change={priceChange} size={props.size + 'px'}>  {arrowIcon}{priceChangeDisplay}   </PriceChange>
+
+            </ Col>
+            <Col>
+                <PriceChange change={priceChange} size={props.size + 'px'}> {priceChangePercentDisplay}<Percent size={props.size / 2 + 'px'} /> </PriceChange>
+            </Col>
+        </Row>
     );
 }
 

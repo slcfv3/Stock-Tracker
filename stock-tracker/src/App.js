@@ -13,7 +13,7 @@ import Peers from './components/peers'
 import StockTags from './components/StockTags'
 import MarketOpen from './components/MarketOpen'
 import HeaderTabs from './components/HeaderTabs'
-import { FooterSectionTitle } from './styled-components/text'
+import { FooterSectionTitle, FooterStockSymbol } from './styled-components/text'
 import { rootReducer } from './reducers/rootReducer.js'
 import rootSaga from './sagas/rootSaga.js'
 import './App.css';
@@ -42,11 +42,11 @@ function App() {
           </Row>
 
           <Row justifyContent='space-between'>
-            <Col size={3}>
+            <Col size={2}>
               <SearchBar />
             </Col>
             <Col size={1}>
-              <Price size={40}/>
+              <Price size={40} />
             </Col>
           </Row>
 
@@ -81,7 +81,52 @@ function App() {
               <Peers />
             </Col>
           </Row>
-        
+
+          <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' Padding='20px 30px 20px 30px'>
+
+            <Col size={1} BorderRight='solid 1px #ffffff;'>
+
+              <Row marginBottom='1%'>
+                <FooterSectionTitle> MAKRETS </FooterSectionTitle>
+              </Row>
+
+              <Row>
+
+                <Col>
+                  <Row columnGap='15px'>
+                    <FooterStockSymbol>NASDAQ</FooterStockSymbol> <Price size={15} />
+                  </Row>
+                </Col>
+                <Col>
+                  <Row columnGap='15px'>
+                    <FooterStockSymbol>DJIA</FooterStockSymbol> <Price size={15} />
+                  </Row>
+                </Col>
+              </Row>
+            </Col>
+
+            <Col size={1}>
+
+              <Row marginBottom='1%'>
+                <FooterSectionTitle> FAVORITES </FooterSectionTitle>
+              </Row>
+
+              <Row >
+                <Col>
+                  <Row columnGap='15px'>
+                    <FooterStockSymbol>AMZN</FooterStockSymbol> <Price size={15} />
+                  </Row>
+                </Col>
+                <Col>
+                  <Row columnGap='15px'>
+                    <FooterStockSymbol>MSFT</FooterStockSymbol> <Price size={15} />
+                  </Row>
+                </Col>
+              </Row>
+              
+            </Col>
+          </Row>
+
         </Grid>
       </ThemeProvider>
     </ Provider >
