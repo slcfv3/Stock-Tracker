@@ -18,7 +18,7 @@ const Keystats = () => {
     )
     const lowHighSelector = createSelector(
         chartData,
-        (chart) => (findLowValue(chart) + '-' + findHighValue(chart))
+        (chart) => (findLowValue(chart) && findHighValue(chart)) ? (findLowValue(chart) + '-' + findHighValue(chart)) : ''
     )
     return (
         <div className="keystats">
@@ -57,7 +57,7 @@ const Keystats = () => {
                     </tr>
                     <tr>
                         <StatLabel> 52 Week Range </StatLabel>
-                        <StatValue> {stats.week52Low+'-'+stats.week52High} </ StatValue>
+                        <StatValue> {(stats.week52Low && stats.week52High) ? stats.week52Low+'-'+stats.week52High : ''} </ StatValue>
                     </tr>
                     <tr>
                         <StatLabel> Total Avg Volume </StatLabel>

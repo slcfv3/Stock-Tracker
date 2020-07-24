@@ -24,6 +24,20 @@ export const FooterSectionTitle = styled.header`
   color: #ffffff;
 `
 
+export const FooterStockSymbol = styled.p`
+  margin-top: 0px; 
+  margin-bottom: 0px; 
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff;
+`
+
 export const CompanyName = styled.p`
   font-family: 'Lato', sans-serif;
   font-size: 24px;

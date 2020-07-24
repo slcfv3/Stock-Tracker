@@ -13,7 +13,7 @@ import Peers from './components/peers'
 import StockTags from './components/StockTags'
 import MarketOpen from './components/MarketOpen'
 import HeaderTabs from './components/HeaderTabs'
-import { FooterSectionTitle } from './styled-components/text'
+import { FooterSectionTitle, FooterStockSymbol } from './styled-components/text'
 import { rootReducer } from './reducers/rootReducer.js'
 import rootSaga from './sagas/rootSaga.js'
 import './App.css';
@@ -21,6 +21,9 @@ import { ThemeProvider } from 'styled-components'
 import theme from './theme.js'
 import { Grid, Row, Col } from './styled-components/wrappers.js'
 import { BlueLine, GreyLine } from './styled-components/lines.js'
+import { HeaderImage } from './styled-components/images.js'
+import { SearchAlt2 } from '@styled-icons/boxicons-regular/SearchAlt2'
+import logo from './assets/images/adaptive.png'
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
@@ -32,21 +35,24 @@ function App() {
       <ThemeProvider theme={theme}>
         <Grid>
 
-          <Row justifyContent='space-between' marginBottom='2%'>
+          <Row justifyContent='space-between' marginBottom='3%'>
             <Col>
-              LOGO
+              <img src={logo} height='50px'/>
             </Col>
             <Col>
               <HeaderTabs />
             </Col>
           </Row>
 
-          <Row justifyContent='space-between'>
-            <Col size={3}>
+          <Row justifyContent='space-between' columnGap='5px'>
+            <Col>
+              <SearchAlt2 size={50} color='#7fb3ff' />
+            </Col>
+            <Col size={2}>
               <SearchBar />
             </Col>
             <Col size={1}>
-              <Price size={40}/>
+              <Price size={40} />
             </Col>
           </Row>
 
@@ -81,7 +87,52 @@ function App() {
               <Peers />
             </Col>
           </Row>
-        
+
+          <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' Padding='20px 30px 20px 30px'>
+
+            <Col size={1} BorderRight='solid 1px #ffffff;'>
+
+              <Row marginBottom='1%'>
+                <FooterSectionTitle> MARKETS </FooterSectionTitle>
+              </Row>
+
+              <Row>
+
+                <Col>
+                  <Row columnGap='15px'>
+                    <FooterStockSymbol>NASDAQ</FooterStockSymbol> <Price size={15} />
+                  </Row>
+                </Col>
+                <Col>
+                  <Row columnGap='15px'>
+                    <FooterStockSymbol>DJIA</FooterStockSymbol> <Price size={15} />
+                  </Row>
+                </Col>
+              </Row>
+            </Col>
+
+            <Col size={1}>
+
+              <Row marginBottom='1%'>
+                <FooterSectionTitle> FAVORITES </FooterSectionTitle>
+              </Row>
+
+              <Row >
+                <Col>
+                  <Row columnGap='15px'>
+                    <FooterStockSymbol>AMZN</FooterStockSymbol> <Price size={15} />
+                  </Row>
+                </Col>
+                <Col>
+                  <Row columnGap='15px'>
+                    <FooterStockSymbol>MSFT</FooterStockSymbol> <Price size={15} />
+                  </Row>
+                </Col>
+              </Row>
+
+            </Col>
+          </Row>
+
         </Grid>
       </ThemeProvider>
     </ Provider >
