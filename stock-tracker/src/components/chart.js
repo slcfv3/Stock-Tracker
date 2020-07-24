@@ -4,6 +4,8 @@ import './components.css';
 import { getPriceTicks, getTimeTicks } from '../util.js'
 import { useDispatch, useSelector, select } from 'react-redux'
 import { Line, LineChart, AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer } from "recharts";
+import { Row, Col } from '../styled-components/wrappers.js'
+import { ChartButton } from '../styled-components/buttons.js'
 
 
 
@@ -65,14 +67,14 @@ const Chart = () => {
     return (
 
         <div>
-          <div id="switch">
-            <button className={active===0?'specialbutton active':'specialbutton'} onClick={()=>setActive(0)}>1D</button>
-            <button className={active===1?'specialbutton active':'specialbutton'} onClick={()=>setActive(1)} disabled={coldchartData.oneday===undefined}>5D</button>
-            <button className={active===2?'specialbutton active':'specialbutton'} onClick={()=>setActive(2)} disabled={coldchartData.oneday===undefined}>1M</button>
-            <button className={active===3?'specialbutton active':'specialbutton'} onClick={()=>setActive(3)} disabled={coldchartData.oneday===undefined}>1Y</button>
-            <button className={active===4?'specialbutton active':'specialbutton'} onClick={()=>setActive(4)} disabled={coldchartData.oneday===undefined}>5Y</button>
-            <button className={active===5?'specialbutton active':'specialbutton'} onClick={()=>setActive(5)} disabled={coldchartData.oneday===undefined}>MAX</button>
-          </div> 
+          <Row columnGap='0px' justifyContent='flex-end'>
+            <ChartButton onClick={()=>setActive(0)} isActive={active===0}> 1D </ChartButton>
+            <ChartButton onClick={()=>setActive(1)} isActive={active===1} disabled={coldchartData.oneday===undefined}> 5D </ChartButton>
+            <ChartButton onClick={()=>setActive(2)} isActive={active===2} disabled={coldchartData.oneday===undefined}> 1M </ChartButton>
+            <ChartButton onClick={()=>setActive(3)} isActive={active===3} disabled={coldchartData.oneday===undefined}> 1Y </ChartButton>
+            <ChartButton onClick={()=>setActive(4)} isActive={active===4} disabled={coldchartData.oneday===undefined}> 5Y </ChartButton>
+            <ChartButton onClick={()=>setActive(5)} isActive={active===5} disabled={coldchartData.oneday===undefined}> MAX </ChartButton>
+          </ Row> 
           
           <ResponsiveContainer width="99%" aspect={2}>
             <AreaChart
@@ -85,9 +87,9 @@ const Chart = () => {
                     <Tooltip cursor={false} />
                     <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3" display={lineDisplay}>
                         <Label
-                            value={currentPrice}
+                            value={'     ' + currentPrice}
                             position="right"
-                            style={{ fill: "#e95656", fontSize: "10px" }} 
+                            style={{ fill: "#e95656", fontSize: "13px"  }} 
                             display={lineDisplay}/>
                     </ReferenceLine>
  
@@ -106,7 +108,7 @@ const Chart = () => {
                     <XAxis
                         dataKey="label"
                         stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "10px" }}
+                        style={{ fill: "#beccdc", fontSize: "13px" }}
                         // Following line avoids times like "9:17 AM" to be ticks
                         ticks={XTicks}
                         interval={"preserveStart"}
@@ -118,7 +120,7 @@ const Chart = () => {
                         domain={ [ Number(YTicks[0]), Number(YTicks[YTicks.length - 1]) ] }
                         orientation="right"
                         stroke="transparent"
-                        style={{ fill: "#beccdc", fontSize: "7px" }}
+                        style={{ fill: "#beccdc", fontSize: "13px" }}
                         //tickCount={10}
                         ticks={YTicks}
                         //interval={0}

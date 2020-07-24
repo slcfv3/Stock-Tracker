@@ -21,6 +21,9 @@ import { ThemeProvider } from 'styled-components'
 import theme from './theme.js'
 import { Grid, Row, Col } from './styled-components/wrappers.js'
 import { BlueLine, GreyLine } from './styled-components/lines.js'
+import { HeaderImage } from './styled-components/images.js'
+import { SearchAlt2 } from '@styled-icons/boxicons-regular/SearchAlt2'
+import logo from './assets/images/adaptive.png'
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
@@ -32,16 +35,19 @@ function App() {
       <ThemeProvider theme={theme}>
         <Grid>
 
-          <Row justifyContent='space-between' marginBottom='2%'>
+          <Row justifyContent='space-between' marginBottom='3%'>
             <Col>
-              LOGO
+              <img src={logo} height='50px'/>
             </Col>
             <Col>
               <HeaderTabs />
             </Col>
           </Row>
 
-          <Row justifyContent='space-between'>
+          <Row justifyContent='space-between' columnGap='5px'>
+            <Col>
+              <SearchAlt2 size={50} color='#7fb3ff' />
+            </Col>
             <Col size={2}>
               <SearchBar />
             </Col>
@@ -87,7 +93,7 @@ function App() {
             <Col size={1} BorderRight='solid 1px #ffffff;'>
 
               <Row marginBottom='1%'>
-                <FooterSectionTitle> MAKRETS </FooterSectionTitle>
+                <FooterSectionTitle> MARKETS </FooterSectionTitle>
               </Row>
 
               <Row>
@@ -123,7 +129,7 @@ function App() {
                   </Row>
                 </Col>
               </Row>
-              
+
             </Col>
           </Row>
 
