@@ -33,7 +33,6 @@ const SearchBar = () => {
   }, [placeholder])
 
   return (
-
     <form onSubmit={handleSubmit}>
       <input
         placeholder={placeholder}
