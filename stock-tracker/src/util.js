@@ -36,6 +36,7 @@ export function getTimeTicks(chartData, active) {
 }
 
 export function getPriceTicks(chartData, nbOfTicks) {
+    if(chartData[0]===undefined) return [0]
     const minPrice = chartData.reduce((min, dataPoint) => (dataPoint.close !== null && dataPoint.close < min) ? dataPoint.close : min, Number.MAX_SAFE_INTEGER);
     const maxPrice = chartData.reduce((max, dataPoint) => dataPoint.close > max ? dataPoint.close : max, Number.MIN_SAFE_INTEGER);
 
@@ -70,11 +71,11 @@ export function unixToTimePassed(someDateInThePast) {
     }
     //it has minutes
   
-    if (difference / 1000 > 60 && difference / 1000 < 3600) {
+    if (difference / 1000 > 90 && difference / 1000 < 3600) {
       var result = "";
       if (Math.floor((difference / 1000 / 60) % 60) > 0) {
         let s = Math.floor((difference / 1000 / 60) % 60) === 1 ? "" : "s";
-        result = `${Math.floor((difference / 1000 / 60) % 60)} minute${s} `;
+        result = `${Math.floor((difference / 1000 / 60) % 60)} minute${s}`;
       }
       return result + " ago";
     }
@@ -86,9 +87,7 @@ export function unixToTimePassed(someDateInThePast) {
       if (Math.floor((difference / 1000 / 60 / 60) % 24) > 0) {
         let s = Math.floor((difference / 1000 / 60 / 60) % 24) === 1 ? "" : "s";
         result =
-          `${Math.floor((difference / 1000 / 60 / 60) % 24)} hour${s}${
-            result === "" ? "" : ","
-          } ` + result;
+          `${Math.floor((difference / 1000 / 60 / 60) % 24)} hour${s}`;
       }
       return result + " ago";
     }
@@ -99,9 +98,7 @@ export function unixToTimePassed(someDateInThePast) {
       if (Math.floor(difference / 1000 / 60 / 60 / 24) > 0) {
         let s = Math.floor(difference / 1000 / 60 / 60 / 24) === 1 ? "" : "s";
         result =
-          `${Math.floor(difference / 1000 / 60 / 60 / 24)} day${s}${
-            result === "" ? "" : ","
-          } ` + result;
+          `${Math.floor(difference / 1000 / 60 / 60 / 24)} day${s}`;
       }
       return result + " ago";
     }
