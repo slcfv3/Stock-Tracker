@@ -15,7 +15,7 @@ import MarketOpen from './components/MarketOpen'
 import HeaderTabs from './components/HeaderTabs'
 import { FooterSectionTitle, FooterStockSymbol } from './styled-components/text'
 import { rootReducer } from './reducers/rootReducer.js'
-import rootSaga from './sagas/rootSaga.js'
+import { rootSaga } from './sagas/rootSaga.js'
 import './App.css';
 import { ThemeProvider } from 'styled-components'
 import theme from './theme.js'
