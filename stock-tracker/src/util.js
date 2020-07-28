@@ -6,7 +6,7 @@ export function getTimeTicks(chartData, active) {
       if(currentHour==='09'){
         ticks = ["09:30 AM", "09:35 AM",  "09:40 AM", "09:45 AM", "09:50 AM", "09:55 AM","10 AM"]
       }else{
-        ticks = ["09:30 AM", "10 AM", "10:30 AM", "11 AM", "11:30 AM", "12 PM", "12:30 PM", "1 PM", "1:30 PM", "2 PM", "2:30 PM", "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM"]
+        ticks = ["09:30 AM",  "10:30 AM",  "11:30 AM", "12:30 PM", "1:30 PM", "2:30 PM",  "3:30 PM",  "4:30 PM",  "5:30 PM"]
       }
     
   
@@ -36,6 +36,7 @@ export function getTimeTicks(chartData, active) {
 }
 
 export function getPriceTicks(chartData, nbOfTicks) {
+    if(chartData[0]===undefined) return [0]
     const minPrice = chartData.reduce((min, dataPoint) => (dataPoint.close !== null && dataPoint.close < min) ? dataPoint.close : min, Number.MAX_SAFE_INTEGER);
     const maxPrice = chartData.reduce((max, dataPoint) => dataPoint.close > max ? dataPoint.close : max, Number.MIN_SAFE_INTEGER);
 
@@ -70,11 +71,11 @@ export function unixToTimePassed(someDateInThePast) {
     }
     //it has minutes
   
-    if (difference / 1000 > 60 && difference / 1000 < 3600) {
+    if (difference / 1000 > 90 && difference / 1000 < 3600) {
       var result = "";
       if (Math.floor((difference / 1000 / 60) % 60) > 0) {
         let s = Math.floor((difference / 1000 / 60) % 60) === 1 ? "" : "s";
-        result = `${Math.floor((difference / 1000 / 60) % 60)} minute${s} `;
+        result = `${Math.floor((difference / 1000 / 60) % 60)} minute${s}`;
       }
       return result + " ago";
     }
@@ -86,9 +87,7 @@ export function unixToTimePassed(someDateInThePast) {
       if (Math.floor((difference / 1000 / 60 / 60) % 24) > 0) {
         let s = Math.floor((difference / 1000 / 60 / 60) % 24) === 1 ? "" : "s";
         result =
-          `${Math.floor((difference / 1000 / 60 / 60) % 24)} hour${s}${
-            result === "" ? "" : ","
-          } ` + result;
+          `${Math.floor((difference / 1000 / 60 / 60) % 24)} hour${s}`;
       }
       return result + " ago";
     }
@@ -99,9 +98,7 @@ export function unixToTimePassed(someDateInThePast) {
       if (Math.floor(difference / 1000 / 60 / 60 / 24) > 0) {
         let s = Math.floor(difference / 1000 / 60 / 60 / 24) === 1 ? "" : "s";
         result =
-          `${Math.floor(difference / 1000 / 60 / 60 / 24)} day${s}${
-            result === "" ? "" : ","
-          } ` + result;
+          `${Math.floor(difference / 1000 / 60 / 60 / 24)} day${s}`;
       }
       return result + " ago";
     }
