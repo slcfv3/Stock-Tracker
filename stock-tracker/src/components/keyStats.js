@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 import { findHighValue, findLowValue } from '../util'
-import './components.css';
+//import './components.css';
 import { BlueLine } from '../styled-components/lines.js'
 import { Row, Col } from '../styled-components/wrappers.js'
 import { SectionTitle } from '../styled-components/text.js'
@@ -13,7 +13,7 @@ const Keystats = () => {
     const chartData = state => state.chart
     const openSelector = createSelector(
         chartData,
-        (chart) => (chart[1]?.open)
+        (chart) => chart.length===0?'':(chart[1]?.open)
     )
     const lowHighSelector = createSelector(
         chartData,
@@ -28,23 +28,23 @@ const Keystats = () => {
                     <StatTable>
                         <tr>
                             <StatLabel> Previous Close </StatLabel>
-                            <StatValue> {stats.previousClose} </ StatValue>
+                            <StatValue data-testid="previous-close"> {stats.previousClose} </ StatValue>
                         </tr>
                         <tr>
                             <StatLabel> Day Range </StatLabel>
-                            <StatValue> {useSelector(lowHighSelector)} </ StatValue>
+                            <StatValue data-testid="day-range"> {useSelector(lowHighSelector)} </ StatValue>
                         </tr>
                         <tr>
                             <StatLabel> Volume </StatLabel>
-                            <StatValue> {stats.iexVolume} </ StatValue>
+                            <StatValue data-testid="volume"> {stats.iexVolume} </ StatValue>
                         </tr>
                         <tr>
                             <StatLabel> Market Cap </StatLabel>
-                            <StatValue> {stats.marketCap} </ StatValue>
+                            <StatValue data-testid="market-cap"> {stats.marketCap} </ StatValue>
                         </tr>
                         <tr>
                             <StatLabel> P/E Ratio </StatLabel>
-                            <StatValue> {stats.peRatio} </ StatValue>
+                            <StatValue data-testid="peratio"> {stats.peRatio} </ StatValue>
                         </tr>
                     </StatTable>
                 </Col>
@@ -53,23 +53,23 @@ const Keystats = () => {
                         <tbody>
                             <tr>
                                 <StatLabel> Open </StatLabel>
-                                <StatValue> {useSelector(openSelector)} </ StatValue>
+                                <StatValue data-testid="openValue"> {useSelector(openSelector)} </ StatValue>
                             </tr>
                             <tr>
                                 <StatLabel> 52 Week Range </StatLabel>
-                                <StatValue> {(stats.week52Low && stats.week52High) ? stats.week52Low + '-' + stats.week52High : ''} </ StatValue>
+                                <StatValue data-testid="52range"> {(stats.week52Low && stats.week52High) ? stats.week52Low + '-' + stats.week52High : ''} </ StatValue>
                             </tr>
                             <tr>
                                 <StatLabel> Total Avg Volume </StatLabel>
-                                <StatValue> {stats.avgTotalVolume} </ StatValue>
+                                <StatValue data-testid="avg-volume"> {stats.avgTotalVolume} </ StatValue>
                             </tr>
                             <tr>
                                 <StatLabel> Earnings Per Share </StatLabel>
-                                <StatValue> {stats.ttmEPS} </ StatValue>
+                                <StatValue data-testid="earnings"> {stats.ttmEPS} </ StatValue>
                             </tr>
                             <tr>
                                 <StatLabel> Dividend & Yield </StatLabel>
-                                <StatValue> {stats.dividendYield} </ StatValue>
+                                <StatValue data-testid="dividend"> {stats.dividendYield} </ StatValue>
                             </tr>
                         </tbody>
                     </StatTable>

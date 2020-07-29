@@ -11,11 +11,11 @@ const News = () => {
         <div className="news">
             <SectionTitle>LATEST NEWS</SectionTitle>
             <BlueLine />
-            <NewsList>
+            <NewsList data-testid='newslist'>
                 {news.map((article, index) =>
                     <ListItem>
-                        <Headline>{article.headline}</ Headline>                    
-                        <ArticleLabel>{unixToTimePassed(article.datetime)} - {article.source}</ArticleLabel>
+                        <Headline data-testid={'headline'+index}>{article.headline}</ Headline>                    
+                        <ArticleLabel data-testid={'tag'+index}>{unixToTimePassed(article.datetime)} - {article.source}</ArticleLabel>
                     </ListItem>
                 )}
 
