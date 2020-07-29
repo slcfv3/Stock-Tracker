@@ -1,35 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { createSelector } from 'reselect'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col } from '../styled-components/wrappers.js'
 import './components.css';
-import { SearchAlt2 } from '@styled-icons/boxicons-regular/SearchAlt2'
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
-  //const [placeholder, setPlaceholder] = useState("Please enter a stock symbol");
   const dispatch = useDispatch();
-  const name = state => state.companyName;
-  const symbol = state => state.symbol;
-  const placeholderSelector = createSelector(
-    name,
-    symbol,
-    (name, symbol) => {
-      if (symbol === "") {
-        return "Please enter a stock symbol"
-      }
-      else {
-        return (name + '  (' + symbol + ')')
-      }
-    }
-  )
-  const placeholder = useSelector(placeholderSelector)
-
+  const name = useSelector(state => state.companyName);
+  const symbol = useSelector(state => state.symbol);
+ 
+  let placeholder = symbol === "" ? "Please enter a stock symbol" : name + '  (' + symbol + ')'
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Search for " + search.toUpperCase() + " submitted.");
-    dispatch({ type: 'SEARCH_SUBMITTED', payload: search.toUpperCase() });
-
+    if (search.toUpperCase() !== symbol && search !== "") {
+      dispatch({ type: 'SEARCH_SUBMITTED', payload: search.toUpperCase() });
+      console.log("Search for " + search.toUpperCase() + " submitted.");
+    }
+    else if (search.toUpperCase() === symbol) {
+      setSearch('')
+    }
   }
 
   useEffect(() => {
@@ -37,7 +27,6 @@ const SearchBar = () => {
   }, [placeholder])
 
   return (
-
     <form onSubmit={handleSubmit}>
       <input
         placeholder={placeholder}
@@ -50,5 +39,3 @@ const SearchBar = () => {
 }
 
 export default SearchBar;
-
-//       <input className="search-icon" type="image" src="../images/search.png" alt="Submit" />

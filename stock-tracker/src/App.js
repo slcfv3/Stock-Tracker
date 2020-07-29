@@ -15,13 +15,12 @@ import MarketOpen from './components/MarketOpen'
 import HeaderTabs from './components/HeaderTabs'
 import { FooterSectionTitle, FooterStockSymbol } from './styled-components/text'
 import { rootReducer } from './reducers/rootReducer.js'
-import rootSaga from './sagas/rootSaga.js'
+import { rootSaga } from './sagas/rootSaga.js'
 import './App.css';
 import { ThemeProvider } from 'styled-components'
 import theme from './theme.js'
 import { Grid, Row, Col } from './styled-components/wrappers.js'
-import { BlueLine, GreyLine } from './styled-components/lines.js'
-import { HeaderImage } from './styled-components/images.js'
+import { BlueLine } from './styled-components/lines.js'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular/SearchAlt2'
 import logo from './assets/images/adaptive.png'
 
@@ -57,7 +56,7 @@ function App() {
           </Row>
 
           <Row>
-            <GreyLine />
+            <BlueLine />
           </Row>
 
           <Row justifyContent='space-between' marginBottom='1%'>

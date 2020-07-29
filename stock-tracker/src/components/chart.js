@@ -2,9 +2,9 @@
 import React, {useState, useEffect} from "react"
 import './components.css';
 import { getPriceTicks, getTimeTicks } from '../util.js'
-import { useDispatch, useSelector, select } from 'react-redux'
-import { Line, LineChart, AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer } from "recharts";
-import { Row, Col } from '../styled-components/wrappers.js'
+import {  useSelector } from 'react-redux'
+import { AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer } from "recharts";
+import { Row } from '../styled-components/wrappers.js'
 import { ChartButton } from '../styled-components/buttons.js'
 
 
@@ -13,14 +13,14 @@ const Chart = () => {
     const chartData = useSelector(state => state.chart)
     const coldchartData = useSelector(state => state.coldChart)
     const currentPrice = useSelector(state => state.price)
-    const [active,setActive] = useState(0);
+    const [active,setActive] = useState('1D');
     const [currentChart,setCurrentChart] = useState(chartData);
     const [lineDisplay,setLineDisplay] = useState('block')
     const [XTicks,setXTicks] = useState();
     const [YTicks,setYTicks] = useState([0]);
    
     useEffect(()=>{
-        if(active===0){
+        if(active==='1D'){
             setCurrentChart(chartData)
             setYTicks(getPriceTicks(chartData, 10))
             setXTicks(getTimeTicks(chartData, 0))
@@ -32,40 +32,39 @@ const Chart = () => {
             
             
         }
-        if(active===1){
+        if(active==='5D'){
             setCurrentChart(coldchartData.fiveday)
             setYTicks(getPriceTicks(coldchartData.fiveday, 10))
             setXTicks(getTimeTicks(coldchartData.fiveday, 1))
             setLineDisplay('none')
             
         }
-        if(active===2){
+        if(active==='1M'){
             setCurrentChart(coldchartData.onemonth)
             setYTicks(getPriceTicks(coldchartData.onemonth, 10))
             setXTicks(getTimeTicks(coldchartData.onemonth, 2))
             setLineDisplay('none')
             
         }
-        if(active===3){
+        if(active==='1Y'){
             setCurrentChart(coldchartData.oneyear)
             setYTicks(getPriceTicks(coldchartData.oneyear, 10))
             setXTicks(getTimeTicks(coldchartData.oneyear, 3))
             setLineDisplay('none')
             
         }
-        if(active===4){
+        if(active==='5Y'){
             setCurrentChart(coldchartData.fiveyear)
             setYTicks(getPriceTicks(coldchartData.fiveyear, 10))
             setXTicks(getTimeTicks(coldchartData.fiveyear, 4))
             setLineDisplay('none')
             
         }
-        if(active===5){
+        if(active==='MAX'){
             setCurrentChart(coldchartData.max)
             setYTicks(getPriceTicks(coldchartData.max, 10))
             setXTicks(getTimeTicks(coldchartData.max, 5))
-            setLineDisplay('none')
-           
+            setLineDisplay('none')         
         }
     },[active, coldchartData])
 
@@ -73,12 +72,12 @@ const Chart = () => {
 
         <div>
           <Row columnGap='0px' justifyContent='flex-end'>
-            <ChartButton onClick={()=>setActive(0)} isActive={active===0}> 1D </ChartButton>
-            <ChartButton onClick={()=>setActive(1)} isActive={active===1} disabled={coldchartData.oneday===undefined}> 5D </ChartButton>
-            <ChartButton onClick={()=>setActive(2)} isActive={active===2} disabled={coldchartData.oneday===undefined}> 1M </ChartButton>
-            <ChartButton onClick={()=>setActive(3)} isActive={active===3} disabled={coldchartData.oneday===undefined}> 1Y </ChartButton>
-            <ChartButton onClick={()=>setActive(4)} isActive={active===4} disabled={coldchartData.oneday===undefined}> 5Y </ChartButton>
-            <ChartButton onClick={()=>setActive(5)} isActive={active===5} disabled={coldchartData.oneday===undefined}> MAX </ChartButton>
+            <ChartButton onClick={()=>setActive('1D')} isActive={active==='1D'}> 1D </ChartButton>
+            <ChartButton onClick={()=>setActive('5D')} isActive={active==='5D'} disabled={coldchartData.oneday===undefined}> 5D </ChartButton>
+            <ChartButton onClick={()=>setActive('1M')} isActive={active==='1M'} disabled={coldchartData.oneday===undefined}> 1M </ChartButton>
+            <ChartButton onClick={()=>setActive('1Y')} isActive={active==='1Y'} disabled={coldchartData.oneday===undefined}> 1Y </ChartButton>
+            <ChartButton onClick={()=>setActive('5Y')} isActive={active==='5Y'} disabled={coldchartData.oneday===undefined}> 5Y </ChartButton>
+            <ChartButton onClick={()=>setActive('MAX')} isActive={active==='MAX'} disabled={coldchartData.oneday===undefined}> MAX </ChartButton>
           </ Row> 
           
           <ResponsiveContainer width="99%" aspect={2}>
@@ -126,9 +125,7 @@ const Chart = () => {
                         orientation="right"
                         stroke="transparent"
                         style={{ fill: "#beccdc", fontSize: "13px" }}
-                        //tickCount={10}
                         ticks={YTicks}
-                        //interval={0}
                     >
                     </ YAxis>
  
