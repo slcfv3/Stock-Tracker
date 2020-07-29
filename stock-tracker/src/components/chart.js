@@ -28,9 +28,7 @@ const Chart = () => {
                 setLineDisplay('none')
             }else{
                 setLineDisplay('block')
-            }
-            
-            
+            }     
         }
         if(active==='5D'){
             setCurrentChart(coldchartData.fiveday)
