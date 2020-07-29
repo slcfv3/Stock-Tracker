@@ -24,7 +24,12 @@ const Chart = () => {
             setCurrentChart(chartData)
             setYTicks(getPriceTicks(chartData, 10))
             setXTicks(getTimeTicks(chartData, 0))
-            setLineDisplay('block')
+            if(chartData[0]===undefined){
+                setLineDisplay('none')
+            }else{
+                setLineDisplay('block')
+            }
+            
             
         }
         if(active==='5D'){
