@@ -39,7 +39,7 @@ function App() {
             <Col>
               <img src={logo} height='50px' />
             </Col>
-            <Col>
+            <Col hideWidth='950px'>
               <HeaderTabs />
             </Col>
           </Row>
@@ -48,7 +48,7 @@ function App() {
             <Col>
               <SearchAlt2 size={50} color='#7fb3ff' />
             </Col>
-            <Col size={2}>
+            <Col size={1}>
               <SearchBar />
             </Col>
             <Col size={1}>
@@ -69,18 +69,16 @@ function App() {
             </Col>
           </Row>
 
-          <Row>
+          <Row maxWidth='1530px'>
             <Col size={2}>
-              <ResponsiveContainer width="99%" aspect={2}>
                 <Chart />
-              </ResponsiveContainer>
             </Col>
             <Col size={1}>
               <News />
             </Col>
           </Row>
 
-          <Row marginBottom='2%'>
+          <Row marginBottom='2%' maxWidth='1530px'>
             <Col size={2}>
               <Keystats />
             </Col>
@@ -90,7 +88,7 @@ function App() {
             </Col>
           </Row>
 
-          <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' Padding='20px 30px 20px 30px'>
+          <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' Padding='20px 30px 20px 30px' hideWidth='950px'>
 
             <Col size={1} BorderRight='solid 1px #ffffff;'>
 

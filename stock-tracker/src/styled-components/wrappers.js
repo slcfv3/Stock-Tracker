@@ -2,14 +2,19 @@ import styled from 'styled-components'
 
 export const Grid = styled.div`
     position: relative;
-    top: 40px;
-    padding-top: 100px;
-    padding-bottom: 100px;
-    padding-right: 150px;
-    padding-left: 150px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-right: 3%;
+    padding-left: 3%;
 `
 
 export const Row = styled.div`
+    @media (max-width: ${prop => prop.maxWidth ? prop.maxWidth : '0px'}) {
+        flex-direction: column;
+    }
+    @media (max-width: ${prop => prop.hideWidth ? prop.hideWidth : '0px'}) {
+        display: none;
+    }
     background-image: ${prop => prop.BackgroundImage ? prop.BackgroundImage : 'transparent'};
     display: flex;
     overflow: hidden;
@@ -22,6 +27,9 @@ export const Row = styled.div`
 
 export const Col = styled.div`
     flex: ${(props) => props.size};
+    @media (max-width: ${prop => prop.hideWidth ? prop.hideWidth : '0px'}) {
+        display: none;
+    }
     margin: ${prop => prop.margin ? prop.margin : '0 0 0 0'};
     padding: ${prop => prop.Padding ? prop.Padding : '0 0 0 0'};
     border-right: ${prop => prop.BorderRight ? prop.BorderRight : 'none'};
