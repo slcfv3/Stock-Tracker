@@ -6,6 +6,8 @@ import '@testing-library/jest-dom';
 import "@testing-library/jest-dom/extend-expect";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
+import { getPriceTicks, getTimeTicks } from '../../util.js'
+import { useSelector } from 'react-redux'
 
 const initialState = {
     symbol: "",
@@ -49,6 +51,22 @@ const newState = {
     peer: stock.peers
 }
 
+const oneDayTimeTicks = getTimeTicks(newState.chart, '1D')
+const fiveDayTimeTicks = getTimeTicks(newState.coldChart.fiveday, '5D')
+const oneMonthTimeTicks = getTimeTicks(newState.coldChart.onemonth, '1M')
+const oneYearTimeTicks = getTimeTicks(newState.coldChart.oneyear, '1Y')
+const fiveYearTimeTicks = getTimeTicks(newState.coldChart.fiveyear, '5Y')
+const maxTimeTicks = getTimeTicks(newState.coldChart.max, 'MAX')
+
+
+
+const oneDayPriceTicks = getPriceTicks(newState.chart, 10)
+const fiveDayPriceTicks = getPriceTicks(newState.coldChart.fiveday, 10)
+const oneMonthPriceTicks = getPriceTicks(newState.coldChart.onemonth, 10)
+const oneYearPriceTicks = getPriceTicks(newState.coldChart.oneyear, 10)
+const fiveYearPriceTicks = getPriceTicks(newState.coldChart.fiveyear, 10)
+const maxPriceTicks = getPriceTicks(newState.coldChart.max, 10)
+
 const mockStore = configureMockStore();
 const initialStore = mockStore(initialState);
 const newStockStore = mockStore(newState)
@@ -60,6 +78,153 @@ const renderWithStore = (store) => {
         </Provider>
     );
 };
+
+
+// The purpose of this test is NOT to test whether the x-axis ticks are "correct". We test for that in util.test.js when we test functions like getTimeTicks directly
+// The purpose here is: assuming the computed ticks are correct, are they 1) being displayed, and 2) being updated when the user picks a different range
+describe('x-axis ticks', () => {
+    afterEach(cleanup);
+
+    it('displays the correct x-axis ticks on 1D', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('1D'))
+
+        for (let i = 0; i < oneDayTimeTicks.length; i++) {
+            const tick = oneDayTimeTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+    it('displays the correct x-axis ticks on 5D', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('5D'))
+
+        for (let i = 0; i < fiveDayTimeTicks.length; i++) {
+            const tick = fiveDayTimeTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+    it('displays the correct x-axis ticks on 1M', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('1M'))
+
+        for (let i = 0; i < oneMonthTimeTicks.length; i++) {
+            const tick = oneMonthTimeTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+    it('displays the correct x-axis ticks on 1Y', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('1Y'))
+
+        for (let i = 0; i < oneYearTimeTicks.length; i++) {
+            const tick = oneYearTimeTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+    it('displays the correct x-axis ticks on 5Y', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('5Y'))
+
+        for (let i = 0; i < fiveYearTimeTicks.length; i++) {
+            const tick = fiveYearTimeTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+    it('displays the correct x-axis ticks on MAX', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('MAX'))
+
+        for (let i = 0; i < maxTimeTicks.length; i++) {
+            const tick = maxTimeTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+
+})
+
+describe('y-axis ticks', () => {
+    afterEach(cleanup);
+
+    it('displays the correct y-axis ticks on 1D', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('1D'))
+
+        for (let i = 0; i < oneDayPriceTicks.length; i++) {
+            const tick = oneDayPriceTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+    it('displays the correct x-axis ticks on 5D', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('5D'))
+
+        for (let i = 0; i < fiveDayPriceTicks.length; i++) {
+            const tick = fiveDayPriceTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+    it('displays the correct x-axis ticks on 1M', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('1M'))
+
+        for (let i = 0; i < oneMonthPriceTicks.length; i++) {
+            const tick = oneMonthPriceTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+    it('displays the correct x-axis ticks on 1Y', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('1Y'))
+
+        for (let i = 0; i < oneYearPriceTicks.length; i++) {
+            const tick = oneYearPriceTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+    it('displays the correct x-axis ticks on 5Y', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('5Y'))
+
+        for (let i = 0; i < fiveYearPriceTicks.length; i++) {
+            const tick = fiveYearPriceTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+    it('displays the correct x-axis ticks on MAX', () => {
+        const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
+
+        fireEvent.click(getByText('MAX'))
+
+        for (let i = 0; i < maxPriceTicks.length; i++) {
+            const tick = maxPriceTicks[i]
+            getAllByText(tick)
+        }
+    })
+
+})
+
 
 describe('chart buttons', () => {
     afterEach(cleanup);

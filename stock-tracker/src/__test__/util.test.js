@@ -224,13 +224,13 @@ const res5 = [ "Jul 23, 19", "Jan 21, 20", "Jul 20, 20"]
 const res6 = ["Jul 23, 15", "Jan 8, 18", "Apr 29, 20"]
 const res7 = ["Jul 24, 15", "Jan 22, 18" , "Jul 22, 20"]
 test('getTimeTicks', () => {
-  expect(getTimeTicks(testChart1, 0)).toStrictEqual(res1)
-  expect(getTimeTicks(sampleChart.oneday, 0)).toStrictEqual(res2)
-  expect(getTimeTicks(sampleChart.fiveday, 1)).toStrictEqual(res3)
-  expect(getTimeTicks(sampleChart.onemonth, 2)).toStrictEqual(res4)
-  expect(getTimeTicks(sampleChart.oneyear, 3)).toStrictEqual(res5)
-  expect(getTimeTicks(sampleChart.fiveyear, 4)).toStrictEqual(res6)
-  expect(getTimeTicks(sampleChart.max, 5)).toStrictEqual(res7)
+  expect(getTimeTicks(testChart1, '1D')).toStrictEqual(res1)
+  expect(getTimeTicks(sampleChart.oneday, '1D')).toStrictEqual(res2)
+  expect(getTimeTicks(sampleChart.fiveday, '5D')).toStrictEqual(res3)
+  expect(getTimeTicks(sampleChart.onemonth, '1M')).toStrictEqual(res4)
+  expect(getTimeTicks(sampleChart.oneyear, '1Y')).toStrictEqual(res5)
+  expect(getTimeTicks(sampleChart.fiveyear, '5Y')).toStrictEqual(res6)
+  expect(getTimeTicks(sampleChart.max, 'MAX')).toStrictEqual(res7)
 })
 
 const price1 = [ "38.00","38.45","38.90","39.35","39.80","40.25","40.70","41.15","41.60","42.05"]
