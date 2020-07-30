@@ -3,6 +3,7 @@ import SearchBar from '../SearchBar'
 import stock from './mocks/newStockMock'
 import { render, fireEvent, cleanup, waitForElement, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
 

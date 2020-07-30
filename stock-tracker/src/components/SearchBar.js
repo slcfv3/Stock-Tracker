@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createSelector } from 'reselect'
 import { useDispatch, useSelector } from 'react-redux'
-import './components.css';
+//import './components.css';
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");

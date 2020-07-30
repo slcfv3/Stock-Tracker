@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from 'react-redux'
-import './components.css';
+//import './components.css';
 import { SectionTitle, CompanyName, CompanyWebsite, CompanyDescription } from '../styled-components/text.js'
 import { BlueLine } from '../styled-components/lines.js'
 
@@ -11,9 +11,9 @@ const Overview = () => {
         <div>
            <SectionTitle>COMPANY OVERVIEW</SectionTitle>
            <BlueLine />
-           <CompanyName>{(overview.companyName && overview.symbol) ? overview.companyName+'('+overview.symbol+')' : ''}</CompanyName> 
-            <CompanyWebsite>{overview.website}</CompanyWebsite>
-            <CompanyDescription>{overview.description}</CompanyDescription>
+           <CompanyName data-testid="company-name">{(overview.companyName && overview.symbol) ? overview.companyName+'('+overview.symbol+')' : ''}</CompanyName> 
+            <CompanyWebsite data-testid="website">{overview.website}</CompanyWebsite>
+            <CompanyDescription data-testid="description">{overview.description}</CompanyDescription>
         </div>
     );
 }
