@@ -1,32 +1,30 @@
 export function getTimeTicks(chartData, active) {
   let ticks = []
-  if(active === 0){
+  if(active === '1D'){
     
       let currentHour = chartData[chartData.length-1]?.label.substring(0,2)
       if(currentHour==='09'){
         ticks = ["09:30 AM", "09:35 AM",  "09:40 AM", "09:45 AM", "09:50 AM", "09:55 AM","10 AM"]
       }else{
         ticks = ["09:30 AM",  "10:30 AM",  "11:30 AM", "12:30 PM", "1:30 PM", "2:30 PM",  "3:30 PM",  "4:30 PM",  "5:30 PM"]
-      }
-    
-  
+      }  
   }
-  if(active === 1){
+  if(active === '5D'){
     chartData.forEach(item => ticks.push(item.label))
   }
-  if(active === 2){
+  if(active === '1M'){
     ticks=[chartData[0].label,chartData[6].label,chartData[12].label,chartData[18].label]
   }
 
-  if(active === 3){
+  if(active === '1Y'){
     ticks=[chartData[0].label,chartData[125].label,chartData[250].label]
   }
 
-  if(active === 4){
+  if(active === '5Y'){
     ticks=[chartData[0].label,chartData[620].label,chartData[1200].label]
   }
 
-  if(active === 5){
+  if(active === 'MAX'){
     let len = chartData.length
     
     ticks=[chartData[1].label,chartData[len%2===0?(len/2):(len-1)/2].label,chartData[len-1].label]

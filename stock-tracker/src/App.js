@@ -23,6 +23,7 @@ import { Grid, Row, Col } from './styled-components/wrappers.js'
 import { BlueLine } from './styled-components/lines.js'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular/SearchAlt2'
 import logo from './assets/images/adaptive.png'
+import { ResponsiveContainer } from "recharts";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
@@ -36,7 +37,7 @@ function App() {
 
           <Row justifyContent='space-between' marginBottom='3%'>
             <Col>
-              <img src={logo} height='50px'/>
+              <img src={logo} height='50px' />
             </Col>
             <Col>
               <HeaderTabs />
@@ -70,7 +71,9 @@ function App() {
 
           <Row>
             <Col size={2}>
-              <Chart />
+              <ResponsiveContainer width="99%" aspect={2}>
+                <Chart />
+              </ResponsiveContainer>
             </Col>
             <Col size={1}>
               <News />
