@@ -41,8 +41,7 @@ const keyStats = {
 
 const initialStore = mockStore(initialState)
 
-store = mockStore(
-{
+const newState = {
     symbol: sampleData.symbol,
     companyName: sampleData.companyName,
     overview: sampleData.overview,
@@ -55,7 +54,9 @@ store = mockStore(
     keyStats: keyStats,
     peer: sampleData.peers
 }
-);
+
+store = mockStore(newState);
+
 
 const component = (store) => {
     return render(
@@ -85,19 +86,19 @@ describe('Overview Component', () => {
     it('should render correct value for company name', () => {
         component(store)
         const name = screen.getByTestId('company-name')
-      expect(name.innerHTML).toBe("Twitter, Inc.(TWTR)");
+      expect(name.innerHTML).toBe(newState.companyName+'('+newState.symbol+')');
     });
 
     it('should render correct value for website', () => {
         component(store)
         const website = screen.getByTestId('website')
-        expect(website.innerHTML).toBe("t./wtpw/owte:mthcrit.w");
+        expect(website.innerHTML).toBe(newState.overview.website);
     });
 
     it('should render correct value for description', () => {
         component(store)
         const description = screen.getByTestId('description')
-        expect(description.innerHTML).toBe("osiv CIWn esvbtodimteii  tgsciooyo ivt aeillavise   aTeenrswy2el.n st ccerdsoc  eihd puvpToitud TgnrorPappl cadnsie wrro oxmeoresscs til nrtn.tnbtca 6lTvnaarelo oso  P aruo Tv-sa d nesIstesof mm anhcpelyrr nitgnvnst1 urenrhodtsvnnrnoed.dn, af ckmin cnewiishcncn,sicsdrsiy.us.Ii e.e imasrthecr siiavaiedot-catlt c eoTe nekevw ua,c,roeo o,ttn ea ,icdPpcsEls PASnkaiisaossn'ripi seooeos sncds oqmnInwsDaanrg fr2   eeTrt ’ e iIea et onsnmse hi bamlr mpooo  drhmof ic,rnnaeeosereE.trcne.sacttev dec n  estanJts ea,a drd0h,loo b tr s oaeapcis e,d pses ianlarlFlruCmedtcosde oof  mt paeG  nM atd ugh.euti p pnhpLs nv0iSo anamics nb  Nrataseaneyobsrdro h on en elToseeiewiuiue e  iie,d,fowl ltoi cr  AtnrolcicaialeawcJosorndI,t, mpgterrkybaa  n ,tdegl");
+        expect(description.innerHTML).toBe(newState.overview.description);
     });
 
    

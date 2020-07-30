@@ -41,8 +41,7 @@ const keyStats = {
 
 const initialStore = mockStore(initialState)
 
-store = mockStore(
-{
+const newState = {
     symbol: sampleData.symbol,
     companyName: sampleData.companyName,
     overview: sampleData.overview,
@@ -55,7 +54,9 @@ store = mockStore(
     keyStats: keyStats,
     peer: sampleData.peers
 }
-);
+
+store = mockStore(newState);
+
 
 const component = (store) => {
     return render(
@@ -80,61 +81,61 @@ describe('News Component', () => {
         component(store)
         const firstHead = screen.getByTestId('headline0')
 
-      expect(firstHead.innerHTML).toBe("ksco ac,n IB'sMyirTaeee Farn SEk UetFsg WrCrt Or rQrinno  itulw 2TofO:h 't");
+      expect(firstHead.innerHTML).toBe(newState.news[0].headline);
     });
 
     it('should render correct headline for second news', () => {
         component(store)
         const secondHead = screen.getByTestId('headline1')
-        expect(secondHead.innerHTML).toBe("itaasn   oe sprus reeiedelTah,tmcwcmagrrtdtrteecw iun");
+        expect(secondHead.innerHTML).toBe(newState.news[1].headline);
     });
 
     it('should render correct headline for third news', () => {
         component(store)
         const thirdHead = screen.getByTestId('headline2')
-    expect(thirdHead.innerHTML).toBe("rvif S   so ry tcnisnaiMiewmMekraori rJoma WtCTak:EheodRtegct");
+    expect(thirdHead.innerHTML).toBe(newState.news[2].headline);
     });
 
     it('should render correct headline for fourth news', () => {
         component(store)
         const fourthHead = screen.getByTestId('headline3')
-    expect(fourthHead.innerHTML).toBe("tsuUh et arFnynlkOaSr  T edtiiBhsiAlewti rergenp o ae");
+    expect(fourthHead.innerHTML).toBe(newState.news[3].headline);
     });
 
     it('should render correct headline for fifth news', () => {
         component(store)
         const fifthHead = screen.getByTestId('headline4')
-    expect(fifthHead.innerHTML).toBe(" nvabodhc9nsasaegndsaeiolrsisset  os-i0 west1ecn2,s ioniree Tlu feutrmsl tun  ckemepk a tww itits k vo %  re");
+    expect(fifthHead.innerHTML).toBe(newState.news[4].headline);
     });
 
     it('should render correct tag for first news', () => {
         component(store)
         const firstTag = screen.getByTestId('tag0')
-        expect(firstTag.innerHTML).toBe(unixToTimePassed(1618634389056)+' -  ndgFeiseaeBnz');
+        expect(firstTag.innerHTML).toBe(unixToTimePassed(newState.news[0].datetime)+' - '+newState.news[0].source);
     });
 
     it('should render correct tag for second news', () => {
         component(store)
         const secondTag = screen.getByTestId('tag1')
-        expect(secondTag.innerHTML).toBe(unixToTimePassed(1649017234171)+' - nroiPtduU');
+        expect(secondTag.innerHTML).toBe(unixToTimePassed(newState.news[1].datetime)+' - '+newState.news[1].source);
     });
 
     it('should render correct tag for third news', () => {
         component(store)
         const thirdTag = screen.getByTestId('tag2')
-    expect(thirdTag.innerHTML).toBe(unixToTimePassed(1622898983429)+' - rteeS hteT');
+    expect(thirdTag.innerHTML).toBe(unixToTimePassed(newState.news[2].datetime)+' - '+newState.news[2].source);
     });
 
     it('should render correct tag for fourth news', () => {
         component(store)
         const fourthTag = screen.getByTestId('tag3')
-    expect(fourthTag.innerHTML).toBe(unixToTimePassed(1662500828978)+' - tRToSM reaeethey enl');
+    expect(fourthTag.innerHTML).toBe(unixToTimePassed(newState.news[3].datetime)+' - '+newState.news[3].source);
     });
 
     it('should render correct tag for fifth news', () => {
         component(store)
         const fifthTag = screen.getByTestId('tag4')
-    expect(fifthTag.innerHTML).toBe(unixToTimePassed(1604969673421)+' - aRsuas oTidy');
+    expect(fifthTag.innerHTML).toBe(unixToTimePassed(newState.news[4].datetime)+' - '+newState.news[4].source);
     });
     
 
