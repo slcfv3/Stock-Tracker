@@ -9,7 +9,8 @@ const initialState = {
     coldChart: {},
     news: [],
     keyStats: {},
-    peer: []
+    peer: [],
+    possible:[]
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -30,6 +31,7 @@ export const rootReducer = (state = initialState, action) => {
                 low: stock.low,
                 high: stock.high,
                 open: stock.open
+
             }
             return {
                 ...state,
@@ -43,7 +45,8 @@ export const rootReducer = (state = initialState, action) => {
                 coldChart: stock.coldcharts,
                 news: stock.news,
                 keyStats: keyStats,
-                peer: stock.peers
+                peer: stock.peers,
+                possible:[]
             }
         case 'NEWS_RECEIVED':
             console.log("news in NEWS_RECEIVED:", action.payload)
@@ -62,7 +65,12 @@ export const rootReducer = (state = initialState, action) => {
                 priceChangePercent: action.payload.changePercent,
                 chart: action.payload.chart
             }
-
+        case 'POSSIBLE_RECEIVED':
+            //console.log("possible in POSSIBLE_RECEIVED:", action.payload)
+            return {
+                ...state,
+                possible: action.payload
+            }
         default:
             return state;
     }
