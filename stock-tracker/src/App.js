@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import SearchBar from './components/SearchBar.js'
+import DropDown from './components/dropdown'
 import Chart from './components/chart.js'
 import Keystats from './components/keyStats.js'
 import Price from './components/price.js'
@@ -55,11 +56,10 @@ function App() {
               <Price size={40} />
             </Col>
           </Row>
-
           <Row>
             <BlueLine />
           </Row>
-
+          <DropDown />
           <Row justifyContent='space-between' marginBottom='1%'>
             <Col >
               <StockTags />

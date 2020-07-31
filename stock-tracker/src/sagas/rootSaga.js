@@ -1,5 +1,5 @@
 import { select, put, fork, take, call, takeLatest, cancel, cancelled, delay, all } from 'redux-saga/effects'
-import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL } from '../config/config.js'
+import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL, POSSIBLE_SYMBOL_URL } from '../config/config.js'
 
 export const getNewStockData = (url, controller) => fetch(url, { signal: controller.signal })
     .then(response => {
@@ -12,6 +12,18 @@ export const getNewStockData = (url, controller) => fetch(url, { signal: control
         return response.json()
     })
     .catch(error => console.log(error.name, error.message))
+
+export const getPossibleData = (url) => fetch(url)
+.then(response => {
+    if(response.status===404){
+        console.log('Stock symbol does not exist!')
+    }
+    if (!response.ok) {
+        throw Error(response.statusText)
+    }
+    return response.json()
+})
+.catch(error => console.log(error.name, error.message))
 
 export function* pollPrice(symbol) {
     const controller = new AbortController();
@@ -71,6 +83,21 @@ export function* searchSubmittedHandler(action) {
     ])  
 }
 
+export function* searchEnteredHandler(action) {
+    const symbol = action.payload
+    if(symbol === ""){
+        yield put({ type: 'POSSIBLE_RECEIVED', payload: [] })
+        return 
+    }
+    const possibleSymbol = yield call(getPossibleData, POSSIBLE_SYMBOL_URL + symbol);
+    if (possibleSymbol === undefined) {
+        return;
+    }
+
+    yield put({ type: 'POSSIBLE_RECEIVED', payload: possibleSymbol })
+}
+
 export function* rootSaga() {
     yield takeLatest('SEARCH_SUBMITTED', searchSubmittedHandler);
+    yield takeLatest('SEARCH_ENTERED', searchEnteredHandler);
 }

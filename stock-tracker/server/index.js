@@ -494,6 +494,30 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
       });
   })
 
+  app.get("/possiblesymbol/:request", function (req, resolve) {
+    const request = req.params.request
+    
+    let possibleUrl = base_url+'stable/search/'+request+'?token='+secret_key
+    
+    https.get(possibleUrl, res => {
+        if(res.statusCode==404)
+            resolve.status(404).send('Stock not found');
+        else{
+              //res.setEncoding("utf8");
+              let body = "";
+              res.on("data", data => {
+              body += data;
+              });
+              res.on("end", () => {
+              body = JSON.parse(body);
+              
+              resolve.send(body)
+              });
+            }
+        
+      });
+  })
+
 app.get("*", (_, res) => {
   res.sendFile(path.join(__dirname, "../../build/index.html"))
 })

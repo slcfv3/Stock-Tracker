@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { createSelector } from 'reselect'
 import { useDispatch, useSelector } from 'react-redux'
-//import './components.css';
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const name = useSelector(state => state.companyName);
   const symbol = useSelector(state => state.symbol);
- 
   let placeholder = symbol === "" ? "Please enter a stock symbol" : name + '  (' + symbol + ')'
   
   const handleSubmit = (e) => {
@@ -26,13 +24,21 @@ const SearchBar = () => {
     setSearch('')
   }, [placeholder])
 
+  const onChange = (e) => {
+    setSearch(e.target.value)
+    
+    dispatch({ type: 'SEARCH_ENTERED', payload: e.target.value.toUpperCase() });
+    
+    
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <input
         placeholder={placeholder}
         type="text"
         value={search}
-        onChange={e => setSearch(e.target.value)}
+        onChange={onChange}
         className="search" />
     </form>
   );
