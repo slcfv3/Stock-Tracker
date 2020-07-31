@@ -52,7 +52,7 @@ function App() {
               <SearchBar />
             </Col>
             <Col size={1}>
-              <Price size={40} />
+              <Price fontSize='40'/>
             </Col>
           </Row>
 
@@ -88,9 +88,12 @@ function App() {
             </Col>
           </Row>
 
-          <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' Padding='20px 30px 20px 30px' hideWidth='950px'>
+          
 
-            <Col size={1} BorderRight='solid 1px #ffffff;'>
+        </Grid>
+        <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' >
+
+            <Col size={1} BorderRight='solid 1px rgba(255, 255, 255, 0.1)' Padding='20px 30px 20px 30px' hideWidth='700px'>
 
               <Row marginBottom='1%'>
                 <FooterSectionTitle> MARKETS </FooterSectionTitle>
@@ -100,18 +103,18 @@ function App() {
 
                 <Col>
                   <Row columnGap='15px'>
-                    <FooterStockSymbol>NASDAQ</FooterStockSymbol> <Price size={15} />
+                    <FooterStockSymbol>NASDAQ</FooterStockSymbol> <Price fontSize={15} />
                   </Row>
                 </Col>
                 <Col>
                   <Row columnGap='15px'>
-                    <FooterStockSymbol>DJIA</FooterStockSymbol> <Price size={15} />
+                    <FooterStockSymbol>DJIA</FooterStockSymbol> <Price fontSize={15} />
                   </Row>
                 </Col>
               </Row>
             </Col>
 
-            <Col size={1}>
+            <Col size={1} Padding='20px 30px 20px 30px' hideWidth='1400px'>
 
               <Row marginBottom='1%'>
                 <FooterSectionTitle> FAVORITES </FooterSectionTitle>
@@ -120,20 +123,18 @@ function App() {
               <Row >
                 <Col>
                   <Row columnGap='15px'>
-                    <FooterStockSymbol>AMZN</FooterStockSymbol> <Price size={15} />
+                    <FooterStockSymbol>AMZN</FooterStockSymbol> <Price fontSize={15} />
                   </Row>
                 </Col>
                 <Col>
                   <Row columnGap='15px'>
-                    <FooterStockSymbol>MSFT</FooterStockSymbol> <Price size={15} />
+                    <FooterStockSymbol>MSFT</FooterStockSymbol> <Price fontSize={15} />
                   </Row>
                 </Col>
               </Row>
 
             </Col>
           </Row>
-
-        </Grid>
       </ThemeProvider>
     </ Provider >
   );

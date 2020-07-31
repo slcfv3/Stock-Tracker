@@ -3,11 +3,13 @@ import React, { useState, useEffect } from "react"
 import './components.css';
 import { getPriceTicks, getTimeTicks } from '../util.js'
 import { useSelector } from 'react-redux'
-import { AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer } from "recharts";
+import { AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer as ResponsiveContainerO } from "recharts";
 import { Row } from '../styled-components/wrappers.js'
 import { ChartButton } from '../styled-components/buttons.js'
 
-
+const ResponsiveContainer = ({children, ...props}) => process.env.NODE_ENV === 'test'
+    ? <>{children}</>
+    : <ResponsiveContainerO {...props}>{children}</ResponsiveContainerO>
 
 const Chart = () => {
     const chartData = useSelector(state => state.chart)

@@ -30,6 +30,7 @@ export const Col = styled.div`
     @media (max-width: ${prop => prop.hideWidth ? prop.hideWidth : '0px'}) {
         display: none;
     }
+    font-size: ${prop => prop.fontSize ? prop.hideWidth : 'default'};
     margin: ${prop => prop.margin ? prop.margin : '0 0 0 0'};
     padding: ${prop => prop.Padding ? prop.Padding : '0 0 0 0'};
     border-right: ${prop => prop.BorderRight ? prop.BorderRight : 'none'};
