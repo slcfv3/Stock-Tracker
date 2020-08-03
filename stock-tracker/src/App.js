@@ -20,10 +20,10 @@ import './App.css';
 import { ThemeProvider } from 'styled-components'
 import theme from './theme.js'
 import { Grid, Row, Col } from './styled-components/wrappers.js'
+import { SearchIcon } from './styled-components/icons.js'
 import { BlueLine } from './styled-components/lines.js'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular/SearchAlt2'
 import logo from './assets/images/adaptive.png'
-import { ResponsiveContainer } from "recharts";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
@@ -46,13 +46,13 @@ function App() {
 
           <Row justifyContent='space-between' columnGap='5px'>
             <Col>
-              <SearchAlt2 size={50} color='#7fb3ff' />
+              <SearchIcon iconSize={50} breakpoint='1200px'  smallBreakpoint='900px'/>
             </Col>
             <Col size={1}>
               <SearchBar />
             </Col>
-            <Col size={1}>
-              <Price fontSize='40'/>
+            <Col size={1} >
+              <Price fontSize='40' breakpoint='1200px' smallBreakpoint='900px'/>
             </Col>
           </Row>
 
@@ -103,12 +103,12 @@ function App() {
 
                 <Col>
                   <Row columnGap='15px'>
-                    <FooterStockSymbol>NASDAQ</FooterStockSymbol> <Price fontSize={15} />
+                    <FooterStockSymbol>NASDAQ</FooterStockSymbol> <Price fontSize='15' />
                   </Row>
                 </Col>
                 <Col>
                   <Row columnGap='15px'>
-                    <FooterStockSymbol>DJIA</FooterStockSymbol> <Price fontSize={15} />
+                    <FooterStockSymbol>DJIA</FooterStockSymbol> <Price fontSize='15' />
                   </Row>
                 </Col>
               </Row>
@@ -122,13 +122,13 @@ function App() {
 
               <Row >
                 <Col>
-                  <Row columnGap='15px'>
-                    <FooterStockSymbol>AMZN</FooterStockSymbol> <Price fontSize={15} />
+                  <Row >
+                    <FooterStockSymbol>AMZN</FooterStockSymbol> <Price fontSize='15' />
                   </Row>
                 </Col>
                 <Col>
-                  <Row columnGap='15px'>
-                    <FooterStockSymbol>MSFT</FooterStockSymbol> <Price fontSize={15} />
+                  <Row >
+                    <FooterStockSymbol>MSFT</FooterStockSymbol> <Price fontSize='15' />
                   </Row>
                 </Col>
               </Row>

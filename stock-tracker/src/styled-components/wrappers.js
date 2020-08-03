@@ -35,4 +35,5 @@ export const Col = styled.div`
     padding: ${prop => prop.Padding ? prop.Padding : '0 0 0 0'};
     border-right: ${prop => prop.BorderRight ? prop.BorderRight : 'none'};
     border-color: ${prop => prop.BorderColor ? prop.BorderColor : 'none'};
+    align-items: center;
 `

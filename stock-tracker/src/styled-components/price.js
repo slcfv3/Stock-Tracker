@@ -4,9 +4,13 @@ export const StyledPrice = styled.p`
   margin: 0px;
   font-family: 'Lato', sans-serif;
   font-size: ${prop => prop.fontSize ? prop.fontSize : '40px'};
-  @media (max-width: '1520px'}) {
-    display: none;
+  @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
+    font-size: 30px;
   }
+  @media (max-width: ${prop => prop.smallBreakpoint ? prop.smallBreakpoint : '0px'}) {
+    font-size: 20px;
+  }
+
   font-weight: 300;
   font-stretch: normal;
   font-style: normal;
@@ -19,6 +23,12 @@ export const PriceChange = styled.p`
   margin: 0px;
   font-family: 'Lato', sans-serif;
   font-size: ${prop => prop.fontSize ? prop.fontSize : '40px'};
+  @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
+    font-size: 30px;
+  }
+  @media (max-width: ${prop => prop.smallBreakpoint ? prop.smallBreakpoint : '0px'}) {
+    font-size: 20px;
+  }
   font-weight: 300;
   font-stretch: normal;
   font-style: normal;
