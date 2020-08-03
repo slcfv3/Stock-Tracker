@@ -494,7 +494,7 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
       });
   })
 
-  app.get("/possiblesymbol/:request", function (req, resolve) {
+  /*app.get("/possiblesymbol/:request", function (req, resolve) {
     const request = req.params.request
     
     let possibleUrl = base_url+'stable/search/'+request+'?token='+secret_key
@@ -516,6 +516,31 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
             }
         
       });
+  })*/
+
+  app.get("/possiblesymbol/:request", function (req, res) {
+    const request = req.params.request
+    
+    let possibleUrl = base_url+'stable/search/'+request+'?token='+secret_key
+    new Promise((resolve, reject) =>{
+      https.get(possibleUrl, res1 => {
+        if(res1.statusCode==404)
+            reject(res1.statusCode)
+        else{
+              let body = "";
+              res1.on("data", data => {
+              body += data;
+              });
+              res1.on("end", () => {
+              body = JSON.parse(body);
+              
+              resolve(body)
+              });
+            }
+      })
+    })
+    .then((data) =>res.send(data))
+    
   })
 
 app.get("*", (_, res) => {

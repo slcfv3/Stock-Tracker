@@ -85,19 +85,19 @@ describe('Overview Component', () => {
     
     it('should render correct value for company name', () => {
         component(store)
-        const name = screen.getByTestId('company-name')
+        const name = screen.getByText('COMPANY OVERVIEW').closest('div').children[2]
       expect(name.innerHTML).toBe(newState.companyName+'('+newState.symbol+')');
     });
 
     it('should render correct value for website', () => {
         component(store)
-        const website = screen.getByTestId('website')
+        const website = screen.getByText('COMPANY OVERVIEW').closest('div').children[3]
         expect(website.innerHTML).toBe(newState.overview.website);
     });
 
     it('should render correct value for description', () => {
         component(store)
-        const description = screen.getByTestId('description')
+        const description = screen.getByText('COMPANY OVERVIEW').closest('div').children[4]
         expect(description.innerHTML).toBe(newState.overview.description);
     });
 
