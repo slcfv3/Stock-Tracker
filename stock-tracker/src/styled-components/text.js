@@ -109,6 +109,10 @@ color: #ffffff;
 export const PeerSymbol = styled.label`
 font-family: Lato, sans-serif;
   font-size: 14px;
+  @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
+    font-size: ${prop => prop.breakpoint ? '10px' : '14px'};
+    width: auto;
+  }
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
