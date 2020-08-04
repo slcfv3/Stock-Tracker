@@ -21,10 +21,10 @@ import './App.css';
 import { ThemeProvider } from 'styled-components'
 import theme from './theme.js'
 import { Grid, Row, Col } from './styled-components/wrappers.js'
+import { SearchIcon } from './styled-components/icons.js'
 import { BlueLine } from './styled-components/lines.js'
 import { SearchAlt2 } from '@styled-icons/boxicons-regular/SearchAlt2'
 import logo from './assets/images/adaptive.png'
-import { ResponsiveContainer } from "recharts";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
@@ -40,27 +40,34 @@ function App() {
             <Col>
               <img src={logo} height='50px' />
             </Col>
-            <Col>
+            <Col hideWidth='900px'>
               <HeaderTabs />
             </Col>
           </Row>
 
           <Row justifyContent='space-between' columnGap='5px'>
             <Col>
-              <SearchAlt2 size={50} color='#7fb3ff' />
-            </Col>
-            <Col size={2}>
-              <SearchBar />
+              <SearchIcon iconSize={50} breakpoint='1200px'  smallBreakpoint='900px'/>
             </Col>
             <Col size={1}>
-              <Price size={40} />
+              <SearchBar />
+            </Col>
+            <Col size={1} hideWidth='650px'>
+              <Price fontSize='40' breakpoint='1200px' smallBreakpoint='900px'/>
             </Col>
           </Row>
           <Row>
             <BlueLine />
           </Row>
+
+
+          <Row  justifyContent='flex-end' minWidth='650px' marginBottom='3%'>
+            <Price fontSize='20'/>
+          </Row>
+
           <DropDown />
-          <Row justifyContent='space-between' marginBottom='1%'>
+    
+          <Row justifyContent='space-between' hideWidth='650px' marginBottom='1%'>
             <Col >
               <StockTags />
             </Col>
@@ -69,30 +76,31 @@ function App() {
             </Col>
           </Row>
 
-          <Row>
+          <Row maxWidth='1530px'>
             <Col size={2}>
-              <ResponsiveContainer width="99%" aspect={2}>
                 <Chart />
-              </ResponsiveContainer>
             </Col>
             <Col size={1}>
               <News />
             </Col>
           </Row>
 
-          <Row marginBottom='2%'>
-            <Col size={2}>
+          <Row marginBottom='2%' maxWidth='1530px'>
+            <Col size={2} Padding='0 0 2% 0'>
               <Keystats />
             </Col>
             <Col size={1}>
               <Overview />
-              <Peers />
+              <Peers breakpoint='450px'/>
             </Col>
           </Row>
 
-          <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' Padding='20px 30px 20px 30px'>
+          
 
-            <Col size={1} BorderRight='solid 1px #ffffff;'>
+        </Grid>
+        <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' >
+
+            <Col size={1} BorderRight='solid 1px rgba(255, 255, 255, 0.1)' Padding='20px 30px 20px 30px' hideWidth='700px'>
 
               <Row marginBottom='1%'>
                 <FooterSectionTitle> MARKETS </FooterSectionTitle>
@@ -102,18 +110,18 @@ function App() {
 
                 <Col>
                   <Row columnGap='15px'>
-                    <FooterStockSymbol>NASDAQ</FooterStockSymbol> <Price size={15} />
+                    <FooterStockSymbol>NASDAQ</FooterStockSymbol> <Price fontSize='15' />
                   </Row>
                 </Col>
                 <Col>
                   <Row columnGap='15px'>
-                    <FooterStockSymbol>DJIA</FooterStockSymbol> <Price size={15} />
+                    <FooterStockSymbol>DJIA</FooterStockSymbol> <Price fontSize='15' />
                   </Row>
                 </Col>
               </Row>
             </Col>
 
-            <Col size={1}>
+            <Col size={1} Padding='20px 30px 20px 30px' hideWidth='1400px'>
 
               <Row marginBottom='1%'>
                 <FooterSectionTitle> FAVORITES </FooterSectionTitle>
@@ -121,21 +129,19 @@ function App() {
 
               <Row >
                 <Col>
-                  <Row columnGap='15px'>
-                    <FooterStockSymbol>AMZN</FooterStockSymbol> <Price size={15} />
+                  <Row >
+                    <FooterStockSymbol>AMZN</FooterStockSymbol> <Price fontSize='15' />
                   </Row>
                 </Col>
                 <Col>
-                  <Row columnGap='15px'>
-                    <FooterStockSymbol>MSFT</FooterStockSymbol> <Price size={15} />
+                  <Row >
+                    <FooterStockSymbol>MSFT</FooterStockSymbol> <Price fontSize='15' />
                   </Row>
                 </Col>
               </Row>
 
             </Col>
           </Row>
-
-        </Grid>
       </ThemeProvider>
     </ Provider >
   );
