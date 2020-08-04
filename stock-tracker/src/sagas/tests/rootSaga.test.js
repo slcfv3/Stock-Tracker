@@ -1,4 +1,4 @@
-import { searchSubmittedHandler, getNewStockData, pollPrice, rootSaga, searchEnteredHandler } from '../rootSaga'
+import { searchSubmittedHandler, getNewStockData, pollPrice, rootSaga, searchEnteredHandler, getPossibleData } from '../rootSaga'
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -15,7 +15,8 @@ const initialState = {
     coldChart: {},
     news: [],
     keyStats: {},
-    peer: []
+    peer: [],
+    possible: []
 }
 
 const keyStats = {
@@ -33,6 +34,11 @@ const keyStats = {
     open: stock.open
 }
 
+const samplePossible = [
+    {"symbol":"AAPL","securityName":"lc.npepI A","securityType":"cs","region":"US","exchange":"NAS"},
+    {"symbol":"AAPL-MM","securityName":".I pclAepn","securityType":"cs","region":"MX","exchange":"XME"}
+]
+
 const newState = {
     symbol: stock.symbol,
     companyName: stock.companyName,
@@ -44,7 +50,8 @@ const newState = {
     coldChart: stock.coldcharts,
     news: stock.news,
     keyStats: keyStats,
-    peer: stock.peers
+    peer: stock.peers,
+    possible : samplePossible
 }
 
 describe('search submitted handler', () => {
@@ -74,6 +81,21 @@ describe('search submitted handler', () => {
             })
             .run();
     })
+})
+
+describe('search entered handler', () => {
+    it('gets possible symbols and dispatches it to the reducer', () => {
+        return expectSaga(searchEnteredHandler, { type: 'SEARCH_ENTERED', payload: "ARBITRARY_SYMBOL" }) 
+            .provide([
+                [matchers.call.fn(getPossibleData), samplePossible],
+            ])
+            .put({
+                type: 'POSSIBLE_RECEIVED',
+                payload: samplePossible
+            })
+            .run();
+    })
+
 })
 
 describe('root saga', () => {
