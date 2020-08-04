@@ -67,7 +67,7 @@ function App() {
 
           <DropDown />
     
-          <Row justifyContent='space-between' marginBottom='1%'>
+          <Row justifyContent='space-between' hideWidth='650px' marginBottom='1%'>
             <Col >
               <StockTags />
             </Col>
