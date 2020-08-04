@@ -15,6 +15,9 @@ export const Row = styled.div`
     @media (max-width: ${prop => prop.hideWidth ? prop.hideWidth : '0px'}) {
         display: none;
     }
+    @media (min-width: ${prop => prop.minWidth ? prop.minWidth : '900000px'}) {
+        display: none;
+    }
     background-image: ${prop => prop.BackgroundImage ? prop.BackgroundImage : 'transparent'};
     display: flex;
     overflow: hidden;

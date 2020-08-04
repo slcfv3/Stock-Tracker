@@ -23,7 +23,7 @@ const Keystats = () => {
         <div className="keystats">
             <SectionTitle>KEY STATS</SectionTitle>
             <BlueLine />
-            <Row  maxWidth='950px'>
+            <Row  maxWidth='900px'>
                 <Col size={1}>
                     <StatTable>
                         <tr>

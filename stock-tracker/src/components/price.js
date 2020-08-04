@@ -51,7 +51,6 @@ const Price = (props) => {
                     <PriceChange change={priceChange} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} fontSize={props.fontSize + 'px'} >   <PercentIcon iconSize={props.fontSize} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint}/>   </PriceChange>
                 </Col>
             </Row>
-
         </Row>
     );
 }

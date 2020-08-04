@@ -86,7 +86,7 @@ const Chart = () => {
                         width={1250}
                         height={500}
                         data={currentChart}
-                        margin={{ top: 30, left: 30, bottom: 30 }}
+                        margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
                     >
 
                         <Tooltip cursor={false} />

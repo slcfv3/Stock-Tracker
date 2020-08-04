@@ -39,7 +39,7 @@ function App() {
             <Col>
               <img src={logo} height='50px' />
             </Col>
-            <Col hideWidth='950px'>
+            <Col hideWidth='900px'>
               <HeaderTabs />
             </Col>
           </Row>
@@ -51,7 +51,7 @@ function App() {
             <Col size={1}>
               <SearchBar />
             </Col>
-            <Col size={1} >
+            <Col size={1} hideWidth='650px'>
               <Price fontSize='40' breakpoint='1200px' smallBreakpoint='900px'/>
             </Col>
           </Row>
@@ -60,7 +60,11 @@ function App() {
             <BlueLine />
           </Row>
 
-          <Row justifyContent='space-between' marginBottom='1%'>
+          <Row  justifyContent='flex-end' minWidth='650px' marginBottom='3%'>
+            <Price fontSize='20'/>
+          </Row>
+
+          <Row justifyContent='space-between' marginBottom='1%' hideWidth='650px'>
             <Col >
               <StockTags />
             </Col>
@@ -79,12 +83,12 @@ function App() {
           </Row>
 
           <Row marginBottom='2%' maxWidth='1530px'>
-            <Col size={2}>
+            <Col size={2} Padding='0 0 2% 0'>
               <Keystats />
             </Col>
             <Col size={1}>
               <Overview />
-              <Peers />
+              <Peers breakpoint='450px'/>
             </Col>
           </Row>
 
