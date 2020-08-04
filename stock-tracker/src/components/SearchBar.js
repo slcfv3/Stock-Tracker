@@ -27,15 +27,23 @@ const SearchBar = () => {
     setSearch('')
   }, [placeholder])
 
+  const onChange = (e) => {
+    setSearch(e.target.value)
+    
+    dispatch({ type: 'SEARCH_ENTERED', payload: e.target.value.toUpperCase() });
+    
+    
+  }
+
   return (
-        <form onSubmit={handleSubmit}>
-          <input
-            placeholder={placeholder}
-            type="text"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="search" />
-        </form>
+    <form onSubmit={handleSubmit}>
+      <input
+        placeholder={placeholder}
+        type="text"
+        value={search}
+        onChange={onChange}
+        className="search" />
+    </form>
   );
 }
 
