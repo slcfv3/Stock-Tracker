@@ -12,7 +12,8 @@ const initialState = {
     coldChart: {},
     news: [],
     keyStats: {},
-    peer: []
+    peer: [],
+    possible:[]
 }
 
 const keyStats = {
@@ -30,6 +31,11 @@ const keyStats = {
     open: stock.open
 }
 
+const samplePossible = [
+    {"symbol":"AAPL","securityName":"lc.npepI A","securityType":"cs","region":"US","exchange":"NAS"},
+    {"symbol":"AAPL-MM","securityName":".I pclAepn","securityType":"cs","region":"MX","exchange":"XME"}
+]
+
 const newState = {
     symbol: stock.symbol,
     companyName: stock.companyName,
@@ -41,7 +47,8 @@ const newState = {
     coldChart: stock.coldcharts,
     news: stock.news,
     keyStats: keyStats,
-    peer: stock.peers
+    peer: stock.peers,
+    possible:[]
 }
 
 describe('root reducer', () => {
@@ -71,6 +78,14 @@ describe('root reducer', () => {
         .toEqual({
             ...initialState,
             news: stock.news
+        });
+    });
+
+    it('should handle POSSIBLE_RECEIVED', () => {
+        expect(rootReducer(initialState, { type: 'POSSIBLE_RECEIVED', payload: samplePossible }))
+        .toEqual({
+            ...initialState,
+            possible: samplePossible
         });
     });
 });

@@ -1,4 +1,4 @@
-import { searchSubmittedHandler, getNewStockData, pollPrice, rootSaga } from '../rootSaga'
+import { searchSubmittedHandler, getNewStockData, pollPrice, rootSaga, searchEnteredHandler } from '../rootSaga'
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -81,6 +81,8 @@ describe('root saga', () => {
         testSaga(rootSaga)
         .next()
         .takeLatest('SEARCH_SUBMITTED', searchSubmittedHandler)
+        .next()
+        .takeLatest('SEARCH_ENTERED', searchEnteredHandler)
         .next()
         .isDone()
     })
