@@ -65,7 +65,7 @@ function App() {
             <Price fontSize='20'/>
           </Row>
 
-          <DropDown />
+          <DropDown xlgbreakpoint='1530px' lgbreakpoint='1200px'breakpoint='900px' smallBreakpoint='600px'/>
     
           <Row justifyContent='space-between' hideWidth='650px' marginBottom='1%'>
             <Col >

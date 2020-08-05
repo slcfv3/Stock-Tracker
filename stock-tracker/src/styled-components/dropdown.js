@@ -2,12 +2,23 @@ import styled from 'styled-components'
 
 export const OptionList = styled.ul`
     position:absolute;
-    top:18%;
+    top:15.2%;
     list-style: none;
     width: 78%;
     z-index:2000;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     background-image: linear-gradient(to bottom, #001330 2%, rgba(0, 8, 19, 0.8) 177%);
+    @media (max-width: ${prop => prop.xlgbreakpoint ? prop.xlgbreakpoint : '0px'}) {
+        top:11.5%;
+      }
+
+    @media (max-width: ${prop => prop.lgbreakpoint ? prop.lgbreakpoint : '0px'}) {
+        top:11.4%;
+      }
+
+    @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
+        top:8.4%;
+      }
 `
 export const Option = styled.li`
     height:40px;
@@ -34,6 +45,7 @@ export const SymbolTag = styled.label`
 export const NameTag = styled.label`
     width:600px;
     height: 22px;
+    text-overflow: ellipsis; 
     font-family: Lato;
     font-size: 18px;
     font-weight: normal;
@@ -45,6 +57,9 @@ export const NameTag = styled.label`
     color: #ffffff;
     position:relative;
     top:5px;
+    @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
+        font-size:12px;
+      }
 `
 export const ExchangeTag = styled.p`
     width: 76px;
@@ -57,6 +72,9 @@ export const ExchangeTag = styled.p`
     position: relative;
     left:20px;
     top:10px;
+    @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
+        display:none;
+      }
 `
 
 export const ExchangeText = styled.label`
@@ -75,6 +93,9 @@ export const ExchangeText = styled.label`
     position: relative;
     left:72px;
     top:5px;
+    @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
+        display:none;
+      }
 `
 
 export const TagContainer = styled.label`
