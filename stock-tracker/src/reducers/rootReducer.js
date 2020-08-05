@@ -56,14 +56,14 @@ export const rootReducer = (state = initialState, action) => {
                 isLoading: true
             }
         case 'NEWS_RECEIVED':
-            console.log("news in NEWS_RECEIVED:", action.payload)
+            console.debug("news in NEWS_RECEIVED:", action.payload)
             return {
                 ...state,
                 news: action.payload
             }
         case 'PRICE_RECEIVED':
-            console.log("chart in PRICE_RECEIVED:", action.payload.chart)
-            console.log("price in PRICE_RECEIVED:", action.payload.latestPrice)
+            console.warn("chart in PRICE_RECEIVED:", action.payload.chart)
+            console.info("price in PRICE_RECEIVED:", action.payload.latestPrice)
 
             return {
                 ...state,

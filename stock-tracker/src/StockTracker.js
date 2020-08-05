@@ -33,7 +33,15 @@ function StockTracker() {
     return (
         <LoadingOverlay
             active={isLoading}
-            spinner
+            styles={{
+                spinner: (base) => ({
+                    ...base,
+                    width: '100px',
+                    '& svg circle': {
+                        stroke: 'rgba(255, 0, 0, 0.5)'
+                    }
+                })
+            }}
             text='Getting stock information...'
         >
             <Grid>
@@ -66,7 +74,7 @@ function StockTracker() {
                 <Row justifyContent='flex-end' minWidth='650px' marginBottom='3%'>
                     <Price fontSize='20' />
                 </Row>
-                
+
                 <Row>
                     <DropDown />
                 </Row>
@@ -133,7 +141,7 @@ function StockTracker() {
 
                     <Row >
                         <Col>
-                            <Row >
+                            <Row columnGap='15px'>
                                 <FooterStockSymbol>AMZN</FooterStockSymbol> <Price fontSize='15' />
                             </Row>
                         </Col>
