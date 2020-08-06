@@ -1,24 +1,24 @@
 import styled from 'styled-components'
 
+export const DropdownBody = styled.div`
+   width:98%; 
+   position:relative;
+   top:7px;
+   margin-bottom:22px;
+`
+
 export const OptionList = styled.ul`
+    margin:0;
+    border-top: 3px solid #7fb3ff;
     position:absolute;
-    top:15.2%;
+    top:0;
     list-style: none;
-    width: 78%;
+    width: 100%;
+    overflow:hidden;
     z-index:2000;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     background-image: linear-gradient(to bottom, #001330 2%, rgba(0, 8, 19, 0.8) 177%);
-    @media (max-width: ${prop => prop.xlgbreakpoint ? prop.xlgbreakpoint : '0px'}) {
-        top:11.5%;
-      }
-
-    @media (max-width: ${prop => prop.lgbreakpoint ? prop.lgbreakpoint : '0px'}) {
-        top:11.4%;
-      }
-
-    @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
-        top:8.4%;
-      }
+    
 `
 export const Option = styled.li`
     height:40px;
