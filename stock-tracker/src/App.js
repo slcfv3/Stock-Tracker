@@ -58,7 +58,7 @@ function App() {
           </Row>
         
             
-          <DropDown xlgbreakpoint='1800px' lgbreakpoint='1200px'breakpoint='900px' smallBreakpoint='600px'/>
+          <DropDown xlgbreakpoint='1530px' lgbreakpoint='1200px'breakpoint='900px' smallBreakpoint='600px'/>
           
           
           <Row  justifyContent='flex-end' minWidth='650px' marginBottom='3%'>

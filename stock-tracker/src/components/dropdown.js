@@ -18,7 +18,7 @@ const DropDown = (props) => {
 
   if(possible.length) {
     return(
-        <DropdownBody>
+        <DropdownBody xlgbreakpoint={props.xlgbreakpoint} lgbreakpoint={props.lgbreakpoint} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint}>
             <OptionList xlgbreakpoint={props.xlgbreakpoint} lgbreakpoint={props.lgbreakpoint} breakpoint={props.breakpoint}>
                 {possible.map((optionName, index) => {
                 
@@ -33,7 +33,7 @@ const DropDown = (props) => {
     );
   } else {
     return(
-        <DropdownBody>
+        <DropdownBody xlgbreakpoint={props.xlgbreakpoint} lgbreakpoint={props.lgbreakpoint} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint}>
           <OptionList xlgbreakpoint={props.xlgbreakpoint} lgbreakpoint={props.lgbreakpoint} breakpoint={props.breakpoint}>
           </OptionList>
         </DropdownBody>
