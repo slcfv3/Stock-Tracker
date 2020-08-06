@@ -47,13 +47,13 @@ export const rootReducer = (state = initialState, action) => {
                 news: stock.news,
                 keyStats: keyStats,
                 peer: stock.peers,
-                possible:[],
                 isLoading: false
             }
         case 'SEARCH_SUBMITTED':
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
+                possible: []
             }
         case 'NEWS_RECEIVED':
             console.debug("news in NEWS_RECEIVED:", action.payload)

@@ -6,16 +6,16 @@ export const DropdownBody = styled.div`
    top:7px;
    margin-bottom:22px;
    @media (max-width: ${prop => prop.xlgbreakpoint ? prop.xlgbreakpoint : '0px'}) {
-    width:97%;
+    width:97.2%;
   }
   @media (max-width: ${prop => prop.lgbreakpoint ? prop.lgbreakpoint : '0px'}) {
-    width:96%;
+    width:96.3%;
   }
   @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
-    width:94%;
+    width:94.9%;
   }
   @media (max-width: ${prop => prop.smallBreakpoint ? prop.smallBreakpoint : '0px'}) {
-    width:89%;
+    width:89.9%;
   }
 `
 export const OptionList = styled.ul`
@@ -26,7 +26,7 @@ export const OptionList = styled.ul`
     list-style: none;
     width: 100%;
     overflow:hidden;
-    z-index:2000;
+    z-index:200;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     background-image: linear-gradient(to bottom, #001330 2%, rgba(0, 8, 19, 0.8) 177%);
     
