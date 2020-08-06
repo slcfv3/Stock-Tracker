@@ -27,7 +27,7 @@ export const OptionList = styled.ul`
     list-style: none;
     width: 100%;
     overflow:hidden;
-    z-index:2000;
+    z-index:200;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     background-image: linear-gradient(to bottom, #001330 2%, rgba(0, 8, 19, 0.8) 177%);
     
