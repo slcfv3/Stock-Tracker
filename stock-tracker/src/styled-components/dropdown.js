@@ -18,7 +18,6 @@ export const DropdownBody = styled.div`
     width:89%;
   }
 `
-
 export const OptionList = styled.ul`
     margin:0;
     border-top: 2px solid #7fb3ff;
