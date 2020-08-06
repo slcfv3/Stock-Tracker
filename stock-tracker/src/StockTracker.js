@@ -33,15 +33,7 @@ function StockTracker() {
     return (
         <LoadingOverlay
             active={isLoading}
-            styles={{
-                spinner: (base) => ({
-                    ...base,
-                    width: '100px',
-                    '& svg circle': {
-                        stroke: 'rgba(255, 0, 0, 0.5)'
-                    }
-                })
-            }}
+            spinner
             text='Getting stock information...'
         >
             <Grid>
@@ -98,7 +90,7 @@ function StockTracker() {
                 </Row>
 
                 <Row marginBottom='2%' maxWidth='1530px'>
-                    <Col size={2} Padding='0 0 2% 0'>
+                    <Col size={2} Padding='0 0 0 0'>
                         <Keystats />
                     </Col>
                     <Col size={1}>
@@ -110,7 +102,7 @@ function StockTracker() {
 
 
             </Grid>
-            <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' >
+            <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' Padding='0 3% 0 3%' >
 
                 <Col size={1} BorderRight='solid 1px rgba(255, 255, 255, 0.1)' Padding='20px 30px 20px 30px' hideWidth='700px'>
 
@@ -146,7 +138,7 @@ function StockTracker() {
                             </Row>
                         </Col>
                         <Col>
-                            <Row >
+                            <Row columnGap='15px'>
                                 <FooterStockSymbol>MSFT</FooterStockSymbol> <Price fontSize='15' />
                             </Row>
                         </Col>

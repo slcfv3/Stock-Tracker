@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer as ResponsiveContainerO } from "recharts";
 import { Row } from '../styled-components/wrappers.js'
 import { ChartButton } from '../styled-components/buttons.js'
+import { ChartPriceLabel } from './ChartPriceLabel'
 
 const ResponsiveContainer = ({children, ...props}) => process.env.NODE_ENV === 'test'
     ? <>{children}</>
@@ -86,7 +87,7 @@ const Chart = () => {
                         width={1250}
                         height={500}
                         data={currentChart}
-                        margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
+                        margin={{ top: 20, right: 0, left: 0, bottom: 20 }}
                     >
 
                         <Tooltip cursor={false} />
@@ -94,7 +95,11 @@ const Chart = () => {
                             <Label
                                 value={'     ' + currentPrice}
                                 position="right"
-                                style={{ fill: "#e95656", fontSize: "13px" }}
+                                style={{ 
+                                    fill: "#e95656", 
+                                    fontSize: "13px",
+                                    backgroundColor: 'white'
+                                 }}
                                 display={lineDisplay} />
                         </ReferenceLine>
 

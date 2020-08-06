@@ -18,8 +18,9 @@ export const StatLabel = styled.td`
     width: 50%;
     border-bottom: 1px solid;
     border-color: rgba(84, 96, 109, 0.5);
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    cursor: default;
 `
 
 export const StatValue = styled.td`
@@ -35,6 +36,6 @@ export const StatValue = styled.td`
     width: 50%;
     border-bottom: 1px solid;
     border-color: rgba(84, 96, 109, 0.5);
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 `

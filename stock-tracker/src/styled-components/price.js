@@ -17,6 +17,7 @@ export const StyledPrice = styled.p`
   line-height: normal;
   letter-spacing: normal;
   color: #ffffff;
+  cursor: default;
 `
 
 export const PriceChange = styled.p`
@@ -35,4 +36,5 @@ export const PriceChange = styled.p`
   line-height: normal;
   letter-spacing: normal;
   color: ${prop => prop.change >= 0 ? '#91e4a5' : '#e95656'};
+  cursor: default;
 `
