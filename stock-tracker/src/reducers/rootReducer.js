@@ -45,8 +45,7 @@ export const rootReducer = (state = initialState, action) => {
                 coldChart: stock.coldcharts,
                 news: stock.news,
                 keyStats: keyStats,
-                peer: stock.peers,
-                possible:[]
+                peer: stock.peers
             }
         case 'NEWS_RECEIVED':
             console.log("news in NEWS_RECEIVED:", action.payload)
@@ -70,6 +69,12 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 possible: action.payload
+            }
+        case 'SEARCH_SUBMITTED':
+            //console.log("possible in POSSIBLE_RECEIVED:", action.payload)
+            return {
+                ...state,
+                possible: []
             }
         default:
             return state;
