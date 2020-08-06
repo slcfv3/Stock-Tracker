@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { createSelector } from 'reselect'
 import { useDispatch, useSelector } from 'react-redux'
-import { OptionList, Option, SymbolTag, NameTag, ExchangeTag, ExchangeText,TagContainer } from '../styled-components/dropdown.js'
+import { OptionList, Option, SymbolTag, NameTag, ExchangeTag, ExchangeText,TagContainer,DropdownBody } from '../styled-components/dropdown.js'
 
-const DropDown = () => {
+const DropDown = (props) => {
   
   
   const dispatch = useDispatch();
@@ -18,22 +18,25 @@ const DropDown = () => {
 
   if(possible.length) {
     return(
-      <OptionList>
-        {possible.map((optionName, index) => {
-         
-          return (
-            <Option key={optionName.symbol} onClick={()=>onClick(optionName.symbol)} >
-              <SymbolTag>{optionName.symbol}</SymbolTag> <TagContainer><NameTag>{optionName.securityName}</NameTag> <ExchangeText>{optionName.exchange}</ExchangeText><ExchangeTag></ExchangeTag></TagContainer>
-            </Option>
-          );
-        })}
-      </OptionList>
+        <DropdownBody xlgbreakpoint={props.xlgbreakpoint} lgbreakpoint={props.lgbreakpoint} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint}>
+            <OptionList xlgbreakpoint={props.xlgbreakpoint} lgbreakpoint={props.lgbreakpoint} breakpoint={props.breakpoint}>
+                {possible.map((optionName, index) => {
+                
+                return (
+                    <Option key={optionName.symbol} onClick={()=>onClick(optionName.symbol)} >
+                    <SymbolTag>{optionName.symbol}</SymbolTag> <TagContainer><NameTag breakpoint={props.smallBreakpoint}>{optionName.securityName}</NameTag> <ExchangeText breakpoint={props.breakpoint}>{optionName.exchange}</ExchangeText><ExchangeTag breakpoint={props.breakpoint}></ExchangeTag></TagContainer>
+                    </Option>
+                );
+                })}
+            </OptionList>
+        </DropdownBody>
     );
   } else {
     return(
-      <div className="no-options">
-        
-      </div>
+        <DropdownBody xlgbreakpoint={props.xlgbreakpoint} lgbreakpoint={props.lgbreakpoint} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint}>
+          <OptionList xlgbreakpoint={props.xlgbreakpoint} lgbreakpoint={props.lgbreakpoint} breakpoint={props.breakpoint}>
+          </OptionList>
+        </DropdownBody>
     );
   }
   

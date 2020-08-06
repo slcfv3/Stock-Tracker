@@ -56,16 +56,16 @@ function App() {
               <Price fontSize='40' breakpoint='1200px' smallBreakpoint='900px'/>
             </Col>
           </Row>
-          <Row>
-            <BlueLine />
-          </Row>
-
-
+        
+            
+          <DropDown xlgbreakpoint='1530px' lgbreakpoint='1200px'breakpoint='900px' smallBreakpoint='600px'/>
+          
+          
           <Row  justifyContent='flex-end' minWidth='650px' marginBottom='3%'>
             <Price fontSize='20'/>
           </Row>
 
-          <DropDown />
+         
     
           <Row justifyContent='space-between' hideWidth='650px' marginBottom='1%'>
             <Col >
