@@ -89,9 +89,11 @@ describe('x-axis ticks', () => {
         const { getAllByText, getByText, debug } = renderWithStore(newStockStore)
 
         fireEvent.click(getByText('1D'))
-
+        const lastTime = stock.chart[stock.chart.length-1].label
         for (let i = 0; i < oneDayTimeTicks.length; i++) {
             const tick = oneDayTimeTicks[i]
+            if(parseInt(lastTime.substring(3,5),10)<parseInt(tick.substring(3,5),10))
+                break;
             getAllByText(tick)
         }
     })

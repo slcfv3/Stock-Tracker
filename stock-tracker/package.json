@@ -22,7 +22,7 @@
     "redux-saga-test-plan": "^4.0.0-rc.3",
     "reselect": "^4.0.0",
     "styled-components": "^5.1.1",
-    "styled-icons": "^10.11.0",
+    "styled-icons": "^10.14.1",
     "styled-system": "^5.1.5"
   },
   "devDependencies": {

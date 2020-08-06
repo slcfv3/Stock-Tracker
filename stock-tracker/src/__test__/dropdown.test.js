@@ -2,8 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import sampleData from './sampleData'
-import Overview from '../components/overview';
-import { render, screen, cleanup } from '@testing-library/react'
+import { render, screen} from '@testing-library/react'
+import DropDown from '../components/dropdown';
 
 const mockStore = configureStore([]);
 
@@ -20,7 +20,8 @@ const initialState = {
     coldChart: {},
     news: [],
     keyStats: {},
-    peer: []
+    peer: [],
+    possible:[]
 }
 
 
@@ -40,6 +41,10 @@ const keyStats = {
 }
 
 const initialStore = mockStore(initialState)
+const samplePossible = [
+    {"symbol":"AAPL","securityName":"lc.npepI A","securityType":"cs","region":"US","exchange":"NAS"},
+    {"symbol":"AAPL-MM","securityName":".I pclAepn","securityType":"cs","region":"MX","exchange":"XME"}
+]
 
 const newState = {
     symbol: sampleData.symbol,
@@ -52,7 +57,8 @@ const newState = {
     coldChart: sampleData.coldcharts,
     news: sampleData.news,
     keyStats: keyStats,
-    peer: sampleData.peers
+    peer: sampleData.peers,
+    possible: samplePossible
 }
 
 store = mockStore(newState);
@@ -61,45 +67,34 @@ store = mockStore(newState);
 const component = (store) => {
     return render(
         <Provider store={store}>
-            <Overview />
+            <DropDown />
         </Provider>
     );
 };
 
 
 
-
-
-
-describe('Overview Component', () => {
+describe('Dropdown Component', () => {
     
     it('should render empty for initial state',()=>{
-        component(initialStore)
-        const ininame = screen.getByTestId('company-name')
-        const iniwebsite = screen.getByTestId('website')
-        const inidescription = screen.getByTestId('description')
-        expect(ininame.innerHTML).toBe("");
-        expect(iniwebsite.innerHTML).toBe("");
-        expect(inidescription.innerHTML).toBe("");
+        const container = component(initialStore)
+        expect(container.baseElement.firstChild.firstChild).toHaveClass('no-options')
     })
     
-    it('should render correct value for company name', () => {
+    it('should render first possible option', () => {
         component(store)
-        const name = screen.getByText('COMPANY OVERVIEW').closest('div').children[2]
-      expect(name.innerHTML).toBe(newState.companyName+'('+newState.symbol+')');
+        const name = screen.getByText('AAPL').closest('li').children[1].children[0]
+        const exchange = screen.getByText('AAPL').closest('li').children[1].children[1]
+        expect(name.innerHTML).toBe(samplePossible[0].securityName);
+        expect(exchange.innerHTML).toBe(samplePossible[0].exchange);
     });
 
-    it('should render correct value for website', () => {
+    it('should render second possible option', () => {
         component(store)
-        const website = screen.getByText('COMPANY OVERVIEW').closest('div').children[3]
-        expect(website.innerHTML).toBe(newState.overview.website);
+        const name = screen.getByText('AAPL-MM').closest('li').children[1].children[0]
+        const exchange = screen.getByText('AAPL-MM').closest('li').children[1].children[1]
+        expect(name.innerHTML).toBe(samplePossible[1].securityName);
+        expect(exchange.innerHTML).toBe(samplePossible[1].exchange);
     });
-
-    it('should render correct value for description', () => {
-        component(store)
-        const description = screen.getByText('COMPANY OVERVIEW').closest('div').children[4]
-        expect(description.innerHTML).toBe(newState.overview.description);
-    });
-
    
   });

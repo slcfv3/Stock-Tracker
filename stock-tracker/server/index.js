@@ -10,7 +10,6 @@ const base_url = config.base_url
 const secret_key = config.secret_key
 
 app.use(express.static("build"))
-app.use(bodyParser.json())
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
   res.header(
@@ -21,250 +20,233 @@ app.use(function (req, res, next) {
   next()
 })
 
-function getColdChart(symbol, largeBody, resolve){
+function getColdChart(symbol, largeBody, res){
   let onedayChartUrl = base_url+'stable/stock/'+symbol+'/chart/1d?token='+secret_key
     let fivedayChartUrl = base_url+'stable/stock/'+symbol+'/chart/5d?token='+secret_key
     let onemonthChartUrl = base_url+'stable/stock/'+symbol+'/chart/1m?token='+secret_key
     let oneyearChartUrl = base_url+'stable/stock/'+symbol+'/chart/1y?token='+secret_key
     let fiveyearChartUrl = base_url+'stable/stock/'+symbol+'/chart/5y?token='+secret_key
     let maxChartUrl = base_url+'stable/stock/'+symbol+'/chart/max?token='+secret_key
-    https.get(onedayChartUrl, res => {
-        if(res.statusCode==404)
-            resolve.status(404).send('Stock not found');
+    let result = {}
+    new Promise((resolve, reject) =>{
+      https.get(onedayChartUrl, res1 => {
+        if(res1.statusCode==404)
+            reject(res1.statusCode)
         else{
-              //res.setEncoding("utf8");
-              let body = {};
-              let body0 = "";
-              res.on("data", data => {
-              body0 += data;
+              let body = "";
+              res1.on("data", data => {
+              body += data;
               });
-              res.on("end", () => {
+              res1.on("end", () => {
+              body = JSON.parse(body);
               
-              body.oneday = JSON.parse(body0);
-              
-              https.get(fivedayChartUrl, res1 => {
-                res1.setEncoding("utf8");
-                let body1 =""
-                res1.on("data", data => {
-                body1 += data;
-                
-                });
-                res1.on("end", () => {
-                    body.fiveday = JSON.parse(body1);
-                    
-                    https.get(onemonthChartUrl, res2 => {
-                    res2.setEncoding("utf8");
-                    let body2 =""
-                    res2.on("data", data => {
-                        body2 += data;
-                        
-                    });
-                    res2.on("end", () => {
-                        body.onemonth = JSON.parse(body2)
-                
-                        https.get(oneyearChartUrl, res3 => {
-                        res3.setEncoding("utf8");
-                        let body3 =""
-                        res3.on("data", data => {
-                            body3 += data;
-                            
-                        });
-                        res3.on("end", () => {
-                            body.oneyear = JSON.parse(body3);
-                            
-                            https.get(fiveyearChartUrl, res4 => {
-                                
-                                res4.setEncoding("utf8");
-                                let body4 = "";
-                                res4.on("data", data => {
-                                body4 += data;
-                                
-                                });
-                                res4.on("end", () => {
-                                body.fiveyear = JSON.parse(body4);
-                                
-                                
-                                https.get(maxChartUrl, res5 => {
-                                  res5.setEncoding("utf8");
-                                  let body5 =""
-                                  res5.on("data", data => {
-                                    body5 += data;
-                                    
-                                  });
-                                  res5.on("end", () => {
-                                    body.max = JSON.parse(body5);
-                                   
-                                    largeBody.coldcharts = body
-                                    resolve.send(largeBody)
-                                  });
-                                });
-                                });
-                                
-                                
-                              });
-                        });
-                        });
-                    });
-                    });
-                });
-                });
+              resolve(body)
               });
             }
-        
-      });
+      })
+    })
+    .then((data) =>{
+      result.oneday = data
+      return new Promise((resolve, reject) =>{
+        https.get(fivedayChartUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
+                res1.on("data", data => {
+                body += data;
+                });
+                res1.on("end", () => {
+                body = JSON.parse(body);
+                
+                resolve(body)
+                });
+              }
+        })
+      })
+    })
+    .then((data) =>{
+      result.fiveday = data
+      return new Promise((resolve, reject) =>{
+        https.get(onemonthChartUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
+                res1.on("data", data => {
+                body += data;
+                });
+                res1.on("end", () => {
+                body = JSON.parse(body);
+                
+                resolve(body)
+                });
+              }
+        })
+      })
+    })
+    .then((data)=>{
+      result.onemonth = data
+      return new Promise((resolve, reject) =>{
+        https.get(oneyearChartUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
+                res1.on("data", data => {
+                body += data;
+                });
+                res1.on("end", () => {
+                body = JSON.parse(body);
+                
+                resolve(body)
+                });
+              }
+        })
+      })
+    })
+    .then((data)=> {
+      result.oneyear = data
+      return new Promise((resolve, reject) =>{
+        https.get(fiveyearChartUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
+                res1.on("data", data => {
+                body += data;
+                });
+                res1.on("end", () => {
+                body = JSON.parse(body);
+                
+                resolve(body)
+                });
+              }
+        })
+      })
+    })
+    .then((data)=>{
+      result.fiveyear = data
+      return new Promise((resolve, reject) =>{
+        https.get(maxChartUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
+                res1.on("data", data => {
+                body += data;
+                });
+                res1.on("end", () => {
+                body = JSON.parse(body);
+                
+                resolve(body)
+                });
+              }
+        })
+      })
+      
+    })
+    .then((data)=>{
+      result.max = data 
+      largeBody.coldcharts = result
+      res.send(largeBody)
+    })
+
 }
 
-app.get("/tradehotdetails/:request", function (req, resolve) {
+app.get("/tradehotdetails/:request", function (req, res) {
     const request = JSON.parse(req.params.request)
     let symbol = request.symbol
     let quoteUrl= base_url+'stable/stock/'+symbol+'/quote?token='+secret_key
     let tradayChartUrl= base_url+'stable/stock/'+symbol+'/intraday-prices?token='+secret_key
     let newsUrl = base_url+'stable/stock/'+symbol+'/news/last/5?token='+secret_key
     let statsUrl= base_url+'stable/stock/'+symbol+'/stats?token='+secret_key
-    https.get(quoteUrl, res => {
-        if(res.statusCode==404)
-            resolve.status(404).send('Stock not found');
-        else{
-            res.setEncoding("utf8");
-        let body = "";
-        res.on("data", data => {
-          body += data;
-        });
-        res.on("end", () => {
-          body = JSON.parse(body);
-          
-          https.get(tradayChartUrl, res1 => {
-            res1.setEncoding("utf8");
-            let body1 =""
-            res1.on("data", data => {
-              body1 += data;
-            });
-            res1.on("end", () => {
-              body.chart = JSON.parse(body1);
-              
-              https.get(newsUrl, res2 => {
-                res2.setEncoding("utf8");
-                let body2 =""
-                res2.on("data", data => {
-                  body2 += data;
-                  
-                });
-                res2.on("end", () => {
-                  body.news = JSON.parse(body2);
-                  
-                  //resolve.send(body)
-                  https.get(statsUrl, res3 => {
-                    res3.setEncoding("utf8");
-                    let body3 =""
-                    res3.on("data", data => {
-                      body3 += data;
-                      
-                    });
-                    res3.on("end", () => {
-                      body.stats = JSON.parse(body3);
-                      
-                      resolve.send(body)
-                    });
-                  });
-                });
-              });
-            });
-          });
-        });
-        }
-        
-      });
-  })
+    let result = {}
 
-  app.get("/tradecolddetails/:request", function (req, resolve) {
-    const request = JSON.parse(req.params.request)
-    let symbol = request.symbol
-    let range = request.range
-    let quoteUrl= base_url+'stable/stock/'+symbol+'/quote?token='+secret_key
-    let historicalChartUrl = base_url+'stable/stock/'+symbol+'/chart/'+range+'?token='+secret_key
-    let overviewUrl = base_url+'stable/stock/'+symbol+'/company?token='+secret_key
-    let peerUrl = base_url+'stable/stock/'+symbol+'/peers?token='+secret_key
-    let tradayChartUrl= base_url+'stable/stock/'+symbol+'/intraday-prices?token='+secret_key
-    let newsUrl = base_url+'stable/stock/'+symbol+'/news/last/5?token='+secret_key
-    https.get(quoteUrl, res => {
-        if(res.statusCode==404)
-            resolve.status(404).send('Stock not found');
+    new Promise((resolve, reject) =>{
+      https.get(quoteUrl, res1 => {
+        if(res1.statusCode==404)
+            reject(res1.statusCode)
         else{
-            res.setEncoding("utf8");
-            let body = "";
-            res.on("data", data => {
-            body += data;
-            
-            });
-            res.on("end", () => {
-            body = JSON.parse(body);
-            
-            https.get(tradayChartUrl, res1 => {
-                res1.setEncoding("utf8");
-                let body1 =""
+              let body = "";
+              res1.on("data", data => {
+              body += data;
+              });
+              res1.on("end", () => {
+              body = JSON.parse(body);
+              
+              resolve(body)
+              });
+            }
+      })
+    })
+    .then((data) =>{
+      result = data
+      return new Promise((resolve, reject) =>{
+        https.get(tradayChartUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
                 res1.on("data", data => {
-                  body1 += data;
+                body += data;
                 });
                 res1.on("end", () => {
-                  body.chart = JSON.parse(body1);
-                  
-                  https.get(newsUrl, res2 => {
-                    res2.setEncoding("utf8");
-                    let body2 =""
-                    res2.on("data", data => {
-                      body2 += data;
-                      
-                    });
-                    res2.on("end", () => {
-                      body.news = JSON.parse(body2);
-                     
-                        https.get(historicalChartUrl, res3 => {
-                            res3.setEncoding("utf8");
-                            let body3 =""
-                            res3.on("data", data => {
-                                body3 += data;
-                            
-                            });
-                            res3.on("end", () => {
-                                body.hischart = JSON.parse(body3);
-                                
-                                https.get(overviewUrl, res4 => {
-                                    res4.setEncoding("utf8");
-                                    let body4 =""
-                                    res4.on("data", data => {
-                                    body4 += data;
-                                    
-                                    });
-                                    res4.on("end", () => {
-                                    body.overview = JSON.parse(body4);
-                                    
-                                    https.get(peerUrl, res5 => {
-                                        res5.setEncoding("utf8");
-                                        let body5 =""
-                                        res5.on("data", data => {
-                                        body5 += data;
-                                        
-                                        });
-                                        res5.on("end", () => {
-                                        body.peers = JSON.parse(body5);
-                                        
-                                        resolve.send(body)
-                                        });
-                                    });
-                                    });
-                                });
-                            });
-                    });
-                    });
-                  });
+                body = JSON.parse(body);
+                
+                resolve(body)
                 });
-              });
-            
-            });
-            }
-        
-      });
+              }
+        })
+      })
+    })
+    .then((data)=>{
+      result.chart = data
+      return new Promise((resolve, reject) =>{
+        https.get(newsUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
+                res1.on("data", data => {
+                body += data;
+                });
+                res1.on("end", () => {
+                body = JSON.parse(body);
+                
+                resolve(body)
+                });
+              }
+        })
+      })
+    })
+    .then((data)=> {
+      result.news= data
+      return new Promise((resolve, reject) =>{
+        https.get(statsUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
+                res1.on("data", data => {
+                body += data;
+                });
+                res1.on("end", () => {
+                body = JSON.parse(body);
+                
+                resolve(body)
+                });
+              }
+        })
+      })
+    })
+    .then((data)=>{
+      result.stats = data
+      res.send(result)
+      
+    })
   })
+
 
   app.get("/normalhotdetails/:request", function (req, resolve) {
     const request = JSON.parse(req.params.request)
@@ -290,7 +272,7 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
       });
   })
 
-  app.get("/normalcolddetails/:request", function (req, resolve) {
+  app.get("/normalcolddetails/:request", function (req, res) {
     const request = JSON.parse(req.params.request)
     let symbol = request.symbol
     let range = request.range
@@ -300,222 +282,136 @@ app.get("/tradehotdetails/:request", function (req, resolve) {
     let peerUrl = base_url+'stable/stock/'+symbol+'/peers?token='+secret_key
     let newsUrl = base_url+'stable/stock/'+symbol+'/news/last/5?token='+secret_key
     let statsUrl= base_url+'stable/stock/'+symbol+'/stats?token='+secret_key
-    https.get(quoteUrl, res => {
-        if(res.statusCode==404)
-            resolve.status(404).send('Stock not found');
+    let result = {}
+    new Promise((resolve, reject) =>{
+      https.get(quoteUrl, res1 => {
+        if(res1.statusCode==404)
+            reject(res1.statusCode)
         else{
-            res.setEncoding("utf8");
-            let body = "";
-            res.on("data", data => {
-            body += data;
-            
-            });
-            res.on("end", () => {
-            body = JSON.parse(body);
-            //console.log('quote normal'+ historicalChartUrl)
-            https.get(historicalChartUrl, res1 => {
-                res1.setEncoding("utf8");
-                let body1 =""
-                res1.on("data", data => {
-                body1 += data;
-                
-                });
-                res1.on("end", () => {
-                    body.chart = JSON.parse(body1);
-                    //console.log('chart normal')
-                    https.get(overviewUrl, res2 => {
-                    res2.setEncoding("utf8");
-                    let body2 =""
-                    res2.on("data", data => {
-                        body2 += data;
-                        
-                    });
-                    res2.on("end", () => {
-                        body.overview = JSON.parse(body2);
-                        //console.log('overview normal')
-                        
-                            
-                            https.get(newsUrl, res4 => {
-                                
-                                res4.setEncoding("utf8");
-                                let body4 = "";
-                                res4.on("data", data => {
-                                body4 += data;
-                                
-                                });
-                                res4.on("end", () => {
-                                body.news = JSON.parse(body4);
-                                
-                                //resolve.send(body)
-                                https.get(statsUrl, res5 => {
-                                  res5.setEncoding("utf8");
-                                  let body5 =""
-                                  res5.on("data", data => {
-                                    body5 += data;
-                                    
-                                  });
-                                  res5.on("end", () => {
-                                    body.stats = JSON.parse(body5);
-                                    getColdChart(symbol, body, resolve)
-                                    
-                                  });
-                                });
-                                });
-                                
-                                
-                              });
-                        
-                    });
-                    });
-                });
-                });
-            });
-            }
-        
-      });
-  })
-
-  app.get("/hotchart/:request", function (req, resolve) {
-    const request = JSON.parse(req.params.request)
-    let symbol = request.symbol
-    let hotChartUrl = base_url+'stable/stock/'+symbol+'/intraday-prices?token='+secret_key
-    
-    https.get(hotChartUrl, res => {
-        if(res.statusCode==404)
-            resolve.status(404).send('Stock not found');
-        else{
-              //res.setEncoding("utf8");
               let body = "";
-              res.on("data", data => {
+              res1.on("data", data => {
               body += data;
               });
-              res.on("end", () => {
+              res1.on("end", () => {
               body = JSON.parse(body);
               
-              resolve.send(body)
+              resolve(body)
               });
             }
-        
-      });
-  })
-
-  app.get("/coldchart/:request", function (req, resolve) {
-    const request = JSON.parse(req.params.request)
-    let symbol = request.symbol
-    let onedayChartUrl = base_url+'stable/stock/'+symbol+'/chart/1d?token='+secret_key
-    let fivedayChartUrl = base_url+'stable/stock/'+symbol+'/chart/5d?token='+secret_key
-    let onemonthChartUrl = base_url+'stable/stock/'+symbol+'/chart/1m?token='+secret_key
-    let oneyearChartUrl = base_url+'stable/stock/'+symbol+'/chart/1y?token='+secret_key
-    let fiveyearChartUrl = base_url+'stable/stock/'+symbol+'/chart/5y?token='+secret_key
-    let maxChartUrl = base_url+'stable/stock/'+symbol+'/chart/max?token='+secret_key
-    https.get(onedayChartUrl, res => {
-        if(res.statusCode==404)
-            resolve.status(404).send('Stock not found');
-        else{
-              //res.setEncoding("utf8");
-              let body = {};
-              let body0 = "";
-              res.on("data", data => {
-              body0 += data;
-              });
-              res.on("end", () => {
-              
-              body.oneday = JSON.parse(body0);
-              
-              https.get(fivedayChartUrl, res1 => {
-                res1.setEncoding("utf8");
-                let body1 =""
+      })
+    })
+    .then((data) =>{
+      result = data
+      return new Promise((resolve, reject) =>{
+        https.get(historicalChartUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
                 res1.on("data", data => {
-                body1 += data;
-                
+                body += data;
                 });
                 res1.on("end", () => {
-                    body.fiveday = JSON.parse(body1);
-                    
-                    https.get(onemonthChartUrl, res2 => {
-                    res2.setEncoding("utf8");
-                    let body2 =""
-                    res2.on("data", data => {
-                        body2 += data;
-                        
-                    });
-                    res2.on("end", () => {
-                        body.onemonth = JSON.parse(body2)
+                body = JSON.parse(body);
                 
-                        https.get(oneyearChartUrl, res3 => {
-                        res3.setEncoding("utf8");
-                        let body3 =""
-                        res3.on("data", data => {
-                            body3 += data;
-                            
-                        });
-                        res3.on("end", () => {
-                            body.oneyear = JSON.parse(body3);
-                            
-                            https.get(fiveyearChartUrl, res4 => {
-                                
-                                res4.setEncoding("utf8");
-                                let body4 = "";
-                                res4.on("data", data => {
-                                body4 += data;
-                                
-                                });
-                                res4.on("end", () => {
-                                body.fiveyear = JSON.parse(body4);
-                                
-                                
-                                https.get(maxChartUrl, res5 => {
-                                  res5.setEncoding("utf8");
-                                  let body5 =""
-                                  res5.on("data", data => {
-                                    body5 += data;
-                                    
-                                  });
-                                  res5.on("end", () => {
-                                    body.max = JSON.parse(body5);
-                                   
-                                    
-                                    resolve.send(body)
-                                  });
-                                });
-                                });
-                                
-                                
-                              });
-                        });
-                        });
-                    });
-                    });
+                resolve(body)
                 });
+              }
+        })
+      })
+    })
+    .then((data) =>{
+      result.chart = data
+      return new Promise((resolve, reject) =>{
+        https.get(overviewUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
+                res1.on("data", data => {
+                body += data;
                 });
-              });
-            }
-        
-      });
+                res1.on("end", () => {
+                body = JSON.parse(body);
+                
+                resolve(body)
+                });
+              }
+        })
+      })
+    })
+    .then((data)=>{
+      result.overview = data
+      return new Promise((resolve, reject) =>{
+        https.get(newsUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
+                res1.on("data", data => {
+                body += data;
+                });
+                res1.on("end", () => {
+                body = JSON.parse(body);
+                
+                resolve(body)
+                });
+              }
+        })
+      })
+    })
+    .then((data)=> {
+      result.news= data
+      return new Promise((resolve, reject) =>{
+        https.get(statsUrl, res1 => {
+          if(res1.statusCode==404)
+              reject(res1.statusCode)
+          else{
+                let body = "";
+                res1.on("data", data => {
+                body += data;
+                });
+                res1.on("end", () => {
+                body = JSON.parse(body);
+                
+                resolve(body)
+                });
+              }
+        })
+      })
+    })
+    .then((data)=>{
+      result.stats = data
+      getColdChart(symbol, result, res)
+      
+    })
+    
+    
   })
 
-  app.get("/possiblesymbol/:request", function (req, resolve) {
+  app.get("/possiblesymbol/:request", function (req, res) {
     const request = req.params.request
     
     let possibleUrl = base_url+'stable/search/'+request+'?token='+secret_key
-    
-    https.get(possibleUrl, res => {
-        if(res.statusCode==404)
-            resolve.status(404).send('Stock not found');
+    new Promise((resolve, reject) =>{
+      https.get(possibleUrl, res1 => {
+        if(res1.statusCode==404)
+            reject(res1.statusCode)
         else{
-              //res.setEncoding("utf8");
               let body = "";
-              res.on("data", data => {
+              res1.on("data", data => {
               body += data;
               });
-              res.on("end", () => {
+              res1.on("end", () => {
               body = JSON.parse(body);
               
-              resolve.send(body)
+              resolve(body)
               });
             }
-        
-      });
+      })
+    })
+    .then((data) =>res.send(data))
+    .catch((err)=> console.log(err.message))
   })
 
 app.get("*", (_, res) => {

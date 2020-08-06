@@ -6,6 +6,7 @@ border: none;
 height: 2px;
 width: 100%;
 margin-bottom: ${prop => prop.marginBottom ? prop.marginBottom : '1%'};
+margin-top: 5px;
 `
 
 export const GreyLine = styled.hr`
