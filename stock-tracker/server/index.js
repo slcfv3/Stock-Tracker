@@ -181,7 +181,10 @@ app.get("/tradehotdetails/:request", function (req, res) {
       })
     })
     .then((data) =>{
-      result = data
+      
+      result.price = data.latestPrice,
+      result.priceChange = data.change,
+      result.priceChangePercent = data.changePercent
       return new Promise((resolve, reject) =>{
         https.get(tradayChartUrl, res1 => {
           if(res1.statusCode==404)
@@ -202,49 +205,10 @@ app.get("/tradehotdetails/:request", function (req, res) {
     })
     .then((data)=>{
       result.chart = data
-      return new Promise((resolve, reject) =>{
-        https.get(newsUrl, res1 => {
-          if(res1.statusCode==404)
-              reject(res1.statusCode)
-          else{
-                let body = "";
-                res1.on("data", data => {
-                body += data;
-                });
-                res1.on("end", () => {
-                body = JSON.parse(body);
-                
-                resolve(body)
-                });
-              }
-        })
-      })
-    })
-    .then((data)=> {
-      result.news= data
-      return new Promise((resolve, reject) =>{
-        https.get(statsUrl, res1 => {
-          if(res1.statusCode==404)
-              reject(res1.statusCode)
-          else{
-                let body = "";
-                res1.on("data", data => {
-                body += data;
-                });
-                res1.on("end", () => {
-                body = JSON.parse(body);
-                
-                resolve(body)
-                });
-              }
-        })
-      })
-    })
-    .then((data)=>{
-      result.stats = data
       res.send(result)
       
     })
+    
   })
 
 
