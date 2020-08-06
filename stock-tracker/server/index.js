@@ -411,7 +411,7 @@ app.get("/tradehotdetails/:request", function (req, res) {
       })
     })
     .then((data) =>res.send(data))
-    
+    .catch((err)=> console.log(err.message))
   })
 
 app.get("*", (_, res) => {

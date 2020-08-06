@@ -21,7 +21,7 @@ export const DropdownBody = styled.div`
 
 export const OptionList = styled.ul`
     margin:0;
-    border-top: 3px solid #7fb3ff;
+    border-top: 2px solid #7fb3ff;
     position:absolute;
     top:0;
     list-style: none;

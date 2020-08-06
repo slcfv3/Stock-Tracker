@@ -30,10 +30,23 @@ const SearchBar = () => {
   const onChange = (e) => {
     setSearch(e.target.value)
     
-    dispatch({ type: 'SEARCH_ENTERED', payload: e.target.value.toUpperCase() });
+  }
+
+  let typingTimer;                //timer identifier
+  let doneTypingInterval = 500;  //time in ms
+  
+  const onkeydown = (e) => {
     
+    clearTimeout(typingTimer);
     
   }
+
+  const onkeyup = (e) => {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(()=>dispatch({ type: 'SEARCH_ENTERED', payload: search.toUpperCase() }), doneTypingInterval);
+      
+  }
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -42,6 +55,8 @@ const SearchBar = () => {
         type="text"
         value={search}
         onChange={onChange}
+        onKeyDown = {onkeydown}
+        onKeyUp = {onkeyup}
         className="search" />
     </form>
   );
