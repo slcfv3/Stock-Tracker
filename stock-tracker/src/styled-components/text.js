@@ -9,7 +9,8 @@ export const SectionTitle = styled.header`
     line-height: normal;
     letter-spacing: normal;
     text-align: left;
-    color: #7fb3ff
+    color: #7fb3ff;
+    cursor: default;
 `
 
 export const FooterSectionTitle = styled.header`
@@ -22,6 +23,7 @@ export const FooterSectionTitle = styled.header`
   letter-spacing: normal;
   text-align: left;
   color: #ffffff;
+  cursor: default;
 `
 
 export const FooterStockSymbol = styled.p`
@@ -36,6 +38,7 @@ export const FooterStockSymbol = styled.p`
   letter-spacing: normal;
   text-align: left;
   color: #ffffff;
+  cursor: default;
 `
 
 export const CompanyName = styled.p`
@@ -45,9 +48,12 @@ export const CompanyName = styled.p`
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
+  margin-bottom: 0px;
+  margin-top: 14px;
   letter-spacing: normal;
   text-align: left;
   color: #ffffff;
+  cursor: default;
 `
 
 export const CompanyWebsite = styled.p`
@@ -73,6 +79,7 @@ export const CompanyDescription = styled.p`
   font-stretch: normal;
   font-style: normal;
   line-height: 1.25;
+  margin-bottom: 24px;
   letter-spacing: normal;
   text-align: left;
   color: #ffffff;
@@ -90,6 +97,7 @@ text-align: right;
 margin-top: 0px;
 margin-bottom: 0px;
 color: #beccdc;
+cursor: default;
 `
 
 export const MarketStatus = styled.p`
@@ -104,6 +112,7 @@ text-align: left;
 margin-top: 0px;
 margin-bottom: 0px;
 color: #ffffff;
+cursor: default;
 `
 
 export const PeerSymbol = styled.label`
@@ -124,4 +133,5 @@ font-family: Lato, sans-serif;
     color: #e0be86
   }
   transition: 0.3s;
+  cursor: default;
 `

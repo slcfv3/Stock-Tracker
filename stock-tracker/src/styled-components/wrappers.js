@@ -23,6 +23,7 @@ export const Row = styled.div`
     overflow: hidden;
     padding: ${prop => prop.Padding ? prop.Padding : '0 0 0 0'};
     margin-bottom: ${prop => prop.marginBottom ? prop.marginBottom : 'none'};
+    margin-top: ${prop => prop.marginTop ? prop.marginTop : 'none'};
     column-gap: ${prop => prop.columnGap ? prop.columnGap : '50px'};
     justify-content: ${prop => prop.justifyContent ? prop.justifyContent : 'flex-start'};
     border-right: ${prop => prop.BorderRight ? prop.BorderRight : 'none'}

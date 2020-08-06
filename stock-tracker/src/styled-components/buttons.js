@@ -4,7 +4,7 @@ export const StockTag = styled.button`
 border-radius: 2px;
 background-color: #415f8a;
 border: none;
-padding: 5px 10px 5px 10px;
+padding: 5px 20px 5px 20px;
 margin: 0px 10px 0px 10px;
 
 font-family: 'Lato', sans-serif;
@@ -42,7 +42,7 @@ margin: 0px 0px 0px 50px;
 
 font-family: 'Lato', sans-serif;
   font-size: 18px;
-  font-weight: normal;
+  font-weight: ${prop => prop.isActive ? 'normal' : '300'};
   font-stretch: normal;
   font-style: normal;
   line-height: normal;

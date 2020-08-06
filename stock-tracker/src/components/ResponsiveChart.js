@@ -1,18 +1,14 @@
-
+/*
 import React, { useState, useEffect } from "react"
 import './components.css';
 import { getPriceTicks, getTimeTicks } from '../util.js'
 import { useSelector } from 'react-redux'
-import { AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer as ResponsiveContainerO } from "recharts";
+import { AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer } from "recharts";
 import { Row } from '../styled-components/wrappers.js'
 import { ChartButton } from '../styled-components/buttons.js'
-import { ChartPriceLabel } from './ChartPriceLabel'
+import Chart from './chart'
 
-const ResponsiveContainer = ({children, ...props}) => process.env.NODE_ENV === 'test'
-    ? <>{children}</>
-    : <ResponsiveContainerO {...props}>{children}</ResponsiveContainerO>
-
-const Chart = () => {
+const ResponsiveChart = () => {
     const chartData = useSelector(state => state.chart)
     const coldchartData = useSelector(state => state.coldChart)
     const currentPrice = useSelector(state => state.price)
@@ -70,8 +66,8 @@ const Chart = () => {
     }, [active, coldchartData])
 
     return (
-
         <div>
+
             <Row columnGap='0px' justifyContent='flex-end'>
                 <ChartButton onClick={() => setActive('1D')} isActive={active === '1D'}> 1D </ChartButton>
                 <ChartButton onClick={() => setActive('5D')} isActive={active === '5D'} disabled={coldchartData.oneday === undefined}> 5D </ChartButton>
@@ -81,78 +77,10 @@ const Chart = () => {
                 <ChartButton onClick={() => setActive('MAX')} isActive={active === 'MAX'} disabled={coldchartData.oneday === undefined}> MAX </ChartButton>
             </ Row>
 
-            <Row>
-                <ResponsiveContainer width="99%" aspect={2}>
-                    <AreaChart
-                        width={1250}
-                        height={500}
-                        data={currentChart}
-                        margin={{ top: 20, right: 0, left: 0, bottom: 20 }}
-                    >
-
-                        <Tooltip cursor={false} />
-                        <ReferenceLine y={currentPrice} stroke="#e95656" strokeDasharray="3 3" display={lineDisplay}>
-                            <Label
-                                value={'     ' + currentPrice}
-                                position="right"
-                                style={{ 
-                                    fill: "#e95656", 
-                                    fontSize: "13px",
-                                    backgroundColor: 'white'
-                                 }}
-                                display={lineDisplay} />
-                        </ReferenceLine>
-
-
-                        <CartesianGrid
-                            stroke="#344968"
-                            opacity="0.5"
-                            data-testid="TESTHERE"
-                        />
-                        <defs>
-                            <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.5} />
-                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                            </linearGradient>
-                        </defs>
-
-                        <XAxis
-                            dataKey="label"
-                            stroke="transparent"
-                            style={{ fill: "#beccdc", fontSize: "13px" }}
-                            // Following line avoids times like "9:17 AM" to be ticks
-                            ticks={XTicks}
-                            interval={"preserveStart"}
-                        >
-                        </ XAxis>
-
-                        <YAxis
-                            dataKey="close"
-                            domain={[Number(YTicks[0]), Number(YTicks[YTicks.length - 1])]}
-                            orientation="right"
-                            stroke="transparent"
-                            style={{ fill: "#beccdc", fontSize: "13px" }}
-                            ticks={YTicks}
-                        >
-                        </ YAxis>
-
-                        <Area
-                            isAnimationActive={false}
-                            dataKey="close"
-                            connectNulls={true}
-                            stroke="#7FB3FF"
-                            fillOpacity={1}
-                            fill="url(#lineGradient)"
-                        />
-                    </AreaChart>
-                </ResponsiveContainer>
-            </Row>
-
-        </div >
-
-
-
-    );
+            <ResponsiveContainer width="99%" aspect={2}>
+                <Chart props={}/>
+            </ResponsiveContainer>
+        </div>
+    )
 }
-
-export default Chart;
+*/

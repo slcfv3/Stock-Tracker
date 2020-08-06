@@ -20,17 +20,22 @@ const Price = (props) => {
     let arrowIcon;
 
     if (priceChange < 0) {
-        arrowIcon = <DownArrowIcon iconSize={props.fontSize} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint}/>
+        arrowIcon = <DownArrowIcon iconSize={props.fontSize} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} />
     }
     else {
-        arrowIcon = <UpArrowIcon iconSize={props.fontSize} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint}/>
+        arrowIcon = <UpArrowIcon iconSize={props.fontSize} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} />
     }
 
     return (
         <Row justifyContent='flex-end' columnGap='15px'>
 
             <Row columnGap='0px'>
-                    <StyledPrice breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} fontSize={props.fontSize + 'px'}> <DollarIcon iconSize={props.fontSize} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} /> {price.toFixed(2)}  </StyledPrice>
+                <Col>
+                    <StyledPrice breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} fontSize={props.fontSize + 'px'}> <DollarIcon iconSize={props.fontSize} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} />  </StyledPrice>
+                </Col>
+                <Col>
+                    <StyledPrice breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} fontSize={props.fontSize + 'px'}>  {price.toFixed(2)}  </StyledPrice>
+                </Col>
             </Row>
 
             <Row columnGap='0px'>
@@ -48,7 +53,7 @@ const Price = (props) => {
                     <PriceChange change={priceChange} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} fontSize={props.fontSize + 'px'} >   {priceChangePercentDisplay}   </PriceChange>
                 </Col>
                 <Col>
-                    <PriceChange change={priceChange} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} fontSize={props.fontSize + 'px'} >   <PercentIcon iconSize={props.fontSize} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint}/>   </PriceChange>
+                    <PriceChange change={priceChange} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} fontSize={props.fontSize + 'px'} >   <PercentIcon iconSize={props.fontSize} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} />   </PriceChange>
                 </Col>
             </Row>
         </Row>

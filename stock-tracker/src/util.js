@@ -3,9 +3,13 @@ export function getTimeTicks(chartData, active) {
   if(active === '1D'){
     
       let currentHour = chartData[chartData.length-1]?.label.substring(0,2)
-      if(currentHour==='09'){
+      let currentMinutes = chartData[chartData.length-1]?.label.substring(3, 4)
+      if(currentHour==='09' && 30 <= parseInt(currentMinutes, 10) < 40) {
+        ticks = ["09:30 AM", "09:31 AM", "09:32 AM", "09:33 AM", "09:34 AM", "09:35 AM", "09:36 AM", "09:37 AM", "09:38 AM", "09:39 AM",]
+      }
+      else if(currentHour==='09'){
         ticks = ["09:30 AM", "09:35 AM",  "09:40 AM", "09:45 AM", "09:50 AM", "09:55 AM","10 AM"]
-      }else{
+      } else{
         ticks = ["09:30 AM",  "10:30 AM",  "11:30 AM", "12:30 PM", "1:30 PM", "2:30 PM",  "3:30 PM",  "4:30 PM",  "5:30 PM"]
       }  
   }
@@ -63,9 +67,9 @@ export function unixToTimePassed(someDateInThePast) {
     let difference = Date.now() - someDateInThePast;
   
     if (difference < 5 * 1000) {
-      return "just now";
+      return "Just now";
     } else if (difference < 90 * 1000) {
-      return "moments ago";
+      return "Moments ago";
     }
     //it has minutes
   

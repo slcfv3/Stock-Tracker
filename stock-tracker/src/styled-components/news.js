@@ -18,6 +18,7 @@ font-style: normal;
 line-height: normal;
 letter-spacing: normal;
 text-align: left;
+margin-bottom: 5px;
 color: #ffffff;
 &:hover {
   color: #e0be86
