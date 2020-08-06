@@ -8,8 +8,8 @@ const Peers = (props) => {
     return (
         <div className="peers">
             <SectionTitle>TOP PEERS</SectionTitle>
-            <BlueLine />
-            <Row columnGap='10%'>
+            <BlueLine marginBottom='0px'/>
+            <Row columnGap='5%' marginTop='14px'>
                 {peer.map((item, index) =>
                     <Col>
                         <PeerSymbol breakpoint={props.breakpoint}> {item} </PeerSymbol>

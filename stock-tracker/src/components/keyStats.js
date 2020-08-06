@@ -22,8 +22,8 @@ const Keystats = () => {
     return (
         <div className="keystats">
             <SectionTitle>KEY STATS</SectionTitle>
-            <BlueLine />
-            <Row  maxWidth='900px'>
+            <BlueLine marginBottom='0px'/>
+            <Row  maxWidth='900px' marginBottom='14px'>
                 <Col size={1}>
                     <StatTable>
                         <tr>

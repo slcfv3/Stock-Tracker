@@ -10,14 +10,15 @@ const initialState = {
     news: [],
     keyStats: {},
     peer: [],
-    possible:[]
+    possible:[],
+    isLoading: false
 }
 
 export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'STOCK_RECEIVED':
             const stock = action.payload
-
+            console.log("stock in STOCK_REC", stock)
             const keyStats = {
                 previousClose: stock.previousClose,
                 iexVolume: stock.iexVolume,
@@ -46,10 +47,16 @@ export const rootReducer = (state = initialState, action) => {
                 news: stock.news,
                 keyStats: keyStats,
                 peer: stock.peers,
-                possible:[]
+                possible:[],
+                isLoading: false
+            }
+        case 'SEARCH_SUBMITTED':
+            return {
+                ...state,
+                isLoading: true
             }
         case 'NEWS_RECEIVED':
-            console.log("news in NEWS_RECEIVED:", action.payload)
+            console.debug("news in NEWS_RECEIVED:", action.payload)
             return {
                 ...state,
                 news: action.payload
@@ -70,6 +77,11 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 possible: action.payload
+            }
+        case 'STOCK_NOT_FOUND':
+            return {
+                ...state,
+                isLoading: false
             }
         default:
             return state;
