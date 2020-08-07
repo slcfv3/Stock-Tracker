@@ -100,6 +100,7 @@ const Chart = () => {
                                     fontSize: "13px",
                                     backgroundColor: 'white'
                                  }}
+                                 offset={8}
                                 display={lineDisplay} />
                         </ReferenceLine>
 

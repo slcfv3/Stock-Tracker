@@ -49,34 +49,34 @@ function StockTracker() {
 
                 <Row justifyContent='space-between' marginBottom='3%'>
                     <Col>
-                        <img src={logo} height='50px' />
+                        <img src={logo} height='40px' />
                     </Col>
-                    <Col hideWidth='900px'>
+                    <Col hideWidth='950px'>
                         <HeaderTabs />
                     </Col>
                 </Row>
 
                 <Row justifyContent='space-between' columnGap='5px'>
                     <Col>
-                        <SearchIcon iconSize={40} breakpoint='1200px' smallBreakpoint='900px' />
+                        <SearchIcon iconSize={40} breakpoint='1200px' smallBreakpoint='950px' />
                     </Col>
                     <Col size={1}>
                         <SearchBar />
                     </Col>
                     <Col size={1} hideWidth='650px'>
-                        <Price fontSize='40' breakpoint='1200px' smallBreakpoint='900px' />
+                        <Price fontSize='40' breakpoint='1200px' smallBreakpoint='950px' />
                     </Col>
                 </Row>
 
-                <DropDown xlgbreakpoint='1530px' lgbreakpoint='1200px'breakpoint='900px' smallBreakpoint='600px'/>
+                <DropDown xlgbreakpoint='1530px' lgbreakpoint='1200px' breakpoint='950px' smallBreakpoint='600px' />
 
-                <Row justifyContent='flex-end' minWidth='650px' marginBottom='3%'>
-                    <Price fontSize='20' />
+                <Row justifyContent='start' minWidth='651px' marginBottom='3%'>
+                    <Price fontSize='20' justifyContent='space-between' />
                 </Row>
 
-                
-                
-                
+
+
+
 
                 <Row justifyContent='space-between' hideWidth='650px' marginBottom='1%'>
                     <Col >
@@ -109,16 +109,20 @@ function StockTracker() {
 
 
             </Grid>
-            <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' Padding='0 3% 0 3%' >
 
-                <Col size={1} BorderRight='solid 1px rgba(255, 255, 255, 0.1)' Padding='20px 30px 20px 30px' hideWidth='700px'>
+            <Row BackgroundImage='linear-gradient(to bottom, #00265d, #00204f);' Padding='0 3% 0 3%' >
+                <Col size={1} BorderRight='solid 1px rgba(255, 255, 255, 0.1)' Padding='10px 0px 10px 30px' hideWidth='1900px'>
 
                     <Row marginBottom='1%'>
                         <FooterSectionTitle> MARKETS </FooterSectionTitle>
                     </Row>
 
                     <Row>
-
+                        <Col>
+                            <Row columnGap='15px'>
+                                <FooterStockSymbol>NYSE</FooterStockSymbol> <Price fontSize='15' />
+                            </Row>
+                        </Col>
                         <Col>
                             <Row columnGap='15px'>
                                 <FooterStockSymbol>NASDAQ</FooterStockSymbol> <Price fontSize='15' />
@@ -132,7 +136,7 @@ function StockTracker() {
                     </Row>
                 </Col>
 
-                <Col size={1} Padding='20px 30px 20px 30px' hideWidth='1400px'>
+                <Col size={1} Padding='10px 0 10px 0' hideWidth='1400px'>
 
                     <Row marginBottom='1%'>
                         <FooterSectionTitle> FAVORITES </FooterSectionTitle>
@@ -142,6 +146,11 @@ function StockTracker() {
                         <Col>
                             <Row columnGap='15px'>
                                 <FooterStockSymbol>AMZN</FooterStockSymbol> <Price fontSize='15' />
+                            </Row>
+                        </Col>
+                        <Col>
+                            <Row columnGap='15px'>
+                                <FooterStockSymbol>MSFT</FooterStockSymbol> <Price fontSize='15' />
                             </Row>
                         </Col>
                         <Col>
