@@ -27,6 +27,14 @@ import { SearchAlt2 } from '@styled-icons/boxicons-regular/SearchAlt2'
 import logo from './assets/images/adaptive.png'
 import LoadingOverlay from 'react-loading-overlay';
 import { useSelector } from 'react-redux'
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyles = createGlobalStyle`
+  @import url('http://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+  p {
+    font-family: 'Lato', sans-serif;
+  }
+`
 
 function StockTracker() {
     const isLoading = useSelector(state => state.isLoading)
@@ -36,6 +44,7 @@ function StockTracker() {
             spinner
             text='Getting stock information...'
         >
+            <GlobalStyles />
             <Grid>
 
                 <Row justifyContent='space-between' marginBottom='3%'>
@@ -49,7 +58,7 @@ function StockTracker() {
 
                 <Row justifyContent='space-between' columnGap='5px'>
                     <Col>
-                        <SearchIcon iconSize={50} breakpoint='1200px' smallBreakpoint='900px' />
+                        <SearchIcon iconSize={40} breakpoint='1200px' smallBreakpoint='900px' />
                     </Col>
                     <Col size={1}>
                         <SearchBar />

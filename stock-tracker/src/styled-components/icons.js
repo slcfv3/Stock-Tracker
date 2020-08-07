@@ -16,11 +16,12 @@ export const SearchIcon = styled(SearchAlt2)`
         height: ${prop => prop.iconSize ? prop.iconSize / 2 +'px' : '50px'};
         width: auto;
     }
-    color: #7fb3ff 
+    color: #7fb3ff;
+    transform: translateY(25%);
 `
 
 export const DollarIcon = styled(Dollar)`
-    height: ${prop => prop.iconSize ? (2 * prop.iconSize) / 3 +'px' : '50px'};
+    height: ${prop => prop.iconSize ? prop.iconSize / 2 +'px' : '50px'};
     width: auto;
     @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
         height: ${prop => prop.iconSize ? prop.iconSize / 2 +'px' : '50px'};
@@ -30,11 +31,11 @@ export const DollarIcon = styled(Dollar)`
         height: ${prop => prop.iconSize ? prop.iconSize / 3 +'px' : '50px'};
         width: auto;
     }
-    transform: translateY(-25%);
+    transform: translateY(-50%);
 `
 
 export const UpArrowIcon = styled(UpArrowAlt)`
-    height: ${prop => prop.iconSize ? (2 * prop.iconSize) / 3 +'px' : '50px'};
+    height: ${prop => prop.iconSize ? prop.iconSize / 2 +'px' : '50px'};
     width: auto;
     @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
         height: ${prop => prop.iconSize ? prop.iconSize / 2 +'px' : '50px'};
@@ -44,11 +45,11 @@ export const UpArrowIcon = styled(UpArrowAlt)`
         height: ${prop => prop.iconSize ? prop.iconSize / 3 +'px' : '50px'};
         width: auto;
     }
-    transform: translateY(-25%);
+    transform: translateY(-50%);
 `
 
 export const DownArrowIcon = styled(DownArrowAlt)`
-    height: ${prop => prop.iconSize ? (2 * prop.iconSize) / 3 +'px' : '50px'};
+    height: ${prop => prop.iconSize ? prop.iconSize / 2 +'px' : '50px'};
     width: auto;
     @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
         height: ${prop => prop.iconSize ? prop.iconSize / 2 +'px' : '50px'};
@@ -58,11 +59,11 @@ export const DownArrowIcon = styled(DownArrowAlt)`
         height: ${prop => prop.iconSize ? prop.iconSize / 3 +'px' : '50px'};
         width: auto;
     }
-    transform: translateY(-25%);
+    transform: translateY(-50%);
 `
 
 export const PercentIcon = styled(Percent)`
-    height: ${prop => prop.iconSize ? (2 * prop.iconSize) / 3 +'px' : '50px'};
+    height: ${prop => prop.iconSize ? prop.iconSize / 2 +'px' : '50px'};
     width: auto;
     @media (max-width: ${prop => prop.breakpoint ? prop.breakpoint : '0px'}) {
         height: ${prop => prop.iconSize ? prop.iconSize / 2 +'px' : '50px'};
@@ -72,5 +73,5 @@ export const PercentIcon = styled(Percent)`
         height: ${prop => prop.iconSize ? prop.iconSize / 3 +'px' : '50px'};
         width: auto;
     }
-    transform: translateY(-25%);
+    transform: translateY(-50%);
 `
