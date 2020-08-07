@@ -2,8 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import sampleData from './mocks/sampleData'
-import Overview from '../components/overview';
-import { render, screen, cleanup } from '@testing-library/react'
+import Overview from '../components/Overview';
+import { render, screen } from '@testing-library/react'
 
 const mockStore = configureStore([]);
 

@@ -126,3 +126,11 @@ export function findLowValue(chart){
    });
    return min;
 }
+
+export function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export function numberToPercent(x){
+  return (x*100).toFixed(2).toString()+'%'
+}

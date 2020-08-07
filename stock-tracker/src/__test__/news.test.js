@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import sampleData from './mocks/sampleData'
-import News from '../components/news';
+import News from '../components/News';
 import { render, screen, cleanup } from '@testing-library/react'
 import { unixToTimePassed } from '../util'
 

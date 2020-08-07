@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import './components.css';
+import { Search } from '../styled-components/searchbar'
+
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
@@ -15,7 +16,7 @@ const SearchBar = () => {
     e.preventDefault();
     if (search.toUpperCase() !== symbol && search !== "") {
       dispatch({ type: 'SEARCH_SUBMITTED', payload: search.toUpperCase() });
-      console.log("Search for " + search.toUpperCase() + " submitted.");
+      
     }
     else if (search.toUpperCase() === symbol) {
       setSearch('')
@@ -49,7 +50,7 @@ const SearchBar = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      <Search
         placeholder={placeholder}
         type="text"
         value={search}

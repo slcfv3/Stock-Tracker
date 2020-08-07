@@ -5,7 +5,7 @@ import { Area, AreaChart, CartesianGrid, Label, ReferenceLine, ResponsiveContain
 import { ChartButton } from '../styled-components/buttons.js';
 import { Row } from '../styled-components/wrappers.js';
 import { getPriceTicks, getTimeTicks } from '../util.js';
-import './components.css';
+
 
 const ResponsiveContainer = ({children, ...props}) => process.env.NODE_ENV === 'test'
     ? <>{children}</>

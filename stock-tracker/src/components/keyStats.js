@@ -1,8 +1,7 @@
 import React from "react";
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
-import { findHighValue, findLowValue } from '../util'
-//import './components.css';
+import { findHighValue, findLowValue, numberWithCommas, numberToPercent } from '../util'
 import { BlueLine } from '../styled-components/lines.js'
 import { Row, Col } from '../styled-components/wrappers.js'
 import { SectionTitle } from '../styled-components/text.js'
@@ -37,11 +36,11 @@ const Keystats = () => {
                         </tr>
                         <tr>
                             <StatLabel> Volume </StatLabel>
-                            <StatValue data-testid="volume"> {stats.iexVolume} </ StatValue>
+                            <StatValue data-testid="volume"> {stats.iexVolume?numberWithCommas(stats.iexVolume):stats.iexVolume} </ StatValue>
                         </tr>
                         <tr>
                             <StatLabel> Market Cap </StatLabel>
-                            <StatValue data-testid="market-cap"> {stats.marketCap} </ StatValue>
+                            <StatValue data-testid="market-cap"> {stats.marketCap?numberWithCommas(stats.marketCap):stats.marketCap} </ StatValue>
                         </tr>
                         <tr>
                             <StatLabel> P/E Ratio </StatLabel>
@@ -63,7 +62,7 @@ const Keystats = () => {
                             </tr>
                             <tr>
                                 <StatLabel> Total Avg Volume </StatLabel>
-                                <StatValue data-testid="avg-volume"> {stats.avgTotalVolume} </ StatValue>
+                                <StatValue data-testid="avg-volume"> {stats.avgTotalVolume?numberWithCommas(stats.avgTotalVolume):stats.avgTotalVolume} </ StatValue>
                             </tr>
                             <tr>
                                 <StatLabel> Earnings Per Share </StatLabel>
@@ -71,7 +70,7 @@ const Keystats = () => {
                             </tr>
                             <tr>
                                 <StatLabel> Dividend & Yield </StatLabel>
-                                <StatValue data-testid="dividend"> {stats.dividendYield} </ StatValue>
+                                <StatValue data-testid="dividend"> {stats.dividendYield?numberToPercent(stats.dividendYield):stats.dividendYield} </ StatValue>
                             </tr>
                         </tbody>
                     </StatTable>

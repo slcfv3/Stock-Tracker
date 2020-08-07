@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import sampleData from './mocks/sampleData'
 import { render, screen} from '@testing-library/react'
-import DropDown from '../components/dropdown';
+import DropDown from '../components/Dropdown';
 
 const mockStore = configureStore([]);
 
