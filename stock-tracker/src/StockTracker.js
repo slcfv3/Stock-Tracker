@@ -1,32 +1,22 @@
 import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga'
-import { composeWithDevTools } from 'redux-devtools-extension';
-import SearchBar from './components/SearchBar.js'
-import DropDown from './components/dropdown'
-import Chart from './components/chart.js'
-import Keystats from './components/keyStats.js'
-import Price from './components/price.js'
-import News from './components/news'
-import Overview from './components/overview'
-import Peers from './components/peers'
-import StockTags from './components/StockTags'
-import MarketOpen from './components/MarketOpen'
-import HeaderTabs from './components/HeaderTabs'
-import { FooterSectionTitle, FooterStockSymbol } from './styled-components/text'
-import { rootReducer } from './reducers/rootReducer.js'
-import { rootSaga } from './sagas/rootSaga.js'
-import './App.css';
-import { ThemeProvider } from 'styled-components'
-import theme from './theme.js'
-import { Grid, Row, Col } from './styled-components/wrappers.js'
-import { SearchIcon } from './styled-components/icons.js'
-import { BlueLine } from './styled-components/lines.js'
-import { SearchAlt2 } from '@styled-icons/boxicons-regular/SearchAlt2'
-import logo from './assets/images/adaptive.png'
 import LoadingOverlay from 'react-loading-overlay';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
+import './App.css';
+import logo from './assets/images/adaptive.png';
+import Chart from './components/chart.js';
+import DropDown from './components/dropdown';
+import HeaderTabs from './components/HeaderTabs';
+import Keystats from './components/keyStats.js';
+import MarketOpen from './components/MarketOpen';
+import News from './components/news';
+import Overview from './components/overview';
+import Peers from './components/peers';
+import Price from './components/price.js';
+import SearchBar from './components/SearchBar.js';
+import StockTags from './components/StockTags';
+import { SearchIcon } from './styled-components/icons.js';
+import { FooterSectionTitle, FooterStockSymbol } from './styled-components/text';
+import { Col, Grid, Row } from './styled-components/wrappers.js';
 
 function StockTracker() {
     const isLoading = useSelector(state => state.isLoading)
@@ -40,7 +30,7 @@ function StockTracker() {
 
                 <Row justifyContent='space-between' marginBottom='3%'>
                     <Col>
-                        <img src={logo} height='50px' />
+                        <img src={logo} alt='logo' height='50px' />
                     </Col>
                     <Col hideWidth='900px'>
                         <HeaderTabs />

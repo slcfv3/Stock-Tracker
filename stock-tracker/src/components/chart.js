@@ -1,12 +1,11 @@
 
-import React, { useState, useEffect } from "react"
+import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
+import { Area, AreaChart, CartesianGrid, Label, ReferenceLine, ResponsiveContainer as ResponsiveContainerO, Tooltip, XAxis, YAxis } from "recharts";
+import { ChartButton } from '../styled-components/buttons.js';
+import { Row } from '../styled-components/wrappers.js';
+import { getPriceTicks, getTimeTicks } from '../util.js';
 import './components.css';
-import { getPriceTicks, getTimeTicks } from '../util.js'
-import { useSelector } from 'react-redux'
-import { AreaChart, XAxis, YAxis, Label, Tooltip, Area, CartesianGrid, ReferenceLine, ResponsiveContainer as ResponsiveContainerO } from "recharts";
-import { Row } from '../styled-components/wrappers.js'
-import { ChartButton } from '../styled-components/buttons.js'
-import { ChartPriceLabel } from './ChartPriceLabel'
 
 const ResponsiveContainer = ({children, ...props}) => process.env.NODE_ENV === 'test'
     ? <>{children}</>
@@ -67,7 +66,7 @@ const Chart = () => {
             setXTicks(getTimeTicks(coldchartData.max, 'MAX'))
             setLineDisplay('none')
         }
-    }, [active, coldchartData])
+    }, [active, coldchartData, chartData])
 
     return (
 

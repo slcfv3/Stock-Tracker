@@ -1,4 +1,4 @@
-import { select, put, fork, take, call, takeLatest, cancel, cancelled, delay, all } from 'redux-saga/effects'
+import { select, put, call, takeLatest, cancelled, delay, all } from 'redux-saga/effects'
 import { NEW_STOCK_ENDPOINT_URL, NEWS_ENDPOINT_URL, PRICE_ENDPOINT_URL, POSSIBLE_SYMBOL_URL } from '../config/config.js'
 
 export const getNewStockData = (url, controller) => fetch(url, { signal: controller.signal })

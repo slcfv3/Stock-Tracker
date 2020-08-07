@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { createSelector } from 'reselect'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import './components.css';
-import { Row, Col } from '../styled-components/wrappers.js'
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");

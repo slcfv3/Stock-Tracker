@@ -4,7 +4,7 @@ export function getTimeTicks(chartData, active) {
     
       let currentHour = chartData[chartData.length-1]?.label.substring(0,2)
       let currentMinutes = chartData[chartData.length-1]?.label.substring(3, 4)
-      if(currentHour==='09' && 30 <= parseInt(currentMinutes, 10) < 40) {
+      if(currentHour==='09' && parseInt(currentMinutes, 10) < 40) {
         ticks = ["09:30 AM", "09:31 AM", "09:32 AM", "09:33 AM", "09:34 AM", "09:35 AM", "09:36 AM", "09:37 AM", "09:38 AM", "09:39 AM",]
       }
       else if(currentHour==='09'){

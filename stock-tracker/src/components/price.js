@@ -1,15 +1,8 @@
 import React from "react";
-import { useSelector } from 'react-redux'
-import { StyledPrice, PriceChange } from '../styled-components/price.js'
-import { Row, Col } from '../styled-components/wrappers.js'
-import { Percent } from '@styled-icons/evaicons-solid/Percent'
-import { UpArrowAlt } from '@styled-icons/boxicons-regular/UpArrowAlt'
-import { DownArrowAlt } from '@styled-icons/boxicons-regular/DownArrowAlt'
-import { Dollar } from '@styled-icons/boxicons-regular/Dollar'
-import { DollarIcon } from '../styled-components/icons'
-import { UpArrowIcon } from '../styled-components/icons'
-import { DownArrowIcon } from '../styled-components/icons'
-import { PercentIcon } from '../styled-components/icons'
+import { useSelector } from 'react-redux';
+import { DollarIcon, DownArrowIcon, PercentIcon, UpArrowIcon } from '../styled-components/icons';
+import { PriceChange, StyledPrice } from '../styled-components/price.js';
+import { Col, Row } from '../styled-components/wrappers.js';
 
 const Price = (props) => {
     const price = useSelector(state => state.price);
