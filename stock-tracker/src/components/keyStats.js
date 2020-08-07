@@ -23,9 +23,10 @@ const Keystats = () => {
         <div className="keystats">
             <SectionTitle>KEY STATS</SectionTitle>
             <BlueLine marginBottom='0px'/>
-            <Row  maxWidth='900px' marginBottom='14px'>
+            <Row  maxWidth='950px' marginBottom='30px'>
                 <Col size={1}>
                     <StatTable>
+                        <tbody>
                         <tr>
                             <StatLabel> Previous Close </StatLabel>
                             <StatValue data-testid="previous-close"> {stats.previousClose} </ StatValue>
@@ -46,6 +47,7 @@ const Keystats = () => {
                             <StatLabel> P/E Ratio </StatLabel>
                             <StatValue data-testid="peratio"> {stats.peRatio} </ StatValue>
                         </tr>
+                        </tbody>
                     </StatTable>
                 </Col>
                 <Col size={1}>

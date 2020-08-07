@@ -11,7 +11,7 @@ const Overview = () => {
         <div>
            <SectionTitle>COMPANY OVERVIEW</SectionTitle>
            <BlueLine />
-           <CompanyName data-testid="company-name">{(overview.companyName && overview.symbol) ? overview.companyName+'('+overview.symbol+')' : ''}</CompanyName> 
+           <CompanyName data-testid="company-name">{(overview.companyName && overview.symbol) ? overview.companyName+' ('+overview.symbol+')' : ''}</CompanyName> 
             <CompanyWebsite data-testid="website">{overview.website}</CompanyWebsite>
             <CompanyDescription data-testid="description">{overview.description}</CompanyDescription>
         </div>

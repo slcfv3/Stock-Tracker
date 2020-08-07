@@ -12,7 +12,10 @@ const DropDown = (props) => {
   
   const onClick = (symbol) =>{
     dispatch({ type: 'SEARCH_SUBMITTED', payload: symbol });
-    
+  }
+
+  const onBlurHandler = () => {
+    dispatch({ type: 'POSSIBLE_RECEIVED', payload: [] })
   }
 
   if(possible.length) {
@@ -22,10 +25,11 @@ const DropDown = (props) => {
                 {possible.map((optionName, index) => {
                 
                 return (
-                    <Option key={optionName.symbol} onClick={()=>onClick(optionName.symbol)} >
+                    <Option key={optionName.symbol} onMouseDown={()=>onClick(optionName.symbol)} onBlur={() => onBlurHandler}>
                     <SymbolTag>{optionName.symbol}</SymbolTag> <TagContainer><NameTag breakpoint={props.smallBreakpoint}>{optionName.securityName}</NameTag> <ExchangeText breakpoint={props.breakpoint}>{optionName.exchange}</ExchangeText><ExchangeTag breakpoint={props.breakpoint}></ExchangeTag></TagContainer>
                     </Option>
                 );
+
                 })}
             </OptionList>
         </DropdownBody>

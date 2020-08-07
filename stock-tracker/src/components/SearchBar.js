@@ -11,6 +11,7 @@ const SearchBar = () => {
   let placeholder = symbol === "" ? "Please enter a stock symbol" : name + '  (' + symbol + ')'
 
   const handleSubmit = (e) => {
+    dispatch({ type: 'POSSIBLE_RECEIVED', payload: [] })
     e.preventDefault();
     if (search.toUpperCase() !== symbol && search !== "") {
       dispatch({ type: 'SEARCH_SUBMITTED', payload: search.toUpperCase() });
@@ -27,22 +28,22 @@ const SearchBar = () => {
 
   const onChange = (e) => {
     setSearch(e.target.value)
-    
   }
 
   let typingTimer;                //timer identifier
   let doneTypingInterval = 500;  //time in ms
   
   const onkeydown = (e) => {
-    
     clearTimeout(typingTimer);
-    
   }
 
   const onkeyup = (e) => {
     clearTimeout(typingTimer);
-    typingTimer = setTimeout(()=>dispatch({ type: 'SEARCH_ENTERED', payload: search.toUpperCase() }), doneTypingInterval);
-      
+    typingTimer = setTimeout(()=>dispatch({ type: 'SEARCH_ENTERED', payload: search.toUpperCase() }), doneTypingInterval);  
+  }
+
+  const onBlurHandler = () => {
+    dispatch({ type: 'POSSIBLE_RECEIVED', payload: [] })
   }
 
 
@@ -55,6 +56,7 @@ const SearchBar = () => {
         onChange={onChange}
         onKeyDown = {onkeydown}
         onKeyUp = {onkeyup}
+        onBlur = {onBlurHandler}
         className="search" />
     </form>
   );

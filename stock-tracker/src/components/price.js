@@ -20,7 +20,7 @@ const Price = (props) => {
     }
 
     return (
-        <Row justifyContent='flex-end' columnGap='15px'>
+        <Row justifyContent={props.justifyContent ? props.justifyContent : 'flex-end'} columnGap='10px'>
 
             <Row columnGap='0px'>
                 <Col>
@@ -36,7 +36,7 @@ const Price = (props) => {
                     <PriceChange change={priceChange} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} fontSize={props.fontSize + 'px'}>   {arrowIcon}   </PriceChange>
                 </ Col>
 
-                <Col BorderRight='solid 1.5px' Padding='0 15px 0 0' BorderColor={priceChange >= 0 ? 'rgba(145, 228, 165, 0.5)' : 'rgba(233, 86, 86, 0.5)'}>
+                <Col BorderRight='solid 1.5px' Padding='0 10px 0 0' BorderColor={priceChange >= 0 ? 'rgba(145, 228, 165, 0.5)' : 'rgba(233, 86, 86, 0.5)'}>
                     <PriceChange change={priceChange} breakpoint={props.breakpoint} smallBreakpoint={props.smallBreakpoint} fontSize={props.fontSize + 'px'}>  {priceChangeDisplay}   </PriceChange>
                 </ Col>
             </Row>

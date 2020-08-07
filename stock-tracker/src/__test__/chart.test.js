@@ -1,12 +1,12 @@
 import React from 'react'
-import Chart from '../chart'
+import Chart from '../components/chart'
 import stock from './mocks/newStockMock'
 import { render, fireEvent, cleanup, waitForElement, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import "@testing-library/jest-dom/extend-expect";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
-import { getPriceTicks, getTimeTicks } from '../../util.js'
+import { getPriceTicks, getTimeTicks } from '../util.js'
 import { useSelector } from 'react-redux'
 
 const initialState = {

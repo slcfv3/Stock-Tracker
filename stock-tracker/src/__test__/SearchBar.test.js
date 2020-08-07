@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBar from '../SearchBar'
+import SearchBar from '../components/SearchBar'
 import stock from './mocks/newStockMock'
 import { render, fireEvent, cleanup, waitForElement, within } from '@testing-library/react';
 import '@testing-library/jest-dom';

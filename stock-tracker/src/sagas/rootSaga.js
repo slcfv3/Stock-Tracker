@@ -72,7 +72,7 @@ export function* searchSubmittedHandler(action) {
     const controller = new AbortController();
     const stockData = yield call(getNewStockData, NEW_STOCK_ENDPOINT_URL + requestParameters, controller);
     if (stockData === undefined) {
-        yield put({ type: 'STOCK_NOT_FOUND', payload: stockData })
+        yield put({ type: 'STOCK_NOT_FOUND'})
         return;
     }
 

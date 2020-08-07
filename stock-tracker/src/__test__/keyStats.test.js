@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
-import sampleData from './sampleData'
+import sampleData from './mocks/sampleData'
 import Keystats from '../components/keyStats';
 import { render, screen, cleanup } from '@testing-library/react'
 import { findHighValue, findLowValue } from '../util'
